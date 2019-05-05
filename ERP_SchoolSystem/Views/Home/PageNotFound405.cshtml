@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "PageNotFound405";
+    Layout = "~/Views/Shared/_PartialLayout.cshtml";
+}
+
+<div class="flex-fill">
+
+    <!-- Error title -->
+    <div class="text-center mb-3">
+        <h1 class="error-title">405</h1>
+        <h5>Oops, an error has occurred. Not allowed!</h5>
+    </div>
+    <!-- /error title -->
+    <!-- Error content -->
+    <div class="row">
+        <div class="col-xl-4 offset-xl-4 col-md-8 offset-md-2">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href='@Url.Action("Index","Home")' class="btn btn-primary btn-block"><i class="icon-home4 mr-2"></i>Go Back To Dashboard</a>
+                </div>
+            </div>
+            <!-- /buttons -->
+
+        </div>
+    </div>
+    <!-- /error wrapper -->
+
+</div>
+

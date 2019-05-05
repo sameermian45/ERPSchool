@@ -1,0 +1,79 @@
+﻿@{ 
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    var SystemRoles = db.AspNetRoles.Where(x=>x.Name != "WebUser" && x.Name != "SuperAdmin").ToList();
+    int Sno = 1;
+    string UserID = null;
+    if(ViewBag.UserID != "")
+    {
+        UserID = ViewBag.UserID;
+    }
+}
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">System Roles</h6>
+        <div class="header-elements">
+
+        </div>
+    </div>
+    <div class="row" style="width: 90%;margin-left: 4%;">
+        <div class="col-lg-12">
+            <table class="table datatable-basic">
+                <thead>
+                    <tr>
+                        <th style="display:none"></th>
+                        <th style="display:none"></th>
+                        <th style="display:none"></th>
+                        <th>#</th>
+                        <th>Role Name</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in SystemRoles)
+                    {
+                        <tr>
+                            <td style="display:none"></td>
+                            <td style="display:none"></td>
+                            <td style="display:none"></td>
+                            <td>@Sno</td>
+                            <td>@item.Name</td>
+                            @if (UserID != null)
+                            {
+                                var check = db.AspNetUserRoles.Where(x => x.RoleId == item.Id && x.UserId == UserID).FirstOrDefault();
+                                if (check != null)
+                                {
+                                    <td class="text-center">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked+@Sno" name="RoleId" value="@item.Id" checked="checked">
+                                            <label class="custom-control-label" for="custom_checkbox_stacked_unchecked+@Sno">Assign</label>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="text-center">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked+@Sno" name="RoleId" value="@item.Id">
+                                            <label class="custom-control-label" for="custom_checkbox_stacked_unchecked+@Sno">Assign</label>
+                                        </div>
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td class="text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked+@Sno" name="RoleId" value="1">
+                                        <label class="custom-control-label" for="custom_checkbox_stacked_unchecked+@Sno">Assign</label>
+                                    </div>
+                                </td>
+                            }
+                        </tr>
+                        Sno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

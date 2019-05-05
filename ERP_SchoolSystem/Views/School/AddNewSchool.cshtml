@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "AddNewSchool";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    var CountriesList = db.TblCountries.Where(x => x.IsActive == true).ToList();
+    var UserTypeList = db.TblCountries.Where(x => x.IsActive == true).ToList();
+    
+}
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Add New School</h6>
+        <div class="header-elements">
+
+        </div>
+    </div>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+            <span class="font-weight-semibold">@ViewBag.SuccessMessage</span>
+        </div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+            <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
+        </div>
+    }
+
+
+
+    <div class="card-body">
+        <form class="form-validate-jquery" action='@Url.Action("AddNewSchool", "School")' onsubmit="return ShowLoading()" id="SchoolFrom" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Name</label>
+                        <div class="col-lg-9">
+                            <input type="text" name="SchoolName" class="form-control" placeholder="Enter School Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">SR Person Name</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" placeholder="Enter School Representive Person Name" name="SRPersonName" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Select Country</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-select2" data-fouc name="Country" id="Country" onchange="GetProvince()" required>
+                                <option value="">Select Country</option>
+                                @foreach (var item in CountriesList)
+                                {
+                                    <option value="@item.CountryID">@item.CountryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Select City</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-select2" data-fouc name="City" id="City" required>
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Reg. No.</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="RegistrationNo" placeholder="Enter School Registration No">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Landline</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" data-mask="9999-9999999" name="PtclNo" placeholder="Enter School Landline No">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Cell No (2)</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="CellNo2" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Default UserName</label>
+                        <div class="col-lg-9">
+                            <input type="email" class="form-control" name="DefaultUserName" placeholder="Enter Default UserName" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Select User Type</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-select2" data-fouc name="UserType" id="UserType" required>
+                                <option value="">Select User Type</option>
+                                @foreach (var item in UserTypeList)
+                                {
+                                    <option value="">Select User Type</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Status:</label>
+                        <div class="col-lg-9">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" name="IsActive" value="1" checked="checked">
+                                <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">Active</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Registration Date</label>
+                        <div class="col-lg-9 input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" required name="RegistrationDate">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">SR Contact No</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="SROffiersContactNo" data-mask="9999-9999999" placeholder="Enter School Rrpresentive Person Contact No" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Select Province</label>
+                        <div class="col-lg-9">
+                            <select class="form-control form-control-select2" data-fouc name="Province" id="Province" onchange="GetCities()" required>
+                                <option value="">Select Province</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Address</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="Address" placeholder="Enter School Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School NTN No.</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="NTNNo" placeholder="Enter School NTN No">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Cell No(1)</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="CellNo1" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Email</label>
+                        <div class="col-lg-9">
+                            <input type="email" class="form-control" name="Email" placeholder="Enter School Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Website</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" name="Website" placeholder="Enter School Website">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Default Password</label>
+                        <div class="col-lg-9">
+                            <input type="password" class="form-control" name="DefaultPassword" placeholder="Enter Default Password" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label">School Logo</label>
+                        <div class="col-lg-5">
+                            <input type="file" class="form-input-styled" data-fouc accept=".jpg , .png , .gif ,.jpeg" onchange="readURL(this);" id="SchLogo" required name="SchoolLogo">
+                            <span class="form-text text-muted">Accepted formats: png, jpg. Max file size 2Mb</span>
+                        </div>
+                        <div class="col-lg-5">
+                            <img src="~/Content/images/default_School.png" style="width:180px; height:150px; border: 1px solid #ddd; padding: 1px;" id="img_prev" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function GetProvince() {
+        $("#LoadingSpinner").show();
+        var CountryID = document.getElementById('Country').value;
+        var url = '@Url.Action("GetProvincesList", "School")';
+        $.ajax({
+            url: url,
+            data: { CountryID: CountryID },
+            cache: false,
+            type: "POST",
+            success: function (result) {
+                if (result != null) {
+                    $("#Province").html(result);
+                    $("#LoadingSpinner").hide();
+                }
+            }
+        });
+    }
+    function GetCities() {
+        $("#LoadingSpinner").show();
+        var ProvinceID = document.getElementById('Province').value;
+        var url = '@Url.Action("GetCitiesList", "School")';
+        $.ajax({
+            url: url,
+            data: { ProvinceID: ProvinceID },
+            cache: false,
+            type: "POST",
+            success: function (result) {
+                if (result != null) {
+                    $("#City").html(result);
+                    $("#LoadingSpinner").hide();
+                }
+            }
+        });
+    }
+
+    function ShowLoading() {
+        if ($("#SchoolFrom").valid() == true) {
+            $("#LoadingSpinner").show();
+        }
+    }
+
+    function readURL(input) {
+        document.getElementById("img_prev").style.display = 'block';
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const fileType = file['type'];
+            const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+            if (validImageTypes.includes(fileType))
+            {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img_prev')
+                    .attr('src', e.target.result)
+                    .width(180)
+                    .height(150);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            else
+            {
+                toastr.error('Please select Image only')
+                var input = $("#SchLogo");
+                input.replaceWith(input.val('').clone(true));
+            }
+        }
+    }
+</script>
+

@@ -1,0 +1,19 @@
+﻿.loader-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999999;
+    background-color: white;
+}
+
+.loader {
+    width: 20%;
+    height: 60px;
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

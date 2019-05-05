@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The School System | @ViewBag.Title</title>
+    <link href="~/Content/Loader/icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/layout.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/components.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/CSS/colors.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Loader/spinner.css" rel="stylesheet" />
+
+    <script src="~/Content/Loader/jquery-1.7.1.js"></script>
+    
+    <script src="~/Content/Loader/loader.js"></script>
+
+    <script src="~/Content/JS/main/jquery.min.js"></script>
+    
+    <script src="~/Content/JS/main/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/JS/plugins/loaders/blockui.min.js"></script>
+    <script src="~/Content/JS/plugins/ui/ripple.min.js"></script>
+    <script src="~/Content/JS/app.js"></script>
+    
+</head>
+<body>
+    <div class="Contentloading" id="LoadingSpinner">Loading&#8230;</div>
+    <div class="navbar navbar-expand-md navbar-light navbar-static">
+        <!-- Header with logos -->
+        <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
+            <div class="navbar-brand navbar-brand-md">
+                <a href="index.html" class="d-inline-block">
+                    <img src="~/Content/images//logo_light.png" alt="">
+                </a>
+            </div>
+
+            <div class="navbar-brand navbar-brand-xs">
+                <a href="index.html" class="d-inline-block">
+                    <img src="~/Content/images//logo_icon_light.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-1 d-md-none">
+            <div class="navbar-brand mr-auto">
+                <a href="index.html" class="d-inline-block">
+                    <img src="~/Content/images//logo_dark.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="content-wrapper">
+            <div class="content d-flex justify-content-center align-items-center">
+                @RenderBody()
+            </div>
+            @Html.Partial("Footer")
+        </div>
+    </div>
+</body>
+</html>
+

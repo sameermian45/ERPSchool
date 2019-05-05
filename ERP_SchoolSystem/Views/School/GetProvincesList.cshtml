@@ -1,0 +1,9 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblProvince>
+
+<select class="form-control form-control-select2" data-fouc>
+    <option value="">Select Province</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.ProvincesID">@item.ProvincesName</option>
+    }
+</select>

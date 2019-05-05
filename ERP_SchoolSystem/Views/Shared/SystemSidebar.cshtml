@@ -1,0 +1,62 @@
+﻿<div class="card card-sidebar-mobile">
+    <ul class="nav nav-sidebar" data-nav-type="accordion">
+        <!-- Main -->
+        <li class="nav-item">
+            <a href='@Url.Action("Index","Home")' class="nav-link active">
+                <i class="icon-home4"></i>
+                <span>
+                    Dashboard
+                </span>
+            </a>
+        </li>
+        <li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>School Management</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="form components">
+                <li class="nav-item"><a href='@Url.Action("AddNewSchool","School")' class="nav-link">Add New School</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Update School</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">School Packages</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Monthly Collections</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>User's Management</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="form components">
+                <li class="nav-item"><a href='@Url.Action("SystemRoles","UserRoles")' class="nav-link">System Roles</a></li>
+                <li class="nav-item"><a href='@Url.Action("AssignUserRoles","UserRoles")' class="nav-link">User's Roles</a></li>
+            </ul>
+        </li>
+
+        
+
+        <li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-pencil3"></i> <span>Form components</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="form components">
+                <li class="nav-item"><a href='@Url.Action("form_inputs","Demo")' class="nav-link">Basic inputs</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Checkboxes & radios</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">Select2 selects</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Bootstrap multiselect</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_input_groups","Demo")' class="nav-link">Input groups</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_floating_labels","Demo")' class="nav-link">Floating labels</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_tag_inputs","Demo")' class="nav-link">Tag inputs</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_validation","Demo")' class="nav-link">Validation</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_wizard","Demo")' class="nav-link">Form wizard</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_actions","Demo")' class="nav-link">Form actions</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_inputs_grid","Demo")' class="nav-link">Inputs grid</a></li>
+            </ul>
+        </li>
+        <li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-select2"></i> <span>Pickers</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="Pickers">
+                <li class="nav-item"><a href='@Url.Action("picker_date","Demo")' class="nav-link">Date & time pickers</a></li>
+            </ul>
+        </li>
+        <li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-insert-template"></i> <span>Form layouts</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="form layouts">
+                <li class="nav-item"><a href='@Url.Action("form_layout_vertical","Demo")' class="nav-link">Vertical form</a></li>
+                <li class="nav-item"><a href='@Url.Action("form_layout_horizontal","Demo")' class="nav-link">Horizontal form</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

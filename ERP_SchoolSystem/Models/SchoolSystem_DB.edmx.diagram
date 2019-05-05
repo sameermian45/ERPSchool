@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8a5c34ab14e41f9bbf1dcd75e92c683" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetUserRole" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetUser" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblCity" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblCountry" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblProvince" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchool" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolPackage" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblUserType" Width="1.5" PointX="2.75" PointY="7.75" />
+        <AssociationConnector Association="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
+        <AssociationConnector Association="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ERP_SchoolSystemModel.FK_TblCities_TblCities" />
+        <AssociationConnector Association="ERP_SchoolSystemModel.FK_TblProvinces_TblProvinces" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

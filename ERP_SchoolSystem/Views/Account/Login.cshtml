@@ -1,0 +1,123 @@
+﻿@using ERP_SchoolSystem.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>The School System | Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Loader/icon.ico">
+    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/style.css">
+    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/perfect-scrollbar.css">
+    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/fuse-html.min.css">
+    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/main.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Loader/spinner.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/Loader/toastr.min.css" />
+
+    <script type="text/javascript" src="~/Content/Loader/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="~/Content/Loader/toastr.min.js"></script>
+    <script type="text/javascript" src="~/Content/Loader/loader.js"></script>
+
+    <script type="text/javascript" src="~/LoginPage/JS/jquery.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/mobile-detect.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/perfect-scrollbar.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/popper.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/fuse-html.min.js"></script>
+    <script type="text/javascript" src="~/LoginPage/JS/main.js"></script>
+</head>
+<body oncontextmenu="return false;" class="layout layout-vertical layout-left-navigation layout-below-toolbar layout-below-footer media-step-xs fuse-aside-expanded">
+    <div class="Contentloading" id="LoadingSpinner">Loading&#8230;</div>
+    <main>
+        <div id="wrapper">
+            <div class="content-wrapper">
+                <div class="content custom-scrollbar ps ps--active-y">
+                    <div id="login-v2" class="row no-gutters">
+                        <div class="intro col-12 col-md light-fg">
+                            <div class="d-flex flex-column align-items-center align-items-md-start text-center text-md-left py-16 py-md-32 px-12">
+                                <div class="logo bg-secondary mb-8">
+                                    <span>F</span>
+                                </div>
+                                <div class="title">
+                                    Welcome to the FUSE!
+                                </div>
+                                <div class="description pt-2">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-wrapper col-12 col-md-auto d-flex justify-content-center p-4 p-md-0">
+                            <div class="form-content md-elevation-8 h-100 bg-white text-auto py-16 py-md-32 px-12">
+                                <div class="title h5">Log in to your account</div>
+                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "mt-8", role = "form", onsubmit = "return ShowLoading()" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                                    <div class="form-group mb-4">
+                                        @Html.TextBoxFor(m => m.Email, new { required = "required", @class = "form-control", Type = "Email" })
+                                        <label for="loginFormInputEmail">Email address</label>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+                                        <label for="loginFormInputPassword">Password</label>
+                                    </div>
+                                    <div class="remember-forgot-password row no-gutters align-items-center justify-content-between pt-4">
+                                        <div class="form-check remember-me mb-4">
+                                            <label class="form-check-label">
+                                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                                                <span class="checkbox-icon fuse-ripple-ready"></span>
+                                                <span class="form-check-description">Remember Me</span>
+                                            </label>
+                                        </div>
+                                        <a href="http://bootstrap-material.fusetheme.com/vertical-layout-below-toolbar-below-footer-left-navigation/pages-auth-login-v2.html#" class="forgot-password text-secondary mb-4">Forgot Password?</a>
+                                    </div>
+                                    <button type="submit" class="submit-button btn btn-block btn-secondary my-4 mx-auto fuse-ripple-ready" aria-label="LOG IN">
+                                        LOG IN
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function ShowLoading() {
+            $("#LoadingSpinner").show();
+        }
+        $(function () {
+            var Message = '@ViewBag.Message';
+            if (Message != '') {
+                toastr.error(Message);
+            }
+        });
+
+    </script>
+    <script>
+        document.onkeydown = function (e) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

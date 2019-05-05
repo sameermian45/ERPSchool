@@ -1,0 +1,134 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.AspNetRole>
+@{
+    ViewBag.Title = "SystemRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string RoleID = null;
+    if (ViewBag.RoleID != null)
+    {
+        RoleID = ViewBag.RoleID;
+    }
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    var SystemRoles = db.AspNetRoles.Where(x => x.Id == RoleID).FirstOrDefault();
+    int Sno = 1;
+}
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">System Roles</h6>
+        <div class="header-elements">
+
+        </div>
+    </div>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+            <span class="font-weight-semibold">@ViewBag.SuccessMessage</span>
+        </div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+            <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
+        </div>
+    }
+
+    @if (SystemRoles == null)
+    {
+        <div class="card-body">
+            <form class="form-validate-jquery" action='@Url.Action("SystemRoles", "UserRoles")' onsubmit="return ShowLoading()" id="RoleFrom" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label">Role Name</label>
+                            <div class="col-lg-7">
+                                <input type="text" name="RoleName" class="form-control" placeholder="Enter Role Name" required>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Add New Role <i class="icon-paperplane ml-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="card-body">
+            <form class="form-validate-jquery" action='@Url.Action("SystemRoles", "UserRoles")' onsubmit="return ShowLoading()" id="RoleFrom" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <input type="hidden" name="RoleID" class="form-control" value="@SystemRoles.Id" required>
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label">Role Name</label>
+                            <div class="col-lg-7">
+                                <input type="text" name="RoleName" class="form-control" value="@SystemRoles.Name" placeholder="Enter Role Name" required>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Update Role Name <i class="icon-paperplane ml-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>
+
+
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">System Roles</h6>
+        <div class="header-elements">
+
+        </div>
+    </div>
+    <div class="row" style="width: 90%;margin-left: 4%;">
+        <div class="col-lg-12">
+            <table class="table datatable-basic">
+                <thead>
+                    <tr>
+                        <th style="display:none"></th>
+                        <th style="display:none"></th>
+                        <th style="display:none"></th>
+                        <th>#</th>
+                        <th>Role Name</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td style="display:none"></td>
+                            <td style="display:none"></td>
+                            <td style="display:none"></td>
+                            <td>@Sno</td>
+                            <td>@item.Name</td>
+                            <td class="text-center">
+                                <a href="~/UserRoles/SystemRoles?RoleID=@item.Id">Update</a>
+                            </td>
+                        </tr>
+                        Sno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function ShowLoading() {
+        if ($("#RoleFrom").valid() == true) {
+            $("#LoadingSpinner").show();
+        }
+    }
+</script>
+
