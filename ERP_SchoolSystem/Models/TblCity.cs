@@ -14,11 +14,22 @@ namespace ERP_SchoolSystem.Models
     
     public partial class TblCity
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TblCity()
+        {
+            this.TblEmployees = new HashSet<TblEmployee>();
+            this.TblSchools = new HashSet<TblSchool>();
+        }
+    
         public int CityID { get; set; }
         public string CityName { get; set; }
         public int ProvincesID { get; set; }
         public bool IsActive { get; set; }
     
         public virtual TblProvince TblProvince { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblEmployee> TblEmployees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchool> TblSchools { get; set; }
     }
 }

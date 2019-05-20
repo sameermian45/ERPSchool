@@ -1,6 +1,4 @@
-﻿@using ERP_SchoolSystem.Models
-@model LoginViewModel
-@{
+﻿@{
     ViewBag.Title = "Log in";
     Layout = null;
 }
@@ -8,87 +6,134 @@
 <html lang="en-us">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style class="vjs-styles-defaults">
+        .vdo-js {
+            width: 300px;
+            height: 150px;
+        }
+
+        .vjs-fluid {
+            padding-top: 56.25%;
+        }
+    </style>
     <title>The School System | Login</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/Loader/icon.ico">
-    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/style.css">
-    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/animate.min.css">
-    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/perfect-scrollbar.css">
-    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/fuse-html.min.css">
-    <link type="text/css" rel="stylesheet" href="~/LoginPage/CSS/main.css">
     <link type="text/css" rel="stylesheet" href="~/Content/Loader/spinner.css" />
     <link type="text/css" rel="stylesheet" href="~/Content/Loader/toastr.min.css" />
-
     <script type="text/javascript" src="~/Content/Loader/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="~/Content/Loader/toastr.min.js"></script>
     <script type="text/javascript" src="~/Content/Loader/loader.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Slide Login Form template Responsive, Login form web template, Flat Pricing tables, Flat Drop downs Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    <script type="text/javascript" src="~/LoginPage/JS/jquery.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/mobile-detect.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/perfect-scrollbar.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/popper.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/fuse-html.min.js"></script>
-    <script type="text/javascript" src="~/LoginPage/JS/main.js"></script>
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link href="~/LoginPage/CSS/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/LoginPage/CSS/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
 </head>
-<body oncontextmenu="return false;" class="layout layout-vertical layout-left-navigation layout-below-toolbar layout-below-footer media-step-xs fuse-aside-expanded">
+
+<body>
+    <script src="~/LoginPage/JS/jquery.min.js"></script>
+    <script>
+(function(){
+	if(typeof _bsa !== 'undefined' && _bsa) {
+  		// format, zoneKey, segment:value, options
+  		_bsa.init('flexbar', 'CKYI627U', 'placement:w3layoutscom');
+  	}
+})();
+    </script>
+    <script>
+(function(){
+if(typeof _bsa !== 'undefined' && _bsa) {
+	// format, zoneKey, segment:value, options
+	_bsa.init('fancybar', 'CKYDL2JN', 'placement:demo');
+}
+})();
+    </script>
+    <script>
+(function(){
+	if(typeof _bsa !== 'undefined' && _bsa) {
+  		// format, zoneKey, segment:value, options
+  		_bsa.init('stickybox', 'CKYI653J', 'placement:w3layoutscom');
+  	}
+})();
+    </script>
+
+    <script type="text/javascript" src="https://services.bilsyndication.com/adv1/?d=353" defer="" async=""></script>
+    <script> var vitag = vitag || {};vitag.gdprShowConsentTool=false;vitag.outStreamConfig = {type: "slider", position: "left" };</script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125810435-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125810435-1');
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-30027142-1', 'w3layouts.com');
+  ga('send', 'pageview');
+    </script>
+
     <div class="Contentloading" id="LoadingSpinner">Loading&#8230;</div>
-    <main>
-        <div id="wrapper">
-            <div class="content-wrapper">
-                <div class="content custom-scrollbar ps ps--active-y">
-                    <div id="login-v2" class="row no-gutters">
-                        <div class="intro col-12 col-md light-fg">
-                            <div class="d-flex flex-column align-items-center align-items-md-start text-center text-md-left py-16 py-md-32 px-12">
-                                <div class="logo bg-secondary mb-8">
-                                    <span>F</span>
-                                </div>
-                                <div class="title">
-                                    Welcome to the FUSE!
-                                </div>
-                                <div class="description pt-2">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
-                                </div>
-                            </div>
+    <!-- main -->
+    <div class="w3layouts-main">
+        <div class="bg-layer">
+            <h1>The School System</h1>
+            <div class="header-main">
+                @*<div class="main-icon">
+                    <span class="fa fa-eercast"></span>
+                </div>*@
+                <div class="header-left-bottom">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "mt-8", role = "form", onsubmit = "return ShowLoading()" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="icon1">
+                            <span class="fa fa-user"></span>
+                            <input type="email"  required name="UserName" id="UserName" />
                         </div>
-                        <div class="form-wrapper col-12 col-md-auto d-flex justify-content-center p-4 p-md-0">
-                            <div class="form-content md-elevation-8 h-100 bg-white text-auto py-16 py-md-32 px-12">
-                                <div class="title h5">Log in to your account</div>
-                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "mt-8", role = "form", onsubmit = "return ShowLoading()" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                                    <div class="form-group mb-4">
-                                        @Html.TextBoxFor(m => m.Email, new { required = "required", @class = "form-control", Type = "Email" })
-                                        <label for="loginFormInputEmail">Email address</label>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
-                                        <label for="loginFormInputPassword">Password</label>
-                                    </div>
-                                    <div class="remember-forgot-password row no-gutters align-items-center justify-content-between pt-4">
-                                        <div class="form-check remember-me mb-4">
-                                            <label class="form-check-label">
-                                                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
-                                                <span class="checkbox-icon fuse-ripple-ready"></span>
-                                                <span class="form-check-description">Remember Me</span>
-                                            </label>
-                                        </div>
-                                        <a href="http://bootstrap-material.fusetheme.com/vertical-layout-below-toolbar-below-footer-left-navigation/pages-auth-login-v2.html#" class="forgot-password text-secondary mb-4">Forgot Password?</a>
-                                    </div>
-                                    <button type="submit" class="submit-button btn btn-block btn-secondary my-4 mx-auto fuse-ripple-ready" aria-label="LOG IN">
-                                        LOG IN
-                                    </button>
-                                }
-                            </div>
+                        <div class="icon1">
+                            <span class="fa fa-lock"></span>
+                            <input type="password" required name="Password" id="Password" />
                         </div>
-                    </div>
+                        <div class="login-check">
+                            <label class="checkbox"><input type="checkbox" name="RememberMe" value="1" checked=""><i> </i> Keep me logged in</label>
+                        </div>
+                        <div class="bottom">
+                            <button class="btn" type="submit">Log In</button>
+                        </div>
+                        <div class="links">
+                            <p></p>
+                            <p class="right"><a href="#">Forgot Password?</a></p>
+                            <div class="clear"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+                <div class="copyright social">
+                    <div><p>© @DateTime.Now.Year. <a href="#">The School System</a> Developed by <a href="#">ZS Software Consultancy (Pvt.) Limited. </a></p> </div>
+                    <ul>
+                        <li><a href="#" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="#" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li><a href="#" class="google"><span class="fa fa-google-plus"></span></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </main>
-    <script>
+
+        <script>
         function ShowLoading() {
             $("#LoadingSpinner").show();
         }
@@ -99,8 +144,6 @@
             }
         });
 
-    </script>
-    <script>
         document.onkeydown = function (e) {
             if (event.keyCode == 123) {
                 return false;
@@ -118,6 +161,6 @@
                 return false;
             }
         }
-    </script>
-</body>
+        </script>
+    </body>
 </html>

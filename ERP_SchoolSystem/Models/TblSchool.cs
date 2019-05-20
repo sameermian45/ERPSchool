@@ -14,6 +14,17 @@ namespace ERP_SchoolSystem.Models
     
     public partial class TblSchool
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TblSchool()
+        {
+            this.CboDepartments = new HashSet<CboDepartment>();
+            this.CboDesignations = new HashSet<CboDesignation>();
+            this.CboEmpStatus = new HashSet<CboEmpStatu>();
+            this.TblEmployees = new HashSet<TblEmployee>();
+            this.TblSchoolBranches = new HashSet<TblSchoolBranch>();
+            this.TblSchoolMonthlyPayments = new HashSet<TblSchoolMonthlyPayment>();
+        }
+    
         public int SchoolId { get; set; }
         public string SchoolName { get; set; }
         public Nullable<int> CityId { get; set; }
@@ -38,5 +49,23 @@ namespace ERP_SchoolSystem.Models
         public byte[] SchoolLogo { get; set; }
         public Nullable<System.DateTime> RegistrationDate { get; set; }
         public string AdminUserName { get; set; }
+        public string SchoolShortCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CboDepartment> CboDepartments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CboDesignation> CboDesignations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CboEmpStatu> CboEmpStatus { get; set; }
+        public virtual TblCity TblCity { get; set; }
+        public virtual TblCountry TblCountry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblEmployee> TblEmployees { get; set; }
+        public virtual TblProvince TblProvince { get; set; }
+        public virtual TblSchoolPackage TblSchoolPackage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolBranch> TblSchoolBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
     }
 }

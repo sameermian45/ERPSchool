@@ -71,15 +71,14 @@ namespace ERP_SchoolSystem.Controllers
         [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin")]
         public ActionResult AssignUserRoles()
         {
-            int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
-            if (SchoolID == 0)
+            if (ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 1)
             {
                 var SystemUser = db.AspNetUsers.ToList();
                 return View(SystemUser);
             }
             else
             {
-                var SystemUser = db.AspNetUsers.Where(x => x.SchoolID == SchoolID).ToList();
+                var SystemUser = db.AspNetUsers.Where(x => x.SchoolID == ERP_SchoolSystem.Classes.UserInfo.GetSchoolID()).ToList();
                 return View(SystemUser);
             }
         }
@@ -155,15 +154,14 @@ namespace ERP_SchoolSystem.Controllers
             {
                 ViewBag.ErrorMessage = ex.Message.ToString();
             }
-            int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
-            if (SchoolID == 0)
+            if (ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 1)
             {
                 var SystemUser = db.AspNetUsers.ToList();
                 return View(SystemUser);
             }
             else
             {
-                var SystemUser = db.AspNetUsers.Where(x => x.SchoolID == SchoolID).ToList();
+                var SystemUser = db.AspNetUsers.Where(x => x.SchoolID == ERP_SchoolSystem.Classes.UserInfo.GetSchoolID()).ToList();
                 return View(SystemUser);
             }
         }

@@ -41,10 +41,50 @@
           <Property Name="UserTypeId" Type="int" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="BranchID" Type="int" />
           <Property Name="AddedOn" Type="datetime" />
           <Property Name="AddedBy" Type="int" />
           <Property Name="UpdateOn" Type="datetime" />
           <Property Name="UpdateBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CboDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CboDesignation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DesignationName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CboEmpStatus">
+          <Key>
+            <PropertyRef Name="EmpStatusID" />
+          </Key>
+          <Property Name="EmpStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpStatusName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="TblCities">
           <Key>
@@ -63,6 +103,73 @@
           <Property Name="CountryName" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="TblEmpEduDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="DegreeTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="InstituteName" Type="nvarchar" MaxLength="150" />
+          <Property Name="DegreeCompletionYear" Type="nchar" MaxLength="10" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TblEmpExpDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="150" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="150" />
+          <Property Name="JobDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="EmpSalary" Type="float" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TblEmployees">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="HusbandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="7" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="DOJ" Type="datetime" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="ProvincesID" Type="int" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="HomeAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="Contact1" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Contact2" Type="nvarchar" MaxLength="15" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="DepartmentID" Type="int" />
+          <Property Name="DesignationID" Type="int" />
+          <Property Name="NTNNo" Type="nvarchar" MaxLength="15" />
+          <Property Name="BranchID" Type="int" />
+          <Property Name="JobDescription" Type="nvarchar" MaxLength="150" />
+          <Property Name="DutyLocation" Type="nvarchar" MaxLength="150" />
+          <Property Name="BankAccountNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxFiler" Type="bit" />
+          <Property Name="IncomeTax" Type="float" />
+          <Property Name="EmpPicture" Type="image" />
+          <Property Name="ProfilePicturePath" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Createdby" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifidOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="TblProvinces">
           <Key>
             <PropertyRef Name="ProvincesID" />
@@ -76,7 +183,7 @@
           <Key>
             <PropertyRef Name="SchoolId" />
           </Key>
-          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="SchoolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SchoolName" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CityId" Type="int" />
           <Property Name="CountryId" Type="int" />
@@ -100,6 +207,48 @@
           <Property Name="SchoolLogo" Type="image" />
           <Property Name="RegistrationDate" Type="date" />
           <Property Name="AdminUserName" Type="nvarchar" MaxLength="250" />
+          <Property Name="SchoolShortCode" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TblSchoolBranches">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblSchoolMonthlyPayment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="PackageID" Type="int" />
+          <Property Name="Payment" Type="float" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="PaymentMode" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddedOn" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="OrderNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Token" Type="nvarchar" MaxLength="50" />
+          <Property Name="TokenExpiry" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="BatchNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="AuthorizeId" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionResponse" Type="nvarchar" MaxLength="250" />
+          <Property Name="Message" Type="nvarchar" MaxLength="250" />
+          <Property Name="TransactionRefNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsShopPay" Type="bit" />
+          <Property Name="IsMobilePay" Type="bit" />
+          <Property Name="isPay" Type="bit" />
+          <Property Name="PaymentData" Type="datetime" />
         </EntityType>
         <EntityType Name="TblSchoolPackages">
           <Key>
@@ -108,7 +257,13 @@
           <Property Name="PackageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="float" />
-          <Property Name="Feature" Type="nvarchar" MaxLength="350" />
+          <Property Name="HrModule" Type="bit" />
+          <Property Name="NoofUserAllow" Type="int" />
+          <Property Name="StudentAccountAllow" Type="bit" />
+          <Property Name="NoofStudentAllow" Type="int" />
+          <Property Name="PayrollModule" Type="bit" />
+          <Property Name="AccountModule" Type="bit" />
+          <Property Name="ExamModule" Type="bit" />
         </EntityType>
         <EntityType Name="TblUserType">
           <Key>
@@ -116,8 +271,45 @@
           </Key>
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShortCode" Type="nvarchar" MaxLength="5" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AspNetUsers_TblUserType">
+          <End Role="TblUserType" Type="Self.TblUserType" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CboDesignation_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="1" />
+          <End Role="CboDesignation" Type="Self.CboDesignation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboDesignation">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CboEmpStatus_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="1" />
+          <End Role="CboEmpStatus" Type="Self.CboEmpStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboEmpStatus">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -146,6 +338,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Department_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="1" />
+          <End Role="CboDepartment" Type="Self.CboDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboDepartment">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblCities_TblCities">
           <End Role="TblProvinces" Type="Self.TblProvinces" Multiplicity="1" />
           <End Role="TblCities" Type="Self.TblCities" Multiplicity="*" />
@@ -155,6 +359,114 @@
             </Principal>
             <Dependent Role="TblCities">
               <PropertyRef Name="ProvincesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmpEduDetails_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="1" />
+          <End Role="TblEmpEduDetails" Type="Self.TblEmpEduDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="TblEmpEduDetails">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmpExpDetails_TblEmployees">
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="1" />
+          <End Role="TblEmpExpDetails" Type="Self.TblEmpExpDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployees">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="TblEmpExpDetails">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboDepartment">
+          <End Role="CboDepartment" Type="Self.CboDepartment" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboDepartment">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboDesignation">
+          <End Role="CboDesignation" Type="Self.CboDesignation" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboDesignation">
+              <PropertyRef Name="DesignationID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboEmpStatus">
+          <End Role="CboEmpStatus" Type="Self.CboEmpStatus" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboEmpStatus">
+              <PropertyRef Name="EmpStatusID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblCities">
+          <End Role="TblCities" Type="Self.TblCities" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblCountries">
+          <End Role="TblCountries" Type="Self.TblCountries" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCountries">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblProvinces">
+          <End Role="TblProvinces" Type="Self.TblProvinces" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProvinces">
+              <PropertyRef Name="ProvincesID" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="ProvincesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="0..1" />
+          <End Role="TblEmployees" Type="Self.TblEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblEmployees">
+              <PropertyRef Name="SchoolID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,16 +482,120 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblSchool_TblCities">
+          <End Role="TblCities" Type="Self.TblCities" Multiplicity="0..1" />
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblCountries">
+          <End Role="TblCountries" Type="Self.TblCountries" Multiplicity="0..1" />
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCountries">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblProvinces">
+          <End Role="TblProvinces" Type="Self.TblProvinces" Multiplicity="0..1" />
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProvinces">
+              <PropertyRef Name="ProvincesID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblSchoolPackages">
+          <End Role="TblSchoolPackages" Type="Self.TblSchoolPackages" Multiplicity="1" />
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchoolPackages">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolBranches_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="1" />
+          <End Role="TblSchoolBranches" Type="Self.TblSchoolBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblSchoolBranches">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolMonthlyPayment_TblSchool">
+          <End Role="TblSchool" Type="Self.TblSchool" Multiplicity="0..1" />
+          <End Role="TblSchoolMonthlyPayment" Type="Self.TblSchoolMonthlyPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblSchoolMonthlyPayment">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolMonthlyPayment_TblSchoolPackages">
+          <End Role="TblSchoolPackages" Type="Self.TblSchoolPackages" Multiplicity="0..1" />
+          <End Role="TblSchoolMonthlyPayment" Type="Self.TblSchoolMonthlyPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchoolPackages">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="TblSchoolMonthlyPayment">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ERP_SchoolSystemModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboDepartment" EntityType="Self.CboDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboDesignation" EntityType="Self.CboDesignation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboEmpStatus" EntityType="Self.CboEmpStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCities" EntityType="Self.TblCities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCountries" EntityType="Self.TblCountries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmpEduDetails" EntityType="Self.TblEmpEduDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmpExpDetails" EntityType="Self.TblEmpExpDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmployees" EntityType="Self.TblEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblProvinces" EntityType="Self.TblProvinces" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblSchool" EntityType="Self.TblSchool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSchoolBranches" EntityType="Self.TblSchoolBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSchoolMonthlyPayment" EntityType="Self.TblSchoolMonthlyPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblSchoolPackages" EntityType="Self.TblSchoolPackages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblUserType" EntityType="Self.TblUserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_TblUserType" Association="Self.FK_AspNetUsers_TblUserType">
+            <End Role="TblUserType" EntitySet="TblUserType" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CboDesignation_TblSchool" Association="Self.FK_CboDesignation_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="CboDesignation" EntitySet="CboDesignation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CboEmpStatus_TblSchool" Association="Self.FK_CboEmpStatus_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="CboEmpStatus" EntitySet="CboEmpStatus" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -188,13 +604,81 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Department_TblSchool" Association="Self.FK_Department_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="CboDepartment" EntitySet="CboDepartment" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblCities_TblCities" Association="Self.FK_TblCities_TblCities">
             <End Role="TblProvinces" EntitySet="TblProvinces" />
             <End Role="TblCities" EntitySet="TblCities" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblEmpEduDetails_TblEmployees" Association="Self.FK_TblEmpEduDetails_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblEmpEduDetails" EntitySet="TblEmpEduDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmpExpDetails_TblEmployees" Association="Self.FK_TblEmpExpDetails_TblEmployees">
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+            <End Role="TblEmpExpDetails" EntitySet="TblEmpExpDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboDepartment" Association="Self.FK_TblEmployees_CboDepartment">
+            <End Role="CboDepartment" EntitySet="CboDepartment" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboDesignation" Association="Self.FK_TblEmployees_CboDesignation">
+            <End Role="CboDesignation" EntitySet="CboDesignation" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboEmpStatus" Association="Self.FK_TblEmployees_CboEmpStatus">
+            <End Role="CboEmpStatus" EntitySet="CboEmpStatus" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblCities" Association="Self.FK_TblEmployees_TblCities">
+            <End Role="TblCities" EntitySet="TblCities" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblCountries" Association="Self.FK_TblEmployees_TblCountries">
+            <End Role="TblCountries" EntitySet="TblCountries" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblProvinces" Association="Self.FK_TblEmployees_TblProvinces">
+            <End Role="TblProvinces" EntitySet="TblProvinces" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblSchool" Association="Self.FK_TblEmployees_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="TblEmployees" EntitySet="TblEmployees" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblProvinces_TblProvinces" Association="Self.FK_TblProvinces_TblProvinces">
             <End Role="TblCountries" EntitySet="TblCountries" />
             <End Role="TblProvinces" EntitySet="TblProvinces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblCities" Association="Self.FK_TblSchool_TblCities">
+            <End Role="TblCities" EntitySet="TblCities" />
+            <End Role="TblSchool" EntitySet="TblSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblCountries" Association="Self.FK_TblSchool_TblCountries">
+            <End Role="TblCountries" EntitySet="TblCountries" />
+            <End Role="TblSchool" EntitySet="TblSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblProvinces" Association="Self.FK_TblSchool_TblProvinces">
+            <End Role="TblProvinces" EntitySet="TblProvinces" />
+            <End Role="TblSchool" EntitySet="TblSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblSchoolPackages" Association="Self.FK_TblSchool_TblSchoolPackages">
+            <End Role="TblSchoolPackages" EntitySet="TblSchoolPackages" />
+            <End Role="TblSchool" EntitySet="TblSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolBranches_TblSchool" Association="Self.FK_TblSchoolBranches_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="TblSchoolBranches" EntitySet="TblSchoolBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolMonthlyPayment_TblSchool" Association="Self.FK_TblSchoolMonthlyPayment_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchool" />
+            <End Role="TblSchoolMonthlyPayment" EntitySet="TblSchoolMonthlyPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolMonthlyPayment_TblSchoolPackages" Association="Self.FK_TblSchoolMonthlyPayment_TblSchoolPackages">
+            <End Role="TblSchoolPackages" EntitySet="TblSchoolPackages" />
+            <End Role="TblSchoolMonthlyPayment" EntitySet="TblSchoolMonthlyPayment" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -205,10 +689,18 @@
           <EntitySet Name="AspNetRoles" EntityType="ERP_SchoolSystemModel.AspNetRole" />
           <EntitySet Name="AspNetUserRoles" EntityType="ERP_SchoolSystemModel.AspNetUserRole" />
           <EntitySet Name="AspNetUsers" EntityType="ERP_SchoolSystemModel.AspNetUser" />
+          <EntitySet Name="CboDepartments" EntityType="ERP_SchoolSystemModel.CboDepartment" />
+          <EntitySet Name="CboDesignations" EntityType="ERP_SchoolSystemModel.CboDesignation" />
+          <EntitySet Name="CboEmpStatus" EntityType="ERP_SchoolSystemModel.CboEmpStatu" />
           <EntitySet Name="TblCities" EntityType="ERP_SchoolSystemModel.TblCity" />
           <EntitySet Name="TblCountries" EntityType="ERP_SchoolSystemModel.TblCountry" />
+          <EntitySet Name="TblEmpEduDetails" EntityType="ERP_SchoolSystemModel.TblEmpEduDetail" />
+          <EntitySet Name="TblEmpExpDetails" EntityType="ERP_SchoolSystemModel.TblEmpExpDetail" />
+          <EntitySet Name="TblEmployees" EntityType="ERP_SchoolSystemModel.TblEmployee" />
           <EntitySet Name="TblProvinces" EntityType="ERP_SchoolSystemModel.TblProvince" />
           <EntitySet Name="TblSchools" EntityType="ERP_SchoolSystemModel.TblSchool" />
+          <EntitySet Name="TblSchoolBranches" EntityType="ERP_SchoolSystemModel.TblSchoolBranch" />
+          <EntitySet Name="TblSchoolMonthlyPayments" EntityType="ERP_SchoolSystemModel.TblSchoolMonthlyPayment" />
           <EntitySet Name="TblSchoolPackages" EntityType="ERP_SchoolSystemModel.TblSchoolPackage" />
           <EntitySet Name="TblUserTypes" EntityType="ERP_SchoolSystemModel.TblUserType" />
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
@@ -219,13 +711,93 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_TblUserType" Association="ERP_SchoolSystemModel.FK_AspNetUsers_TblUserType">
+            <End Role="TblUserType" EntitySet="TblUserTypes" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_TblSchool" Association="ERP_SchoolSystemModel.FK_Department_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="CboDepartment" EntitySet="CboDepartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboDepartment" Association="ERP_SchoolSystemModel.FK_TblEmployees_CboDepartment">
+            <End Role="CboDepartment" EntitySet="CboDepartments" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CboDesignation_TblSchool" Association="ERP_SchoolSystemModel.FK_CboDesignation_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="CboDesignation" EntitySet="CboDesignations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboDesignation" Association="ERP_SchoolSystemModel.FK_TblEmployees_CboDesignation">
+            <End Role="CboDesignation" EntitySet="CboDesignations" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CboEmpStatus_TblSchool" Association="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="CboEmpStatu" EntitySet="CboEmpStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_CboEmpStatus" Association="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus">
+            <End Role="CboEmpStatu" EntitySet="CboEmpStatus" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblCities_TblCities" Association="ERP_SchoolSystemModel.FK_TblCities_TblCities">
             <End Role="TblProvince" EntitySet="TblProvinces" />
             <End Role="TblCity" EntitySet="TblCities" />
           </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblCities" Association="ERP_SchoolSystemModel.FK_TblEmployees_TblCities">
+            <End Role="TblCity" EntitySet="TblCities" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblCities" Association="ERP_SchoolSystemModel.FK_TblSchool_TblCities">
+            <End Role="TblCity" EntitySet="TblCities" />
+            <End Role="TblSchool" EntitySet="TblSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblCountries" Association="ERP_SchoolSystemModel.FK_TblEmployees_TblCountries">
+            <End Role="TblCountry" EntitySet="TblCountries" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
           <AssociationSet Name="FK_TblProvinces_TblProvinces" Association="ERP_SchoolSystemModel.FK_TblProvinces_TblProvinces">
             <End Role="TblCountry" EntitySet="TblCountries" />
             <End Role="TblProvince" EntitySet="TblProvinces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblCountries" Association="ERP_SchoolSystemModel.FK_TblSchool_TblCountries">
+            <End Role="TblCountry" EntitySet="TblCountries" />
+            <End Role="TblSchool" EntitySet="TblSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmpEduDetails_TblEmployees" Association="ERP_SchoolSystemModel.FK_TblEmpEduDetails_TblEmployees">
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+            <End Role="TblEmpEduDetail" EntitySet="TblEmpEduDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmpExpDetails_TblEmployees" Association="ERP_SchoolSystemModel.FK_TblEmpExpDetails_TblEmployees">
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+            <End Role="TblEmpExpDetail" EntitySet="TblEmpExpDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblProvinces" Association="ERP_SchoolSystemModel.FK_TblEmployees_TblProvinces">
+            <End Role="TblProvince" EntitySet="TblProvinces" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblEmployees_TblSchool" Association="ERP_SchoolSystemModel.FK_TblEmployees_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblProvinces" Association="ERP_SchoolSystemModel.FK_TblSchool_TblProvinces">
+            <End Role="TblProvince" EntitySet="TblProvinces" />
+            <End Role="TblSchool" EntitySet="TblSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchool_TblSchoolPackages" Association="ERP_SchoolSystemModel.FK_TblSchool_TblSchoolPackages">
+            <End Role="TblSchoolPackage" EntitySet="TblSchoolPackages" />
+            <End Role="TblSchool" EntitySet="TblSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolBranches_TblSchool" Association="ERP_SchoolSystemModel.FK_TblSchoolBranches_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="TblSchoolBranch" EntitySet="TblSchoolBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolMonthlyPayment_TblSchool" Association="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchool">
+            <End Role="TblSchool" EntitySet="TblSchools" />
+            <End Role="TblSchoolMonthlyPayment" EntitySet="TblSchoolMonthlyPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSchoolMonthlyPayment_TblSchoolPackages" Association="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchoolPackages">
+            <End Role="TblSchoolPackage" EntitySet="TblSchoolPackages" />
+            <End Role="TblSchoolMonthlyPayment" EntitySet="TblSchoolMonthlyPayments" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -267,11 +839,58 @@
           <Property Name="UserTypeId" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="BranchID" Type="Int32" />
           <Property Name="AddedOn" Type="DateTime" Precision="3" />
           <Property Name="AddedBy" Type="Int32" />
           <Property Name="UpdateOn" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="Int32" />
           <NavigationProperty Name="AspNetUserRoles" Relationship="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
+          <NavigationProperty Name="TblUserType" Relationship="ERP_SchoolSystemModel.FK_AspNetUsers_TblUserType" FromRole="AspNetUser" ToRole="TblUserType" />
+        </EntityType>
+        <EntityType Name="CboDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_Department_TblSchool" FromRole="CboDepartment" ToRole="TblSchool" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboDepartment" FromRole="CboDepartment" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="CboDesignation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesignationName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_CboDesignation_TblSchool" FromRole="CboDesignation" ToRole="TblSchool" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboDesignation" FromRole="CboDesignation" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="CboEmpStatu">
+          <Key>
+            <PropertyRef Name="EmpStatusID" />
+          </Key>
+          <Property Name="EmpStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpStatusName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="CboEmpStatu" ToRole="TblSchool" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus" FromRole="CboEmpStatu" ToRole="TblEmployee" />
         </EntityType>
         <EntityType Name="TblCity">
           <Key>
@@ -282,6 +901,8 @@
           <Property Name="ProvincesID" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblProvince" Relationship="ERP_SchoolSystemModel.FK_TblCities_TblCities" FromRole="TblCity" ToRole="TblProvince" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblCities" FromRole="TblCity" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblSchools" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblCities" FromRole="TblCity" ToRole="TblSchool" />
         </EntityType>
         <EntityType Name="TblCountry">
           <Key>
@@ -290,7 +911,87 @@
           <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblCountries" FromRole="TblCountry" ToRole="TblEmployee" />
           <NavigationProperty Name="TblProvinces" Relationship="ERP_SchoolSystemModel.FK_TblProvinces_TblProvinces" FromRole="TblCountry" ToRole="TblProvince" />
+          <NavigationProperty Name="TblSchools" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblCountries" FromRole="TblCountry" ToRole="TblSchool" />
+        </EntityType>
+        <EntityType Name="TblEmpEduDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="DegreeTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InstituteName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeCompletionYear" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblEmployee" Relationship="ERP_SchoolSystemModel.FK_TblEmpEduDetails_TblEmployees" FromRole="TblEmpEduDetail" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblEmpExpDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="JobDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="EmpSalary" Type="Double" />
+          <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblEmployee" Relationship="ERP_SchoolSystemModel.FK_TblEmpExpDetails_TblEmployees" FromRole="TblEmpExpDetail" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HusbandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="DOJ" Type="DateTime" Precision="3" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="ProvincesID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="HomeAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Contact1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Contact2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="DepartmentID" Type="Int32" />
+          <Property Name="DesignationID" Type="Int32" />
+          <Property Name="NTNNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="BranchID" Type="Int32" />
+          <Property Name="JobDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DutyLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxFiler" Type="Boolean" />
+          <Property Name="IncomeTax" Type="Double" />
+          <Property Name="EmpPicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProfilePicturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Createdby" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifidOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CboDepartment" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboDepartment" FromRole="TblEmployee" ToRole="CboDepartment" />
+          <NavigationProperty Name="CboDesignation" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboDesignation" FromRole="TblEmployee" ToRole="CboDesignation" />
+          <NavigationProperty Name="CboEmpStatu" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus" FromRole="TblEmployee" ToRole="CboEmpStatu" />
+          <NavigationProperty Name="TblCity" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblCities" FromRole="TblEmployee" ToRole="TblCity" />
+          <NavigationProperty Name="TblCountry" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblCountries" FromRole="TblEmployee" ToRole="TblCountry" />
+          <NavigationProperty Name="TblEmpEduDetails" Relationship="ERP_SchoolSystemModel.FK_TblEmpEduDetails_TblEmployees" FromRole="TblEmployee" ToRole="TblEmpEduDetail" />
+          <NavigationProperty Name="TblEmpExpDetails" Relationship="ERP_SchoolSystemModel.FK_TblEmpExpDetails_TblEmployees" FromRole="TblEmployee" ToRole="TblEmpExpDetail" />
+          <NavigationProperty Name="TblProvince" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblProvinces" FromRole="TblEmployee" ToRole="TblProvince" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblSchool" FromRole="TblEmployee" ToRole="TblSchool" />
         </EntityType>
         <EntityType Name="TblProvince">
           <Key>
@@ -302,12 +1003,14 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TblCities" Relationship="ERP_SchoolSystemModel.FK_TblCities_TblCities" FromRole="TblProvince" ToRole="TblCity" />
           <NavigationProperty Name="TblCountry" Relationship="ERP_SchoolSystemModel.FK_TblProvinces_TblProvinces" FromRole="TblProvince" ToRole="TblCountry" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblProvinces" FromRole="TblProvince" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblSchools" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblProvinces" FromRole="TblProvince" ToRole="TblSchool" />
         </EntityType>
         <EntityType Name="TblSchool">
           <Key>
             <PropertyRef Name="SchoolId" />
           </Key>
-          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CityId" Type="Int32" />
           <Property Name="CountryId" Type="Int32" />
@@ -331,6 +1034,61 @@
           <Property Name="SchoolLogo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
           <Property Name="AdminUserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolShortCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CboDepartments" Relationship="ERP_SchoolSystemModel.FK_Department_TblSchool" FromRole="TblSchool" ToRole="CboDepartment" />
+          <NavigationProperty Name="CboDesignations" Relationship="ERP_SchoolSystemModel.FK_CboDesignation_TblSchool" FromRole="TblSchool" ToRole="CboDesignation" />
+          <NavigationProperty Name="CboEmpStatus" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="TblSchool" ToRole="CboEmpStatu" />
+          <NavigationProperty Name="TblCity" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblCities" FromRole="TblSchool" ToRole="TblCity" />
+          <NavigationProperty Name="TblCountry" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblCountries" FromRole="TblSchool" ToRole="TblCountry" />
+          <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_TblSchool" FromRole="TblSchool" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblProvince" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblProvinces" FromRole="TblSchool" ToRole="TblProvince" />
+          <NavigationProperty Name="TblSchoolPackage" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblSchoolPackages" FromRole="TblSchool" ToRole="TblSchoolPackage" />
+          <NavigationProperty Name="TblSchoolBranches" Relationship="ERP_SchoolSystemModel.FK_TblSchoolBranches_TblSchool" FromRole="TblSchool" ToRole="TblSchoolBranch" />
+          <NavigationProperty Name="TblSchoolMonthlyPayments" Relationship="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchool" FromRole="TblSchool" ToRole="TblSchoolMonthlyPayment" />
+        </EntityType>
+        <EntityType Name="TblSchoolBranch">
+          <Key>
+            <PropertyRef Name="BranchID" />
+          </Key>
+          <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_TblSchoolBranches_TblSchool" FromRole="TblSchoolBranch" ToRole="TblSchool" />
+        </EntityType>
+        <EntityType Name="TblSchoolMonthlyPayment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="PackageID" Type="Int32" />
+          <Property Name="Payment" Type="Double" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddedOn" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="OrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TokenExpiry" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BatchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorizeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionResponse" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionRefNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsShopPay" Type="Boolean" />
+          <Property Name="IsMobilePay" Type="Boolean" />
+          <Property Name="isPay" Type="Boolean" />
+          <Property Name="PaymentData" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchool" FromRole="TblSchoolMonthlyPayment" ToRole="TblSchool" />
+          <NavigationProperty Name="TblSchoolPackage" Relationship="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchoolPackages" FromRole="TblSchoolMonthlyPayment" ToRole="TblSchoolPackage" />
         </EntityType>
         <EntityType Name="TblSchoolPackage">
           <Key>
@@ -339,7 +1097,15 @@
           <Property Name="PackageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" />
-          <Property Name="Feature" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="HrModule" Type="Boolean" />
+          <Property Name="NoofUserAllow" Type="Int32" />
+          <Property Name="StudentAccountAllow" Type="Boolean" />
+          <Property Name="NoofStudentAllow" Type="Int32" />
+          <Property Name="PayrollModule" Type="Boolean" />
+          <Property Name="AccountModule" Type="Boolean" />
+          <Property Name="ExamModule" Type="Boolean" />
+          <NavigationProperty Name="TblSchools" Relationship="ERP_SchoolSystemModel.FK_TblSchool_TblSchoolPackages" FromRole="TblSchoolPackage" ToRole="TblSchool" />
+          <NavigationProperty Name="TblSchoolMonthlyPayments" Relationship="ERP_SchoolSystemModel.FK_TblSchoolMonthlyPayment_TblSchoolPackages" FromRole="TblSchoolPackage" ToRole="TblSchoolMonthlyPayment" />
         </EntityType>
         <EntityType Name="TblUserType">
           <Key>
@@ -347,7 +1113,9 @@
           </Key>
           <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ERP_SchoolSystemModel.FK_AspNetUsers_TblUserType" FromRole="TblUserType" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Type="ERP_SchoolSystemModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
@@ -377,6 +1145,90 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AspNetUsers_TblUserType">
+          <End Type="ERP_SchoolSystemModel.TblUserType" Role="TblUserType" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUserType">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.CboDepartment" Role="CboDepartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboDepartment">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboDepartment">
+          <End Type="ERP_SchoolSystemModel.CboDepartment" Role="CboDepartment" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboDepartment">
+              <PropertyRef Name="DepartmentID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CboDesignation_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.CboDesignation" Role="CboDesignation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboDesignation">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboDesignation">
+          <End Type="ERP_SchoolSystemModel.CboDesignation" Role="CboDesignation" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboDesignation">
+              <PropertyRef Name="DesignationID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CboEmpStatus_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.CboEmpStatu" Role="CboEmpStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="CboEmpStatu">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_CboEmpStatus">
+          <End Type="ERP_SchoolSystemModel.CboEmpStatu" Role="CboEmpStatu" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CboEmpStatu">
+              <PropertyRef Name="EmpStatusID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblCities_TblCities">
           <End Type="ERP_SchoolSystemModel.TblProvince" Role="TblProvince" Multiplicity="1" />
           <End Type="ERP_SchoolSystemModel.TblCity" Role="TblCity" Multiplicity="*" />
@@ -389,6 +1241,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TblEmployees_TblCities">
+          <End Type="ERP_SchoolSystemModel.TblCity" Role="TblCity" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCity">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblCities">
+          <End Type="ERP_SchoolSystemModel.TblCity" Role="TblCity" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCity">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblCountries">
+          <End Type="ERP_SchoolSystemModel.TblCountry" Role="TblCountry" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCountry">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblProvinces_TblProvinces">
           <End Type="ERP_SchoolSystemModel.TblCountry" Role="TblCountry" Multiplicity="1" />
           <End Type="ERP_SchoolSystemModel.TblProvince" Role="TblProvince" Multiplicity="*" />
@@ -398,6 +1286,126 @@
             </Principal>
             <Dependent Role="TblProvince">
               <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblCountries">
+          <End Type="ERP_SchoolSystemModel.TblCountry" Role="TblCountry" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCountry">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmpEduDetails_TblEmployees">
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.TblEmpEduDetail" Role="TblEmpEduDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="TblEmpEduDetail">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmpExpDetails_TblEmployees">
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.TblEmpExpDetail" Role="TblEmpExpDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="TblEmpExpDetail">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblProvinces">
+          <End Type="ERP_SchoolSystemModel.TblProvince" Role="TblProvince" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProvince">
+              <PropertyRef Name="ProvincesID" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="ProvincesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblEmployees_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblEmployee" Role="TblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblEmployee">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblProvinces">
+          <End Type="ERP_SchoolSystemModel.TblProvince" Role="TblProvince" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProvince">
+              <PropertyRef Name="ProvincesID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchool_TblSchoolPackages">
+          <End Type="ERP_SchoolSystemModel.TblSchoolPackage" Role="TblSchoolPackage" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchoolPackage">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="TblSchool">
+              <PropertyRef Name="PackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolBranches_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.TblSchoolBranch" Role="TblSchoolBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblSchoolBranch">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolMonthlyPayment_TblSchool">
+          <End Type="ERP_SchoolSystemModel.TblSchool" Role="TblSchool" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblSchoolMonthlyPayment" Role="TblSchoolMonthlyPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchool">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TblSchoolMonthlyPayment">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSchoolMonthlyPayment_TblSchoolPackages">
+          <End Type="ERP_SchoolSystemModel.TblSchoolPackage" Role="TblSchoolPackage" Multiplicity="0..1" />
+          <End Type="ERP_SchoolSystemModel.TblSchoolMonthlyPayment" Role="TblSchoolMonthlyPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSchoolPackage">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="TblSchoolMonthlyPayment">
+              <PropertyRef Name="PackageID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -431,6 +1439,7 @@
                 <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
                 <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
                 <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
                 <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
@@ -448,6 +1457,48 @@
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboDepartments">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboDepartment">
+              <MappingFragment StoreEntitySet="CboDepartment">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboDesignations">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboDesignation">
+              <MappingFragment StoreEntitySet="CboDesignation">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboEmpStatus">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboEmpStatu">
+              <MappingFragment StoreEntitySet="CboEmpStatus">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="EmpStatusName" ColumnName="EmpStatusName" />
+                <ScalarProperty Name="EmpStatusID" ColumnName="EmpStatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -470,6 +1521,76 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblEmpEduDetails">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblEmpEduDetail">
+              <MappingFragment StoreEntitySet="TblEmpEduDetails">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="DegreeCompletionYear" ColumnName="DegreeCompletionYear" />
+                <ScalarProperty Name="InstituteName" ColumnName="InstituteName" />
+                <ScalarProperty Name="DegreeTitle" ColumnName="DegreeTitle" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmpExpDetails">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblEmpExpDetail">
+              <MappingFragment StoreEntitySet="TblEmpExpDetails">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmployees">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblEmployee">
+              <MappingFragment StoreEntitySet="TblEmployees">
+                <ScalarProperty Name="ModifidOn" ColumnName="ModifidOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProfilePicturePath" ColumnName="ProfilePicturePath" />
+                <ScalarProperty Name="EmpPicture" ColumnName="EmpPicture" />
+                <ScalarProperty Name="IncomeTax" ColumnName="IncomeTax" />
+                <ScalarProperty Name="TaxFiler" ColumnName="TaxFiler" />
+                <ScalarProperty Name="BankAccountNo" ColumnName="BankAccountNo" />
+                <ScalarProperty Name="DutyLocation" ColumnName="DutyLocation" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="NTNNo" ColumnName="NTNNo" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+                <ScalarProperty Name="Contact1" ColumnName="Contact1" />
+                <ScalarProperty Name="HomeAddress" ColumnName="HomeAddress" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="ProvincesID" ColumnName="ProvincesID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="HusbandName" ColumnName="HusbandName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblProvinces">
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblProvince">
               <MappingFragment StoreEntitySet="TblProvinces">
@@ -483,6 +1604,7 @@
           <EntitySetMapping Name="TblSchools">
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblSchool">
               <MappingFragment StoreEntitySet="TblSchool">
+                <ScalarProperty Name="SchoolShortCode" ColumnName="SchoolShortCode" />
                 <ScalarProperty Name="AdminUserName" ColumnName="AdminUserName" />
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="SchoolLogo" ColumnName="SchoolLogo" />
@@ -510,10 +1632,59 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblSchoolBranches">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblSchoolBranch">
+              <MappingFragment StoreEntitySet="TblSchoolBranches">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="BranchTitle" ColumnName="BranchTitle" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSchoolMonthlyPayments">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblSchoolMonthlyPayment">
+              <MappingFragment StoreEntitySet="TblSchoolMonthlyPayment">
+                <ScalarProperty Name="PaymentData" ColumnName="PaymentData" />
+                <ScalarProperty Name="isPay" ColumnName="isPay" />
+                <ScalarProperty Name="IsMobilePay" ColumnName="IsMobilePay" />
+                <ScalarProperty Name="IsShopPay" ColumnName="IsShopPay" />
+                <ScalarProperty Name="TransactionRefNumber" ColumnName="TransactionRefNumber" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="TransactionResponse" ColumnName="TransactionResponse" />
+                <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+                <ScalarProperty Name="AuthorizeId" ColumnName="AuthorizeId" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TokenExpiry" ColumnName="TokenExpiry" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblSchoolPackages">
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblSchoolPackage">
               <MappingFragment StoreEntitySet="TblSchoolPackages">
-                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="ExamModule" ColumnName="ExamModule" />
+                <ScalarProperty Name="AccountModule" ColumnName="AccountModule" />
+                <ScalarProperty Name="PayrollModule" ColumnName="PayrollModule" />
+                <ScalarProperty Name="NoofStudentAllow" ColumnName="NoofStudentAllow" />
+                <ScalarProperty Name="StudentAccountAllow" ColumnName="StudentAccountAllow" />
+                <ScalarProperty Name="NoofUserAllow" ColumnName="NoofUserAllow" />
+                <ScalarProperty Name="HrModule" ColumnName="HrModule" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="PackageID" ColumnName="PackageID" />
@@ -524,6 +1695,7 @@
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblUserType">
               <MappingFragment StoreEntitySet="TblUserType">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
               </MappingFragment>

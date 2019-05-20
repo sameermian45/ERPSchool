@@ -17,7 +17,9 @@ namespace ERP_SchoolSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TblCountry()
         {
+            this.TblEmployees = new HashSet<TblEmployee>();
             this.TblProvinces = new HashSet<TblProvince>();
+            this.TblSchools = new HashSet<TblSchool>();
         }
     
         public int CountryID { get; set; }
@@ -25,6 +27,10 @@ namespace ERP_SchoolSystem.Models
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblEmployee> TblEmployees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblProvince> TblProvinces { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchool> TblSchools { get; set; }
     }
 }

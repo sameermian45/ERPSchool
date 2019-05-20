@@ -20,6 +20,8 @@ namespace ERP_SchoolSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ERP_SchoolSystemEntities db = new ERP_SchoolSystemEntities();
+
         public AccountController()
         {
         }
@@ -62,10 +64,94 @@ namespace ERP_SchoolSystem.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public async Task<ActionResult> Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            string UserName = null;
+            string Password = null;
+            if (Request.Cookies["TheSchollSystemUsername"] != null)
+            {
+                UserName = Request.Cookies["TheSchollSystemUsername"].Value;
+            }
+            if (Request.Cookies["TheSchollSystemPassword"] != null)
+            {
+                Password = Request.Cookies["TheSchollSystemPassword"].Value;
+            }
+            if (UserName != null && Password != null)
+            {
+                using (ERP_SchoolSystemEntities db = new ERP_SchoolSystemEntities())
+                {
+                    var IsUserValid = db.AspNetUsers.Where(x => x.UserName == UserName && x.Password == Password).FirstOrDefault();
+                    if (IsUserValid != null)
+                    {
+                        var SchoolDetails = db.TblSchools.Where(x => x.SchoolId == IsUserValid.SchoolID).FirstOrDefault();
+                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.Month == DateTime.Now.Month && x.Year == DateTime.Now.Year).FirstOrDefault();
+
+                        if(IsUserValid.UserTypeId == 1)
+                        {
+                            int RememberMe = 1;
+                            string DP = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Decrypt(Password);
+                            var result = await SignInManager.PasswordSignInAsync(UserName, DP, Convert.ToBoolean(RememberMe), shouldLockout: false);
+                            switch (result)
+                            {
+                                case SignInStatus.Success:
+                                    return RedirectToLocal(returnUrl);
+                                case SignInStatus.LockedOut:
+                                    ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
+                                    return View();
+                                case SignInStatus.Failure:
+                                default:
+                                    ViewBag.Message = "The user name or password provided is incorrect.";
+                                    return View();
+                            }
+                        }
+                        else if (checkpayment == null)
+                        {
+                            if (IsUserValid.UserTypeId == 2)
+                            {
+                                return RedirectToAction("PaymentAlert", "Home");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                                return View();
+                            }
+                        }
+                        else if (IsUserValid.IsActive == true && SchoolDetails.IsActive == true)
+                        {
+                            int RememberMe = 1;
+                            var result = await SignInManager.PasswordSignInAsync(UserName, ERP_SchoolSystem.Classes.Encrypt_Decrypt.Decrypt(Password), Convert.ToBoolean(RememberMe), shouldLockout: false);
+                            switch (result)
+                            {
+                                case SignInStatus.Success:
+                                    return RedirectToLocal(returnUrl);
+                                case SignInStatus.LockedOut:
+                                    ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
+                                    return View();
+                                case SignInStatus.Failure:
+                                default:
+                                    ViewBag.Message = "The user name or password provided is incorrect.";
+                                    return View();
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                        return View();
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+
         }
 
         //
@@ -73,87 +159,170 @@ namespace ERP_SchoolSystem.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(string UserName, string Password, string returnUrl, int RememberMe = 0)
         {
-            var ab = User.Identity.GetUserId();
-            // var aa = HttpContext.Current.User.Identity.GetUserId();
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    ViewBag.Message = "The user name or password provided is incorrect.";
-                    return View(model);
-            }
-        }
-
-        //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
-        {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
+                using (ERP_SchoolSystemEntities db = new ERP_SchoolSystemEntities())
+                {
+                    string P = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(Password);
+                    var IsUserValid = db.AspNetUsers.Where(x => x.UserName == UserName && x.Password == P).FirstOrDefault();
+                    if (IsUserValid != null)
                     {
-                        return RedirectToLocal(model.ReturnUrl);
+                        var SchoolDetails = db.TblSchools.Where(x => x.SchoolId == IsUserValid.SchoolID).FirstOrDefault();
+                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.Month == DateTime.Now.Month && x.Year == DateTime.Now.Year).FirstOrDefault();
+                        if (IsUserValid.UserTypeId == 1)
+                        {
+                            var result = await SignInManager.PasswordSignInAsync(UserName, Password, Convert.ToBoolean(RememberMe), shouldLockout: false);
+                            switch (result)
+                            {
+                                case SignInStatus.Success:
+                                    string EmpName = "System Admin";
+                                    string ProfilePicturePath = "Not Added";
+                                    int EmpAdded = 0;
+                                    var Emp = db.TblEmployees.Where(x => x.UserID == IsUserValid.UserID).FirstOrDefault();
+                                    if (Emp != null)
+                                    {
+                                        EmpName = Emp.FirstName + " " + Emp.LastName;
+                                        ProfilePicturePath = Emp.ProfilePicturePath;
+                                        EmpAdded = 1;
+                                    }
+                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded);
+                                    return RedirectToLocal(returnUrl);
+                                case SignInStatus.LockedOut:
+                                    ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
+                                    return View();
+                                case SignInStatus.Failure:
+                                default:
+                                    ViewBag.Message = "The user name or password provided is incorrect.";
+                                    return View();
+                            }
+                        }
+                        else if (checkpayment == null)
+                        {
+                            if (IsUserValid.UserTypeId == 2)
+                            {
+                                return RedirectToAction("PaymentAlert", "Home");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                                return View();
+                            }
+                        }
+                        else if (IsUserValid.IsActive == true && SchoolDetails.IsActive == true)
+                        {
+                            var result = await SignInManager.PasswordSignInAsync(UserName, Password, Convert.ToBoolean(RememberMe), shouldLockout: false);
+                            switch (result)
+                            {
+                                case SignInStatus.Success:
+                                    string EmpName = "System Admin";
+                                    string ProfilePicturePath = "Not Added";
+                                    int EmpAdded = 0;
+                                    var Emp = db.TblEmployees.Where(x => x.UserID == IsUserValid.UserID).FirstOrDefault();
+                                    if (Emp != null)
+                                    {
+                                        EmpName = Emp.FirstName + " " + Emp.LastName;
+                                        ProfilePicturePath = Emp.ProfilePicturePath;
+                                        EmpAdded = 1;
+                                    }
+                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded);
+                                    return RedirectToLocal(returnUrl);
+                                case SignInStatus.LockedOut:
+                                    ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
+                                    return View();
+                                case SignInStatus.Failure:
+                                default:
+                                    ViewBag.Message = "The user name or password provided is incorrect.";
+                                    return View();
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                            return View();
+                        }
                     }
-                case SignInStatus.LockedOut:
+                    else
                     {
-                        return View("Lockout");
+                        ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                        return View();
                     }
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
-                    return View(model);
+                }
             }
-        }
-        
-       
-
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
+            catch (Exception Ex)
             {
-                return View("Error");
+                ViewBag.Message = Ex.Message.ToString() ;
+                return View();
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+
+
+
+
+
+        public void CreateCookies(string UserName, string Password, int RememberMe , int UserID ,string EmpName, int SchoolID , int? UserTypeID , int? BranchID , string  ProfilePicturePath , int EMPADDED)
+        {
+
+            System.Web.HttpCookie ckUserID = new System.Web.HttpCookie("TheSchollSystemUserID");
+            ckUserID.Value = UserID.ToString();
+            ckUserID.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckUserID);
+
+            System.Web.HttpCookie ckEmpName = new System.Web.HttpCookie("TheSchollSystemEmpName");
+            ckEmpName.Value = EmpName;
+            ckEmpName.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckEmpName);
+
+            System.Web.HttpCookie ckSchoolID = new System.Web.HttpCookie("TheSchollSystemSchoolID");
+            ckSchoolID.Value = SchoolID.ToString();
+            ckSchoolID.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckSchoolID);
+
+            System.Web.HttpCookie ckUserTypeID = new System.Web.HttpCookie("TheSchollSystemUserTypeID");
+            ckUserTypeID.Value = UserTypeID.ToString();
+            ckUserTypeID.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckUserTypeID);
+
+            System.Web.HttpCookie ckBranchID = new System.Web.HttpCookie("TheSchollSystemBranchID");
+            ckBranchID.Value = BranchID.ToString();
+            ckBranchID.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckBranchID);
+
+            System.Web.HttpCookie ckProfilePicture = new System.Web.HttpCookie("TheSchollSystemProfilePicturePath");
+            ckProfilePicture.Value = ProfilePicturePath.ToString();
+            ckProfilePicture.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckProfilePicture);
+
+            System.Web.HttpCookie ckEMPADDED = new System.Web.HttpCookie("TheSchollSystemEMPADDED");
+            ckEMPADDED.Value = EMPADDED.ToString();
+            ckEMPADDED.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckEMPADDED);
+
+            System.Web.HttpCookie ckUsername = new System.Web.HttpCookie("TheSchollSystemUsername");
+            ckUsername.Value = UserName;
+            ckUsername.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckUsername);
+
+
+            if (RememberMe == 1)
+            {
+                System.Web.HttpCookie ckPassword = new System.Web.HttpCookie("TheSchollSystemPassword");
+                ckPassword.Value = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(Password);
+                ckPassword.Expires = DateTime.Now.AddDays(1);
+                Response.Cookies.Add(ckPassword);
+            }
+            else
+            {
+                if (Request.Cookies["TheSchollSystemPassword"] != null)
+                {
+                    System.Web.HttpCookie ckPassword = new System.Web.HttpCookie("TheSchollSystemPassword");
+                    ckPassword.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(ckPassword);
+                }
+            }
+        }
+
 
         //
         // GET: /Account/ForgotPassword
@@ -178,16 +347,7 @@ namespace ERP_SchoolSystem.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -252,39 +412,6 @@ namespace ERP_SchoolSystem.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
-        // GET: /Account/SendCode
-        [AllowAnonymous]
-        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
-        {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
-            {
-                return View("Error");
-            }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
-        }
 
         //
         // GET: /Account/ExternalLoginCallback
@@ -361,6 +488,70 @@ namespace ERP_SchoolSystem.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+            if (Request.Cookies["TheSchollSystemUserID"] != null)
+            {
+                System.Web.HttpCookie ckUserID = new System.Web.HttpCookie("TheSchollSystemUserID");
+                ckUserID.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckUserID);
+            }
+
+            if (Request.Cookies["TheSchollSystemEmpName"] != null)
+            {
+                System.Web.HttpCookie ckEmpName = new System.Web.HttpCookie("TheSchollSystemEmpName");
+                ckEmpName.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckEmpName);
+            }
+
+            if (Request.Cookies["TheSchollSystemSchoolID"] != null)
+            {
+                System.Web.HttpCookie ckSchoolID = new System.Web.HttpCookie("TheSchollSystemSchoolID");
+                ckSchoolID.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckSchoolID);
+            }
+
+            if (Request.Cookies["TheSchollSystemUserTypeID"] != null)
+            {
+                System.Web.HttpCookie ckUserTypeID = new System.Web.HttpCookie("TheSchollSystemUserTypeID");
+                ckUserTypeID.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckUserTypeID);
+            }
+
+            if (Request.Cookies["TheSchollSystemBranchID"] != null)
+            {
+                System.Web.HttpCookie ckBranchID = new System.Web.HttpCookie("TheSchollSystemBranchID");
+                ckBranchID.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckBranchID);
+            }
+            if (Request.Cookies["TheSchollSystemUsername"] != null)
+            {
+                System.Web.HttpCookie ckUsername = new System.Web.HttpCookie("TheSchollSystemUsername");
+                ckUsername.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckUsername);
+            }
+            if (Request.Cookies["TheSchollSystemPassword"] != null)
+            {
+                System.Web.HttpCookie ckPassword = new System.Web.HttpCookie("TheSchollSystemPassword");
+                ckPassword.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckPassword);
+            }
+
+            if (Request.Cookies["TheSchollSystemProfilePicturePath"] != null)
+            {
+                System.Web.HttpCookie ckProfilePicture = new System.Web.HttpCookie("TheSchollSystemProfilePicturePath");
+                ckProfilePicture.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckProfilePicture);
+            }
+
+            if (Request.Cookies["TheSchollSystemEMPADDED"] != null)
+            {
+                System.Web.HttpCookie ckEMPADDED = new System.Web.HttpCookie("TheSchollSystemEMPADDED");
+                ckEMPADDED.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckEMPADDED);
+            }
+            
+
+
             return RedirectToAction("Index", "Home");
         }
 

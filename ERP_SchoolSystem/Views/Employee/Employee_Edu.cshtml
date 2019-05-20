@@ -1,0 +1,145 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Institute Name<span class="text-danger">*</span></label>
+            <input type="text" name="InstituteName" id="InstituteName" class="form-control" placeholder="Enter Institute Name">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Degree Title<span class="text-danger">*</span></label>
+            <input type="text" name="DegreeTitle" id="DegreeTitle" class="form-control" placeholder="Enter Degree Title">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Degree Completion Year <span class="text-danger">*</span></label>
+            <input type="text" name="DegreeCompletionYear" id="DegreeCompletionYear" class="form-control" placeholder="Enter Degree Completion Year" data-mask="9999">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Remarks <span class="text-danger">*</span></label>
+            <input type="text" name="Remarks" class="form-control" id="Remarks" placeholder="Enter Remarks">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div style="margin-left: 89%;">
+                <a class="btn btn-primary" onclick="AddEduRow()"> Add to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title">Employee Education Document Details</h5>
+        <div class="header-elements">
+        </div>
+    </div>
+
+    <div class="table-responsive table-scrollable">
+        <table class="table" id="EmpEduDoc">
+            <thead>
+                <tr id="1">
+                    <th>Institute Name</th>
+                    <th>Degree Title</th>
+                    <th>Completion Year</th>
+                    <th>Remarks</th>
+                    <th>Modify</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function AddEduRow() {
+        if (document.getElementById("InstituteName").value == "")
+        {
+            toastr.error('Please Enter Institute Name');
+        }
+        else if (document.getElementById("DegreeTitle").value == "")
+        {
+            toastr.error('Please Enter Degree Title');
+        }
+        else if (document.getElementById("DegreeCompletionYear").value == "")
+        {
+            toastr.error('Please Enter Degree Completion Year');
+        }
+        else if (document.getElementById("Remarks").value == "")
+        {
+            toastr.error('Please Enter Remarks');
+        }
+        else
+        {
+            var InstituteName = document.getElementById("InstituteName").value;
+            var DegreeTitle = document.getElementById("DegreeTitle").value;
+            var DegreeCompletionYear = document.getElementById("DegreeCompletionYear").value;
+            var Remarks = document.getElementById("Remarks").value;
+            var table = document.getElementById("EmpEduDoc");
+            var rowCount = document.getElementById('EmpEduDoc').rows.length;
+
+            var Lid = $('table tr:last').attr('id');
+            var row = table.insertRow(-1);
+            var RowId = parseInt(Lid) + 1;
+            row.id = RowId;
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+
+            cell1.innerHTML = '<input type="text" value="' + InstituteName + '" name="InstituteNameN" readonly="readonly" id="InstituteNameN-' + RowId + '" style="border: 0px;width: 250px"/>';
+            cell2.innerHTML = '<input type="text" value="' + DegreeTitle + '" name="DegreeTitleN" readonly="readonly" id="DegreeTitleN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell3.innerHTML = '<input type="text" value="' + DegreeCompletionYear + '" name="DegreeCompletionYearN" readonly="readonly" id="DegreeCompletionYearN-' + RowId + '" style="border: 0px;width: 110px;"/>';
+            cell4.innerHTML = '<input type="text" value="' + Remarks + '" name="RemarksN" readonly="readonly" id="RemarksN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell5.innerHTML = '<div style="width: 110px;"> <a onclick="RemoveRow(' + RowId + ')" >Remove</a> / <a onclick="UpdateRow(' + RowId + ')">Update</a> </div>';
+
+            document.getElementById("InstituteName").value = "";
+            document.getElementById("DegreeTitle").value = "";
+            document.getElementById("DegreeCompletionYear").value = "";
+            document.getElementById("Remarks").value = "";
+        }
+    }
+
+    function RemoveRow(RowId) {
+        var _confirm = confirm("Are you sure you want to delete this record?");
+        if (_confirm)
+        {
+            $("#" + RowId).remove();
+        }
+
+    }
+
+    function UpdateRow(RowId) {
+        document.getElementById("InstituteName").value = document.getElementById("InstituteNameN-" + RowId + "").value;
+        document.getElementById("DegreeTitle").value = document.getElementById("DegreeTitleN-" + RowId + "").value;
+        document.getElementById("DegreeCompletionYear").value = document.getElementById("DegreeCompletionYearN-" + RowId + "").value;
+        document.getElementById("Remarks").value = document.getElementById("RemarksN-" + RowId + "").value;
+        $("#" + RowId).remove();
+    }
+
+
+    function validateEduDetails()
+    {
+        var rowCount = document.getElementById('EmpEduDoc').rows.length;
+        if(rowCount > 1)
+        {
+            return true;
+        }
+        else
+        {
+            toastr.error('Please Enter Employee Education Documents Details');
+            return false;
+        }
+    }
+</script>

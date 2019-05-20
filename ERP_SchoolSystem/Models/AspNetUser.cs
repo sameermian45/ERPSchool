@@ -37,6 +37,7 @@ namespace ERP_SchoolSystem.Models
         public Nullable<int> UserTypeId { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public int SchoolID { get; set; }
+        public Nullable<int> BranchID { get; set; }
         public Nullable<System.DateTime> AddedOn { get; set; }
         public Nullable<int> AddedBy { get; set; }
         public Nullable<System.DateTime> UpdateOn { get; set; }
@@ -44,5 +45,6 @@ namespace ERP_SchoolSystem.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
+        public virtual TblUserType TblUserType { get; set; }
     }
 }

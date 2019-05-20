@@ -182,6 +182,7 @@
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Filter\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filter\EmpDataFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +194,15 @@
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserRole.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CboDepartment.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CboDesignation.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CboEmpStatu.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -218,10 +228,25 @@
     <Compile Include="Models\TblCountry.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TblEmpEduDetail.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblEmpExpDetail.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblEmployee.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TblProvince.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblSchool.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblSchoolBranch.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblSchoolMonthlyPayment.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblSchoolPackage.cs">
@@ -369,6 +394,7 @@
     <Content Include="Content\images\logo_demo.png" />
     <Content Include="Content\images\logo_icon_light.png" />
     <Content Include="Content\images\logo_light.png" />
+    <Content Include="Content\images\noimageicon.png" />
     <Content Include="Content\images\pie-chart.png" />
     <Content Include="Content\images\signature.png" />
     <Content Include="Content\images\user_bg3.jpg" />
@@ -865,19 +891,12 @@
     <Content Include="Content\Loader\toastr.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="LoginPage\CSS\animate.min.css" />
-    <Content Include="LoginPage\CSS\fuse-html.min.css" />
-    <Content Include="LoginPage\CSS\main.css" />
-    <Content Include="LoginPage\CSS\perfect-scrollbar.css" />
+    <Content Include="LoginPage\CSS\font-awesome.min.css" />
     <Content Include="LoginPage\CSS\style.css" />
-    <Content Include="LoginPage\dark-material-bg.jpg" />
-    <Content Include="LoginPage\JS\bootstrap.min.js" />
-    <Content Include="LoginPage\JS\fuse-html.min.js" />
+    <Content Include="LoginPage\CSS\vdo.min.css" />
+    <Content Include="LoginPage\images\bg.jpg" />
+    <Content Include="LoginPage\images\tick.png" />
     <Content Include="LoginPage\JS\jquery.min.js" />
-    <Content Include="LoginPage\JS\main.js" />
-    <Content Include="LoginPage\JS\mobile-detect.min.js" />
-    <Content Include="LoginPage\JS\perfect-scrollbar.min.js" />
-    <Content Include="LoginPage\JS\popper.min.js" />
     <Content Include="Models\SchoolSystem_DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SchoolSystem_DB.edmx</DependentUpon>
@@ -920,10 +939,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Employee\CreateEmploye.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProfileImagesUploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -937,8 +956,6 @@
     <Content Include="global_assets\demo_data\dashboard\app_sales_heatmap.csv" />
     <Content Include="global_assets\demo_data\dashboard\traffic_sources.csv" />
     <Content Include="global_assets\demo_data\dashboard\bullets.json" />
-    <Content Include="LoginPage\CSS\fonts\fuse-iconfont.ttf" />
-    <Content Include="LoginPage\CSS\fonts\fuse-iconfont.woff" />
     <EntityDeploy Include="Models\SchoolSystem_DB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SchoolSystem_DB.Designer.cs</LastGenOutput>
@@ -946,6 +963,10 @@
     <Content Include="Models\SchoolSystem_DB.edmx.diagram">
       <DependentUpon>SchoolSystem_DB.edmx</DependentUpon>
     </Content>
+    <Content Include="LoginPage\fonts\fontawesome-webfont.eot" />
+    <Content Include="LoginPage\fonts\fontawesome-webfont.ttf" />
+    <Content Include="LoginPage\fonts\fontawesome-webfont.woff" />
+    <Content Include="LoginPage\fonts\fontawesome-webfont.woff2" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\SystemSidebar.cshtml" />
     <Content Include="Views\Demo\form_inputs.cshtml" />
@@ -977,6 +998,14 @@
     <Content Include="Views\UserRoles\AssignUserRoles.cshtml" />
     <Content Include="Views\Demo\DataTable.cshtml" />
     <Content Include="Views\UserRoles\UserRoles_Partial.cshtml" />
+    <Content Include="Views\Employee\NewEmployee.cshtml" />
+    <Content Include="Views\Employee\GetCitiesList.cshtml" />
+    <Content Include="Views\Employee\GetProvincesList.cshtml" />
+    <Content Include="Views\Employee\Employee_Edu.cshtml" />
+    <Content Include="Views\Employee\Employee_Exp.cshtml" />
+    <Content Include="Views\Home\UpdateEmpData.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home\PaymentAlert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

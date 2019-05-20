@@ -41,7 +41,7 @@ namespace ERP_SchoolSystem.Controllers
         [HttpPost]
         [Authorize]
         [CustomAuthorizeAttribute(Roles = "SuperAdmin")]
-        public async System.Threading.Tasks.Task<ActionResult> AddNewSchool(string SchoolName, string SRPersonName, int Country, int City, string RegistrationNo, string PtclNo, string CellNo2, int IsActive, DateTime RegistrationDate, string SROffiersContactNo, int Province, string Address, string NTNNo, string CellNo1, string Email,string Website, HttpPostedFileBase SchoolLogo, string UserName, string Password)
+        public async System.Threading.Tasks.Task<ActionResult> AddNewSchool(string SchoolName, string SRPersonName, int Country, int City, string RegistrationNo, string PtclNo, string CellNo2, int IsActive, DateTime RegistrationDate, string SROffiersContactNo, int Province, string Address, string NTNNo, string CellNo1, string Email,string Website, HttpPostedFileBase SchoolLogo, string DefaultUserName, string DefaultPassword, string SchoolShortCode ,int PackageID)
         {
             try
             {
@@ -69,7 +69,9 @@ namespace ERP_SchoolSystem.Controllers
                 s.CellNo = CellNo1;
                 s.Email = Email;
                 s.Website = Website;
-                s.AdminUserName = UserName;
+                s.AdminUserName = DefaultUserName;
+                s.SchoolShortCode = SchoolShortCode;
+                s.PackageId = PackageID;
                 if (SchoolLogo != null)
                 {
                     using (MemoryStream ms = new MemoryStream())
@@ -82,14 +84,53 @@ namespace ERP_SchoolSystem.Controllers
                 s.CreatedDateTime = DateTime.Now;
                 db.TblSchools.Add(s);
                 db.SaveChanges();
-                var user = new ApplicationUser { UserName = UserName, Email = UserName };
-                var result = await UserManager.CreateAsync(user, Password);
+
+                TblSchoolBranch B = new TblSchoolBranch();
+                B.BranchTitle = "Head Office";
+                B.SchoolID = s.SchoolId;
+                B.IsActive = true;
+                B.CreatedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                B.CreatedOn = DateTime.Now;
+                db.TblSchoolBranches.Add(B);
+                db.SaveChanges();
+
+
+                CboDepartment Dp = new CboDepartment();
+                Dp.DepartmentName = "Administrator";
+                Dp.IsActive = true;
+                Dp.SchoolId = s.SchoolId;
+                Dp.CreatedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                Dp.CreatedOn = DateTime.Now;
+                db.CboDepartments.Add(Dp);
+                db.SaveChanges();
+
+                CboDesignation D = new CboDesignation();
+                D.DesignationName = "Administrator Head";
+                D.IsActive = true;
+                D.SchoolId = s.SchoolId;
+                D.CreatedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                D.CreatedOn = DateTime.Now;
+                db.CboDesignations.Add(D);
+                db.SaveChanges();
+
+                CboEmpStatu ES = new CboEmpStatu();
+                ES.EmpStatusName = "Permanent";
+                ES.IsActive = true;
+                ES.SchoolId = s.SchoolId;
+                ES.CreatedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                ES.CreatedOn = DateTime.Now;
+                db.CboEmpStatus.Add(ES);
+                db.SaveChanges();
+
+                var user = new ApplicationUser { UserName = DefaultUserName, Email = DefaultUserName };
+                var result = await UserManager.CreateAsync(user, DefaultPassword);
                 if (result.Succeeded)
                 {
-                    AspNetUser obj = db.AspNetUsers.Where(x => x.Email == UserName).FirstOrDefault();
+                    AspNetUser obj = db.AspNetUsers.Where(x => x.Email == DefaultUserName).FirstOrDefault();
                     obj.SchoolID = s.SchoolId;
-                    obj.UserName = UserName;
-                    obj.Password = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(Password);
+                    obj.BranchID = B.BranchID;
+                    obj.UserName = DefaultUserName;
+                    obj.Password = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(DefaultPassword);
                     obj.UserTypeId = 2;
                     obj.IsActive = true;
                     obj.AddedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
@@ -107,6 +148,7 @@ namespace ERP_SchoolSystem.Controllers
                     r1.UserId = obj.Id;
                     db.AspNetUserRoles.Add(r1);
                     db.SaveChanges();
+
                 }
                 ViewBag.SuccessMessage = "New School Successfully Added";
             }

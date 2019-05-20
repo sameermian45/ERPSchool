@@ -28,10 +28,18 @@ namespace ERP_SchoolSystem.Models
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<CboDepartment> CboDepartments { get; set; }
+        public virtual DbSet<CboDesignation> CboDesignations { get; set; }
+        public virtual DbSet<CboEmpStatu> CboEmpStatus { get; set; }
         public virtual DbSet<TblCity> TblCities { get; set; }
         public virtual DbSet<TblCountry> TblCountries { get; set; }
+        public virtual DbSet<TblEmpEduDetail> TblEmpEduDetails { get; set; }
+        public virtual DbSet<TblEmpExpDetail> TblEmpExpDetails { get; set; }
+        public virtual DbSet<TblEmployee> TblEmployees { get; set; }
         public virtual DbSet<TblProvince> TblProvinces { get; set; }
         public virtual DbSet<TblSchool> TblSchools { get; set; }
+        public virtual DbSet<TblSchoolBranch> TblSchoolBranches { get; set; }
+        public virtual DbSet<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
         public virtual DbSet<TblSchoolPackage> TblSchoolPackages { get; set; }
         public virtual DbSet<TblUserType> TblUserTypes { get; set; }
     }

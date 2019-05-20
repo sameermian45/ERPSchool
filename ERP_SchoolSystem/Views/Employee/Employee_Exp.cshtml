@@ -1,0 +1,184 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Company Name<span class="text-danger">*</span></label>
+            <input type="text" name="CompanyName" id="CompanyName" class="form-control" placeholder="Enter Company Name">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Job Title<span class="text-danger">*</span></label>
+            <input type="text" name="JobTitle" id="JobTitle" class="form-control" placeholder="Enter Job Title">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Job Description <span class="text-danger">*</span></label>
+            <input type="text" name="JobDescription" id="JobDescription" class="form-control" placeholder="Enter Job Description">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Salary Details <span class="text-danger">*</span></label>
+            <input type="text" name="EmpSalary" class="form-control" id="EmpSalary" placeholder="Enter Employee Salary Details">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Job Start Date <span class="text-danger">*</span></label>
+            <span class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+            </span>
+            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" name="StartDate" id="StartDate">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Job End Date <span class="text-danger">*</span></label>
+            <span class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+            </span>
+            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" name="EndDate" id="EndDate">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Remarks <span class="text-danger">*</span></label>
+            <input type="text" name="RemarksExp" class="form-control" id="RemarksExp" placeholder="Enter Remarks">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div style="margin-top: 6%; margin-left: 77%;">
+                <a class="btn btn-primary" onclick="AddExpRow()"> Add to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title">Employee Job Experience Details</h5>
+        <div class="header-elements">
+        </div>
+    </div>
+
+    <div class="table-responsive table-scrollable">
+        <table class="table" id="EmpExpDoc">
+            <thead>
+                <tr id="1">
+                    <th>Company Name</th>
+                    <th>Job Title</th>
+                    <th>Job Description</th>
+                    <th>Salary Details</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Remarks</th>
+                    <th>Modify</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function AddExpRow() {
+        if (document.getElementById("CompanyName").value == "")
+        {
+            toastr.error('Please Enter Institute Name');
+        }
+        else if (document.getElementById("JobTitle").value == "")
+        {
+            toastr.error('Please Enter Job Title');
+        }
+        else if (document.getElementById("JobDescription").value == "")
+        {
+            toastr.error('Please Enter Job Description');
+        }
+        else if (document.getElementById("EmpSalary").value == "") {
+            toastr.error('Please Enter Salary Details');
+        }
+        else if (document.getElementById("StartDate").value == "") {
+            toastr.error('Please Enter Start Date');
+        }
+        else if (document.getElementById("EndDate").value == "") {
+            toastr.error('Please Enter End Date');
+        }
+        else if (document.getElementById("RemarksExp").value == "")
+        {
+            toastr.error('Please Enter Remarks');
+        }
+        else
+        {
+            var CompanyName = document.getElementById("CompanyName").value;
+            var JobTitle = document.getElementById("JobTitle").value;
+            var JobDescription = document.getElementById("JobDescription").value;
+            var EmpSalary = document.getElementById("EmpSalary").value;
+            var StartDate = document.getElementById("StartDate").value;
+            var EndDate = document.getElementById("EndDate").value;
+            var Remarks = document.getElementById("RemarksExp").value;
+            var table = document.getElementById("EmpExpDoc");
+            var rowCount = document.getElementById('EmpExpDoc').rows.length;
+
+            var Lid = $('table tr:last').attr('id');
+            var row = table.insertRow(-1);
+            var RowId = parseInt(Lid) + 1;
+            row.id = RowId;
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+            var cell8 = row.insertCell(7);
+
+            cell1.innerHTML = '<input type="text" value="' + CompanyName + '" name="CompanyNameN" readonly="readonly" id="CompanyNameN-' + RowId + '" style="border: 0px;width: 250px"/>';
+            cell2.innerHTML = '<input type="text" value="' + JobTitle + '" name="JobTitleN" readonly="readonly" id="JobTitleN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell3.innerHTML = '<input type="text" value="' + JobDescription + '" name="JobDescriptionN" readonly="readonly" id="JobDescriptionN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell4.innerHTML = '<input type="text" value="' + EmpSalary + '" name="EmpSalaryN" readonly="readonly" id="EmpSalaryN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell5.innerHTML = '<input type="text" value="' + StartDate + '" name="StartDateN" readonly="readonly" id="StartDateN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell6.innerHTML = '<input type="text" value="' + EndDate + '" name="EndDateN" readonly="readonly" id="EndDateN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell7.innerHTML = '<input type="text" value="' + Remarks + '" name="RemarksExpN" readonly="readonly" id="RemarksExpN-' + RowId + '" style="border: 0px;width: 250px;"/>';
+            cell8.innerHTML = '<div style="width: 110px;"> <a onclick="RemoveExpRow(' + RowId + ')" >Remove</a> / <a onclick="UpdateExpRow(' + RowId + ')">Update</a> </div>';
+
+            document.getElementById("CompanyName").value = "";
+            document.getElementById("JobTitle").value = "";
+            document.getElementById("JobDescription").value = "";
+            document.getElementById("EmpSalary").value = "";
+            document.getElementById("StartDate").value = "";
+            document.getElementById("EndDate").value = "";
+            document.getElementById("RemarksExp").value = "";
+        }
+    }
+
+    function RemoveExpRow(RowId) {
+        var _confirm = confirm("Are you sure you want to delete this record?");
+        if (_confirm)
+        {
+            $("#" + RowId).remove();
+        }
+
+    }
+
+    function UpdateExpRow(RowId) {
+        document.getElementById("CompanyName").value = document.getElementById("CompanyNameN-" + RowId + "").value;
+        document.getElementById("JobTitle").value = document.getElementById("JobTitleN-" + RowId + "").value;
+        document.getElementById("JobDescription").value = document.getElementById("JobDescriptionN-" + RowId + "").value;
+        document.getElementById("EmpSalary").value = document.getElementById("EmpSalaryN-" + RowId + "").value;
+        document.getElementById("StartDate").value = document.getElementById("StartDateN-" + RowId + "").value;
+        document.getElementById("EndDate").value = document.getElementById("EndDateN-" + RowId + "").value;
+        document.getElementById("RemarksExp").value = document.getElementById("RemarksExpN-" + RowId + "").value;
+        $("#" + RowId).remove();
+    }
+</script>
+

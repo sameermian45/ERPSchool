@@ -224,16 +224,19 @@
                 </li>
                 <li class="nav-item dropdown dropdown-user">
                     <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-                        <img src="~/Content/images//demo/users/face11.jpg" class="rounded-circle mr-2" height="34" alt="">
-                        <span>Victoria</span>
+                        <img src='@ERP_SchoolSystem.Classes.UserInfo.GetEmpImage()' class="rounded-circle mr-2" height="34" alt="">
+                        <span>@ERP_SchoolSystem.Classes.UserInfo.EmpName()</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-                        <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
                         <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-indigo-400 ml-auto">58</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
-                        <a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                        <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Change Password</a>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                        }
                     </div>
                 </li>
             </ul>
@@ -256,12 +259,10 @@
                     <div class="sidebar-user-material-body">
                         <div class="card-body text-center">
                             <a href="#">
-                                <img src="~/Content/images//demo/users/face6.jpg" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                                <img src='@ERP_SchoolSystem.Classes.UserInfo.GetEmpImage()' class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
                             </a>
-                            <h6 class="mb-0 text-white text-shadow-dark">Victoria Baker</h6>
-                            <span class="font-size-sm text-white text-shadow-dark">Santa Ana, CA</span>
+                            <h6 class="mb-0 text-white text-shadow-dark">@ERP_SchoolSystem.Classes.UserInfo.EmpName()</h6>
                         </div>
-
                         <div class="sidebar-user-material-footer">
                             <a href="#user-nav" class="d-flex justify-content-between align-items-center text-shadow-dark dropdown-toggle" data-toggle="collapse"><span>My account</span></a>
                         </div>
@@ -276,12 +277,6 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="icon-coins"></i>
-                                    <span>My balance</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
                                     <i class="icon-comment-discussion"></i>
                                     <span>Messages</span>
                                     <span class="badge bg-success-400 badge-pill align-self-center ml-auto">58</span>
@@ -290,15 +285,19 @@
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="icon-cog5"></i>
-                                    <span>Account settings</span>
+                                    <span>Change Password</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="icon-switch2"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li class="nav-item">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">
+                                        <i class="icon-switch2"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -367,10 +366,9 @@
             <div class="content">
                 @RenderBody()
             </div>
-           @Html.Partial("Footer")
+            @Html.Partial("Footer")
         </div>
     </div>
     @Scripts.Render("~/Content/JS")
 </body>
 </html>
-

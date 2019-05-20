@@ -14,9 +14,27 @@ namespace ERP_SchoolSystem.Models
     
     public partial class TblSchoolPackage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TblSchoolPackage()
+        {
+            this.TblSchools = new HashSet<TblSchool>();
+            this.TblSchoolMonthlyPayments = new HashSet<TblSchoolMonthlyPayment>();
+        }
+    
         public int PackageID { get; set; }
         public string PackageName { get; set; }
         public Nullable<double> Price { get; set; }
-        public string Feature { get; set; }
+        public Nullable<bool> HrModule { get; set; }
+        public Nullable<int> NoofUserAllow { get; set; }
+        public Nullable<bool> StudentAccountAllow { get; set; }
+        public Nullable<int> NoofStudentAllow { get; set; }
+        public Nullable<bool> PayrollModule { get; set; }
+        public Nullable<bool> AccountModule { get; set; }
+        public Nullable<bool> ExamModule { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchool> TblSchools { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
     }
 }

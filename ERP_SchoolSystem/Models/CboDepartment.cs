@@ -12,27 +12,25 @@ namespace ERP_SchoolSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TblProvince
+    public partial class CboDepartment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TblProvince()
+        public CboDepartment()
         {
-            this.TblCities = new HashSet<TblCity>();
             this.TblEmployees = new HashSet<TblEmployee>();
-            this.TblSchools = new HashSet<TblSchool>();
         }
     
-        public int ProvincesID { get; set; }
-        public string ProvincesName { get; set; }
-        public int CountryID { get; set; }
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
+        public int SchoolId { get; set; }
         public bool IsActive { get; set; }
+        public int CreatedBy { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblCity> TblCities { get; set; }
-        public virtual TblCountry TblCountry { get; set; }
+        public virtual TblSchool TblSchool { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblEmployee> TblEmployees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblSchool> TblSchools { get; set; }
     }
 }
