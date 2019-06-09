@@ -1,8 +1,258 @@
-﻿
+﻿@model ERP_SchoolSystem.Models.TblEmployee
 @{
     ViewBag.Title = "UserProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h2>UserProfile</h2>
+    int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    
+    var EmployeeStatus = db.CboEmpStatus.Where(x => x.EmpStatusID == Model.StatusId).FirstOrDefault();
+    var Department = db.CboDepartments.Where(x => x.DepartmentID == Model.DepartmentID).FirstOrDefault();
+    var Designation = db.CboDesignations.Where(x => x.DesignationID == Model.DesignationID).FirstOrDefault();
+    var School = db.TblSchools.Where(x => x.SchoolId == SchoolID).FirstOrDefault();
+    var BranchName = db.TblSchoolBranches.Where(x => x.BranchID == Model.BranchID).FirstOrDefault();
+
+    var Countryname = db.TblCountries.Where(x => x.CountryID == Model.CountryID).FirstOrDefault();
+    var Provincename = db.TblProvinces.Where(x => x.ProvincesID == Model.ProvincesID).FirstOrDefault();
+    var Cityname = db.TblCities.Where(x => x.CityID == Model.CityID).FirstOrDefault();
+
+}
+<div class="profile-cover">
+    <div style="background-color:#2a3140">
+        <div class="profile-cover-img" style="background-image: url(/Content/images/Cover.jpg); opacity:0.6"></div>
+        <div class="media align-items-center text-center text-md-left flex-column flex-md-row m-0">
+            <div class="mr-md-3 mb-2 mb-md-0">
+                <a href="#" class="profile-thumb">
+                    <img src="@ERP_SchoolSystem.Classes.UserInfo.GetEmpImage()" class="border-white rounded-circle" width="48" height="48" alt="">
+                </a>
+            </div>
+            <div class="media-body text-white">
+                <h1 class="mb-0">@ERP_SchoolSystem.Classes.UserInfo.EmpName()</h1>
+                <span class="d-block">@ERP_SchoolSystem.Classes.UserInfo.GetUserName()</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Profile Information</h6>
+        <div class="header-elements">
+
+        </div>
+    </div>
+
+    <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>School Name <span class="text-danger">*</span></label>
+                        <input type="text" name="SchoolName" class="form-control" value="@School.SchoolName" placeholder="Enter School Name" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Branch Name <span class="text-danger">*</span></label>
+                        <input type="text" name="BranchName" class="form-control" value="@BranchName.BranchTitle" placeholder="Enter Branch Name" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name <span class="text-danger">*</span></label>
+                        <input type="text" name="FirstName" class="form-control" placeholder="Enter First Name" value="@Model.FirstName" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Last Name <span class="text-danger">*</span></label>
+                        <input type="text" name="LastName" class="form-control" placeholder="Enter Last Name" value="@Model.LastName" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Gender <span class="text-danger">*</span></label>
+                        <input type="text" name="Gender" class="form-control" placeholder="Enter Gender" value="@Model.Gender" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (Model.Gender == "Female" && Model.MaritalStatus != "Single")
+                    {
+                        <div class="form-group" id="Father">
+                            <label>Father Name <span class="text-danger">*</span></label>
+                            <input type="text" name="FatherName" id="FatherName" class="form-control required" placeholder="Enter Father Name" value="@Model.FatherName">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group" id="Husband">
+                            <label>Husband Name <span class="text-danger">*</span></label>
+                            <input type="text" name="HusbandName" id="HusbandName" class="form-control" placeholder="Enter Husband Name" value="@Model.HusbandName">
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date of Birth <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" value="@String.Format("{0:MM/dd/yyyy}", Model.DOB)" name="DOB" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date of Joining <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input type="text" readonly class="form-control" value="@String.Format("{0:MM/dd/yyyy}", Model.DOJ)" name="DOJ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Marital Status <span class="text-danger">*</span></label>
+                        <input type="text" name="MaritalStatus" class="form-control" placeholder="Enter Marital Status" value="@Model.MaritalStatus" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee CNIC <span class="text-danger">*</span></label>
+                        <input type="text" name="CNIC" value="@Model.CNIC" class="form-control" placeholder="Enter Employee CNIC" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email Address <span class="text-danger">*</span></label>
+                        <input type="email" name="EmailAddress" class="form-control" placeholder="Enter Email Address" readonly value="@Model.Email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Country <span class="text-danger">*</span></label>
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Countryname.CountryName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Province <span class="text-danger">*</span></label>
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Provincename.ProvincesName">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee City <span class="text-danger">*</span></label>
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Cityname.CityName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Home Address <span class="text-danger">*</span></label>
+                        <input type="text" name="HomeAddress" class="form-control" value="@Model.HomeAddress" placeholder="Enter Home Address" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Status <span class="text-danger">*</span></label>
+                        <input type="text" value="@EmployeeStatus.EmpStatusName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact No. <span class="text-danger">*</span></label>
+                        <input type="text" name="ContactNo1" class="form-control" value="@Model.Contact1" placeholder="Enter Contact No" data-mask="9999-9999999" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact No.</label>
+                        <input type="text" name="ContactNo2" class="form-control" value="@Model.Contact2" placeholder="Enter Contact No" data-mask="9999-9999999" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Department <span class="text-danger">*</span></label>
+                        <input type="text" value="@Department.DepartmentName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Employee Designation <span class="text-danger">*</span></label>
+                        <input type="text" value="@Designation.DesignationName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Job Description<span class="text-danger">*</span></label>
+                        <input type="text" name="JobDescription" class="form-control" readonly value="@Model.JobDescription" placeholder="Enter Job Description">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Duty Location <span class="text-danger">*</span></label>
+                        <input type="text" name="DutyLocation" class="form-control" value="@Model.DutyLocation" placeholder="Enter Duty Location" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Bank Account No</label>
+                        <input type="text" name="BankAccountNo" class="form-control" placeholder="Enter Bank Account No." value="@Model.BankAccountNo" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Employee Income Tax Details</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox" style="margin-top: 10%;">
+                                    @if (Convert.ToBoolean(Model.TaxFiler) == true)
+                                    {
+                                        <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" checked="checked" readonly name="TaxFiler" value="1">
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" readonly name="TaxFiler" value="1">
+                                    }
+                                    <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">TaxFiler</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="NTNNo" class="form-control" placeholder="Enter NTN No." readonly value="@Model.NTNNo">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="number" name="IncomeTax" class="form-control" placeholder="Enter Income Tax Amount" readonly value="@Model.IncomeTax">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
 

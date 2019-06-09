@@ -98,6 +98,21 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Marital Status <span class="text-danger">*</span></label>
+                        <select name="MaritalStatus" data-placeholder="Select Marital Status" id="MaritalStatus" onchange="ShowGDatails()" class="form-control form-control-select2" data-fouc>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widow">Widow</option>
+                        </select>
+                    </div>
+                </div>
+               
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
                     <div class="form-group" id="Father" style="display:block">
                         <label>Father Name <span class="text-danger">*</span></label>
                         <input type="text" name="FatherName" id="FatherName" class="form-control" placeholder="Enter Father Name">
@@ -107,9 +122,6 @@
                         <input type="text" name="HusbandName" id="HusbandName" class="form-control" placeholder="Enter Husband Name">
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Date of Birth <span class="text-danger">*</span></label>
@@ -121,6 +133,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Date of Joining <span class="text-danger">*</span></label>
@@ -130,19 +144,6 @@
                             </span>
                             <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" name="DOJ">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Marital Status <span class="text-danger">*</span></label>
-                        <select name="MaritalStatus" data-placeholder="Select Marital Status" class="form-control form-control-select2" data-fouc>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widow">Widow</option>
-                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -375,13 +376,17 @@
     function ShowGDatails() {
         $('#FatherName').val(null);
         $('#HusbandName').val(null);
-        if ($("#Gender").val() == "Male") {
-            $("#Father").show();
-            $("#Husband").hide();
+        if ($("#Gender").val() == "Female" && $("#MaritalStatus").val() != "Single") {
+            $("#Husband").show();
+            $("#HusbandName").addClass("required");
+            $("#Father").hide();
+            $("#FatherName").removeClass("required");
         }
         else {
-            $("#Husband").show();
-            $("#Father").hide();
+            $("#Father").show();
+            $("#FatherName").addClass("required");
+            $("#Husband").hide();
+            $("#HusbandName").removeClass("required");
         }
     }
 

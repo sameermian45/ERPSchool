@@ -187,7 +187,7 @@ namespace ERP_SchoolSystem.Controllers
                                         ProfilePicturePath = Emp.ProfilePicturePath;
                                         EmpAdded = 1;
                                     }
-                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded);
+                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded , SchoolDetails.SchoolName , SchoolDetails.SchoolLogoPath);
                                     return RedirectToLocal(returnUrl);
                                 case SignInStatus.LockedOut:
                                     ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
@@ -226,7 +226,7 @@ namespace ERP_SchoolSystem.Controllers
                                         ProfilePicturePath = Emp.ProfilePicturePath;
                                         EmpAdded = 1;
                                     }
-                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded);
+                                    CreateCookies(UserName, Password, RememberMe, IsUserValid.UserID, EmpName, IsUserValid.SchoolID, IsUserValid.UserTypeId, IsUserValid.BranchID, ProfilePicturePath, EmpAdded, SchoolDetails.SchoolName, SchoolDetails.SchoolLogoPath);
                                     return RedirectToLocal(returnUrl);
                                 case SignInStatus.LockedOut:
                                     ViewBag.Message = "Your user name has been locked due to invalid attemps. Please contact to system admin.";
@@ -261,7 +261,7 @@ namespace ERP_SchoolSystem.Controllers
 
 
 
-        public void CreateCookies(string UserName, string Password, int RememberMe , int UserID ,string EmpName, int SchoolID , int? UserTypeID , int? BranchID , string  ProfilePicturePath , int EMPADDED)
+        public void CreateCookies(string UserName, string Password, int RememberMe , int UserID ,string EmpName, int SchoolID , int? UserTypeID , int? BranchID , string  ProfilePicturePath , int EMPADDED , string SchoolName, string SchoolLogoPath)
         {
 
             System.Web.HttpCookie ckUserID = new System.Web.HttpCookie("TheSchollSystemUserID");
@@ -298,6 +298,17 @@ namespace ERP_SchoolSystem.Controllers
             ckEMPADDED.Value = EMPADDED.ToString();
             ckEMPADDED.Expires = DateTime.Now.AddDays(1);
             Response.Cookies.Add(ckEMPADDED);
+
+
+            System.Web.HttpCookie ckSchoolName = new System.Web.HttpCookie("TheSchollSystemSchoolName");
+            ckSchoolName.Value = SchoolName;
+            ckSchoolName.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckSchoolName);
+
+            System.Web.HttpCookie ckSchoollogoPath = new System.Web.HttpCookie("TheSchollSystemSchoollogoPath");
+            ckSchoollogoPath.Value = SchoolLogoPath;
+            ckSchoollogoPath.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(ckSchoollogoPath);
 
             System.Web.HttpCookie ckUsername = new System.Web.HttpCookie("TheSchollSystemUsername");
             ckUsername.Value = UserName;
@@ -549,10 +560,21 @@ namespace ERP_SchoolSystem.Controllers
                 ckEMPADDED.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(ckEMPADDED);
             }
-            
 
 
-            return RedirectToAction("Index", "Home");
+            if (Request.Cookies["TheSchollSystemSchoolName"] != null)
+            {
+                System.Web.HttpCookie ckEMPADDED = new System.Web.HttpCookie("TheSchollSystemSchoolName");
+                ckEMPADDED.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckEMPADDED);
+            }
+            if (Request.Cookies["TheSchollSystemSchoollogoPath"] != null)
+            {
+                System.Web.HttpCookie ckEMPADDED = new System.Web.HttpCookie("TheSchollSystemSchoollogoPath");
+                ckEMPADDED.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(ckEMPADDED);
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         //

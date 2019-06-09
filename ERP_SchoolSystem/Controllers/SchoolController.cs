@@ -79,6 +79,11 @@ namespace ERP_SchoolSystem.Controllers
                         SchoolLogo.InputStream.CopyTo(ms);
                         s.SchoolLogo = ms.GetBuffer();
                     }
+
+                    string FilePath = SchoolName + System.IO.Path.GetExtension(SchoolLogo.FileName);
+                    var path = Path.Combine(Server.MapPath("~/SchoolLogo"), FilePath);
+                    SchoolLogo.SaveAs(path);
+                    s.SchoolLogoPath = "/SchoolLogo/" + FilePath;
                 }
                 s.CreatedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
                 s.CreatedDateTime = DateTime.Now;

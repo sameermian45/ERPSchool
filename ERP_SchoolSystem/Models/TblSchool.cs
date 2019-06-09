@@ -50,6 +50,7 @@ namespace ERP_SchoolSystem.Models
         public Nullable<System.DateTime> RegistrationDate { get; set; }
         public string AdminUserName { get; set; }
         public string SchoolShortCode { get; set; }
+        public string SchoolLogoPath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CboDepartment> CboDepartments { get; set; }

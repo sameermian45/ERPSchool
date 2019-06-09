@@ -208,6 +208,7 @@
           <Property Name="RegistrationDate" Type="date" />
           <Property Name="AdminUserName" Type="nvarchar" MaxLength="250" />
           <Property Name="SchoolShortCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="SchoolLogoPath" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="TblSchoolBranches">
           <Key>
@@ -1035,6 +1036,7 @@
           <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
           <Property Name="AdminUserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="SchoolShortCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolLogoPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CboDepartments" Relationship="ERP_SchoolSystemModel.FK_Department_TblSchool" FromRole="TblSchool" ToRole="CboDepartment" />
           <NavigationProperty Name="CboDesignations" Relationship="ERP_SchoolSystemModel.FK_CboDesignation_TblSchool" FromRole="TblSchool" ToRole="CboDesignation" />
           <NavigationProperty Name="CboEmpStatus" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="TblSchool" ToRole="CboEmpStatu" />
@@ -1604,6 +1606,7 @@
           <EntitySetMapping Name="TblSchools">
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.TblSchool">
               <MappingFragment StoreEntitySet="TblSchool">
+                <ScalarProperty Name="SchoolLogoPath" ColumnName="SchoolLogoPath" />
                 <ScalarProperty Name="SchoolShortCode" ColumnName="SchoolShortCode" />
                 <ScalarProperty Name="AdminUserName" ColumnName="AdminUserName" />
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />

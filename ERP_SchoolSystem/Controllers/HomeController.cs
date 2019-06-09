@@ -1,5 +1,7 @@
 ﻿using ERP_SchoolSystem.Filters;
 using ERP_SchoolSystem.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,6 +15,8 @@ namespace ERP_SchoolSystem.Controllers
     public class HomeController : Controller
     {
         ERP_SchoolSystemEntities db = new ERP_SchoolSystemEntities();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
         [Authorize]
         [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin,WebUser")]
@@ -20,6 +24,74 @@ namespace ERP_SchoolSystem.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult PaymentAlert()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin,WebUser")]
+        [EmpDataFilter]
+        public ActionResult AccountSetting()
+        {
+            int UserID = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+            var EmpData = db.TblEmployees.Where(x => x.UserID == UserID).FirstOrDefault();
+            return View(EmpData);
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin,WebUser")]
+        [EmpDataFilter]
+        public async System.Threading.Tasks.Task<ActionResult> AccountSetting(string UserName, string NewPassword, string ConfirmPassword, HttpPostedFileBase EmpLogo)
+        {
+            try
+            {
+                var user = await UserManager.FindByNameAsync(UserName);
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "The user does not exist";
+                }
+                //var result = await UserManager.ResetPasswordAsync(user.Id, null, NewPassword);
+                //if (result.Succeeded)
+                //{
+                //    ViewBag.SuccessMessage = "Password has been changed successfully";
+                //}
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message.ToString();
+                return View();
+            }
+        }
+
+        public JsonResult CheckPassword(string UserName, string OldPassword)
+        {
+            OldPassword = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(OldPassword);
+            var UserPassword = db.AspNetUsers.Where(x => x.UserName == UserName && x.Password == OldPassword).FirstOrDefault();
+            if (UserPassword == null)
+            {
+                return Json(false);
+            }
+            else
+            {
+                return Json(UserPassword);
+            }
         }
 
         [Authorize]
@@ -166,9 +238,6 @@ namespace ERP_SchoolSystem.Controllers
             return View();
         }
 
-        public ActionResult PaymentAlert()
-        {
-            return View();
-        }
+        
     }
 }

@@ -129,6 +129,10 @@ namespace ERP_SchoolSystem.Controllers
                             EmpLogo.InputStream.CopyTo(ms);
                             Emp.EmpPicture = ms.GetBuffer();
                         }
+                        string FilePath = DefaultUserName + System.IO.Path.GetExtension(EmpLogo.FileName);
+                        var path = Path.Combine(Server.MapPath("~/ProfileImagesUploads"), FilePath);
+                        EmpLogo.SaveAs(path);
+                        Emp.ProfilePicturePath = "/ProfileImagesUploads/" + FilePath;
                     }
                     Emp.IsActive = Convert.ToBoolean(IsActive);
                     Emp.Createdby = ERP_SchoolSystem.Classes.UserInfo.GetUserID();

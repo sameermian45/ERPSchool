@@ -1,67 +1,129 @@
-﻿<div class="card card-sidebar-mobile">
-    <ul class="nav nav-sidebar" data-nav-type="accordion">
-        <!-- Main -->
-        <li class="nav-item">
-            <a href='@Url.Action("Index","Home")' class="nav-link active">
-                <i class="icon-home4"></i>
-                <span>
-                    Dashboard
-                </span>
-            </a>
-        </li>
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>School Management</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="form components">
-                <li class="nav-item"><a href='@Url.Action("AddNewSchool","School")' class="nav-link">Add New School</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Update School</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">School Packages</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Monthly Collections</a></li>
-            </ul>
-        </li>
+﻿<div class="sidebar sidebar-dark sidebar-main sidebar-fixed sidebar-expand-md">
+    <div class="sidebar-mobile-toggler text-center">
+        <a href="#" class="sidebar-mobile-main-toggle">
+            <i class="icon-arrow-left8"></i>
+        </a>
+        The School System
+        <a href="#" class="sidebar-mobile-expand">
+            <i class="icon-screen-full"></i>
+            <i class="icon-screen-normal"></i>
+        </a>
+    </div>
+    <div class="sidebar-content">
+        <div class="sidebar-user-material">
+            <div class="sidebar-user-material-body">
+                <div class="card-body text-center">
+                    <a href="#">
+                        <img src='@ERP_SchoolSystem.Classes.UserInfo.GetEmpImage()' class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                    </a>
+                    <h6 class="mb-0 text-white text-shadow-dark">@ERP_SchoolSystem.Classes.UserInfo.EmpName()</h6>
+                </div>
+                <div class="sidebar-user-material-footer">
+                    <a href="#user-nav" class="d-flex justify-content-between align-items-center text-shadow-dark dropdown-toggle" data-toggle="collapse"><span>My account</span></a>
+                </div>
+            </div>
+            <div class="collapse" id="user-nav">
+                <ul class="nav nav-sidebar">
+                    <li class="nav-item">
+                        <a href='@Url.Action("UserProfile" , "Home")' class="nav-link">
+                            <i class="icon-user-plus"></i>
+                            <span>My profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="icon-comment-discussion"></i>
+                            <span>Messages</span>
+                            <span class="badge bg-success-400 badge-pill align-self-center ml-auto">58</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href='@Url.Action("AccountSetting" , "Home")' class="nav-link">
+                            <i class="icon-cog5"></i>
+                            <span>Account Setting</span>
+                        </a>
+                    </li>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <li class="nav-item">
+                            <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">
+                                <i class="icon-switch2"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
 
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Role's Management</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="form components">
-                <li class="nav-item"><a href='@Url.Action("SystemRoles","UserRoles")' class="nav-link">System Roles</a></li>
-                <li class="nav-item"><a href='@Url.Action("AssignUserRoles","UserRoles")' class="nav-link">User's Roles</a></li>
+        <div class="card card-sidebar-mobile">
+            <ul class="nav nav-sidebar" data-nav-type="accordion">
+                <!-- Main -->
+                <li class="nav-item">
+                    <a href='@Url.Action("Index","Home")' class="nav-link active">
+                        <i class="icon-home4"></i>
+                        <span>
+                            Dashboard
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>School Management</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="form components">
+                        <li class="nav-item"><a href='@Url.Action("AddNewSchool","School")' class="nav-link">Add New School</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Update School</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">School Packages</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Monthly Collections</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Role's Management</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="form components">
+                        <li class="nav-item"><a href='@Url.Action("SystemRoles","UserRoles")' class="nav-link">System Roles</a></li>
+                        <li class="nav-item"><a href='@Url.Action("AssignUserRoles","UserRoles")' class="nav-link">User's Roles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Employee's Management</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="form components">
+                        <li class="nav-item"><a href='@Url.Action("NewEmployee","Employee")' class="nav-link">Add New Employee</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-pencil3"></i> <span>Form components</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="form components">
+                        <li class="nav-item"><a href='@Url.Action("form_inputs","Demo")' class="nav-link">Basic inputs</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Checkboxes & radios</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">Select2 selects</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Bootstrap multiselect</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_input_groups","Demo")' class="nav-link">Input groups</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_floating_labels","Demo")' class="nav-link">Floating labels</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_tag_inputs","Demo")' class="nav-link">Tag inputs</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_validation","Demo")' class="nav-link">Validation</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_wizard","Demo")' class="nav-link">Form wizard</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_actions","Demo")' class="nav-link">Form actions</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_inputs_grid","Demo")' class="nav-link">Inputs grid</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-select2"></i> <span>Pickers</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Pickers">
+                        <li class="nav-item"><a href='@Url.Action("picker_date","Demo")' class="nav-link">Date & time pickers</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"><i class="icon-insert-template"></i> <span>Form layouts</span></a>
+                    <ul class="nav nav-group-sub" data-submenu-title="form layouts">
+                        <li class="nav-item"><a href='@Url.Action("form_layout_vertical","Demo")' class="nav-link">Vertical form</a></li>
+                        <li class="nav-item"><a href='@Url.Action("form_layout_horizontal","Demo")' class="nav-link">Horizontal form</a></li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Employee's Management</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="form components">
-                <li class="nav-item"><a href='@Url.Action("NewEmployee","Employee")' class="nav-link">Add New Employee</a></li>
-            </ul>
-        </li>
-        
-
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-pencil3"></i> <span>Form components</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="form components">
-                <li class="nav-item"><a href='@Url.Action("form_inputs","Demo")' class="nav-link">Basic inputs</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_checkboxes_radios","Demo")' class="nav-link">Checkboxes & radios</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_select2","Demo")' class="nav-link">Select2 selects</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_multiselect","Demo")' class="nav-link">Bootstrap multiselect</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_input_groups","Demo")' class="nav-link">Input groups</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_floating_labels","Demo")' class="nav-link">Floating labels</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_tag_inputs","Demo")' class="nav-link">Tag inputs</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_validation","Demo")' class="nav-link">Validation</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_wizard","Demo")' class="nav-link">Form wizard</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_actions","Demo")' class="nav-link">Form actions</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_inputs_grid","Demo")' class="nav-link">Inputs grid</a></li>
-            </ul>
-        </li>
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-select2"></i> <span>Pickers</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="Pickers">
-                <li class="nav-item"><a href='@Url.Action("picker_date","Demo")' class="nav-link">Date & time pickers</a></li>
-            </ul>
-        </li>
-        <li class="nav-item nav-item-submenu">
-            <a href="#" class="nav-link"><i class="icon-insert-template"></i> <span>Form layouts</span></a>
-            <ul class="nav nav-group-sub" data-submenu-title="form layouts">
-                <li class="nav-item"><a href='@Url.Action("form_layout_vertical","Demo")' class="nav-link">Vertical form</a></li>
-                <li class="nav-item"><a href='@Url.Action("form_layout_horizontal","Demo")' class="nav-link">Horizontal form</a></li>
-            </ul>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
+
+
+
+

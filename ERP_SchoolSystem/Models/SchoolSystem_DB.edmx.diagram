@@ -8,19 +8,19 @@
         <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetRole" Width="1.5" PointX="3" PointY="8.125" />
         <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetUserRole" Width="1.5" PointX="5.25" PointY="2.875" />
         <EntityTypeShape EntityType="ERP_SchoolSystemModel.AspNetUser" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboDepartment" Width="1.5" PointX="9.75" PointY="24" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboDesignation" Width="1.5" PointX="9.75" PointY="31.375" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboEmpStatu" Width="1.5" PointX="9.75" PointY="27.75" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblCity" Width="1.5" PointX="5.25" PointY="16.75" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboDepartment" Width="1.5" PointX="12.75" PointY="31.125" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboDesignation" Width="1.5" PointX="12.75" PointY="17.375" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.CboEmpStatu" Width="1.5" PointX="12.75" PointY="34.875" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblCity" Width="1.5" PointX="5.25" PointY="27.375" />
         <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblCountry" Width="1.5" PointX="0.75" PointY="16.75" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmpEduDetail" Width="1.5" PointX="12" PointY="14.875" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmpExpDetail" Width="1.5" PointX="12" PointY="18" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmployee" Width="1.5" PointX="9.75" PointY="13" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblProvince" Width="1.5" PointX="3" PointY="16.625" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchool" Width="1.5" PointX="7.5" PointY="14" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolBranch" Width="1.5" PointX="9.75" PointY="9" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolMonthlyPayment" Width="1.5" PointX="14.75" PointY="15" />
-        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolPackage" Width="1.5" PointX="5.25" PointY="12.25" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmpEduDetail" Width="1.5" PointX="9.75" PointY="30" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmpExpDetail" Width="1.5" PointX="9.75" PointY="16.25" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblEmployee" Width="1.5" PointX="7.5" PointY="18.375" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblProvince" Width="1.5" PointX="3" PointY="27.25" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchool" Width="1.5" PointX="10.5" PointY="20.375" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolBranch" Width="1.5" PointX="12.75" PointY="21.125" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolMonthlyPayment" Width="1.5" PointX="15.75" PointY="21.375" />
+        <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblSchoolPackage" Width="1.5" PointX="8.25" PointY="11.625" />
         <EntityTypeShape EntityType="ERP_SchoolSystemModel.TblUserType" Width="1.5" PointX="0.75" PointY="2.875" />
         <AssociationConnector Association="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
         <AssociationConnector Association="ERP_SchoolSystemModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />

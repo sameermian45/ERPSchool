@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="Contentloading" id="LoadingSpinner">Loading&#8230;</div>
-    <div class="navbar navbar-expand-md navbar-light navbar-static">
+    <div class="navbar navbar-expand-md navbar-light fixed-top">
         <!-- Header with logos -->
         <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
             <div class="navbar-brand navbar-brand-md">
@@ -51,80 +51,8 @@
                         <i class="icon-paragraph-justify3"></i>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
-                        <i class="icon-people"></i>
-                        <span class="d-md-none ml-2">Users</span>
-                        <span class="badge badge-mark border-pink-400 ml-auto ml-md-0"></span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-content wmin-md-300">
-                        <div class="dropdown-content-header">
-                            <span class="font-weight-semibold">Users online</span>
-                            <a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
-                        </div>
-                        <div class="dropdown-content-body dropdown-scrollable">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <div class="mr-3">
-                                        <img src="~/Content/images//demo/users/face18.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="#" class="media-title font-weight-semibold">Jordana Ansley</a>
-                                        <span class="d-block text-muted font-size-sm">Lead web developer</span>
-                                    </div>
-                                    <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
-                                </li>
-                                <li class="media">
-                                    <div class="mr-3">
-                                        <img src="~/Content/images//demo/users/face24.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="#" class="media-title font-weight-semibold">Will Brason</a>
-                                        <span class="d-block text-muted font-size-sm">Marketing manager</span>
-                                    </div>
-                                    <div class="ml-3 align-self-center"><span class="badge badge-mark border-danger"></span></div>
-                                </li>
-                                <li class="media">
-                                    <div class="mr-3">
-                                        <img src="~/Content/images//demo/users/face17.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="#" class="media-title font-weight-semibold">Hanna Walden</a>
-                                        <span class="d-block text-muted font-size-sm">Project manager</span>
-                                    </div>
-                                    <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
-                                </li>
-                                <li class="media">
-                                    <div class="mr-3">
-                                        <img src="~/Content/images//demo/users/face19.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="#" class="media-title font-weight-semibold">Dori Laperriere</a>
-                                        <span class="d-block text-muted font-size-sm">Business developer</span>
-                                    </div>
-                                    <div class="ml-3 align-self-center"><span class="badge badge-mark border-warning-300"></span></div>
-                                </li>
-                                <li class="media">
-                                    <div class="mr-3">
-                                        <img src="~/Content/images//demo/users/face16.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <a href="#" class="media-title font-weight-semibold">Vanessa Aurelius</a>
-                                        <span class="d-block text-muted font-size-sm">UX expert</span>
-                                    </div>
-                                    <div class="ml-3 align-self-center"><span class="badge badge-mark border-grey-400"></span></div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown-content-footer bg-light">
-                            <a href="#" class="text-grey mr-auto">All users</a>
-                            <a href="#" class="text-grey"><i class="icon-gear"></i></a>
-                        </div>
-                    </div>
-                </li>
             </ul>
-            <span class="badge bg-pink-400 badge-pill ml-md-3 mr-md-auto">16 orders</span>
+            <span class="mr-md-auto" style="color:white">1</span>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
@@ -228,10 +156,10 @@
                         <span>@ERP_SchoolSystem.Classes.UserInfo.EmpName()</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+                        <a href='@Url.Action("UserProfile" , "Home")' class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
                         <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-indigo-400 ml-auto">58</span></a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Change Password</a>
+                        <a href='@Url.Action("AccountSetting" , "Home")' class="dropdown-item"><i class="icon-cog5"></i> Account Setting</a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
@@ -243,96 +171,25 @@
         </div>
     </div>
     <div class="page-content">
-        <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
-            <div class="sidebar-mobile-toggler text-center">
-                <a href="#" class="sidebar-mobile-main-toggle">
-                    <i class="icon-arrow-left8"></i>
-                </a>
-                Navigation
-                <a href="#" class="sidebar-mobile-expand">
-                    <i class="icon-screen-full"></i>
-                    <i class="icon-screen-normal"></i>
-                </a>
-            </div>
-            <div class="sidebar-content">
-                <div class="sidebar-user-material">
-                    <div class="sidebar-user-material-body">
-                        <div class="card-body text-center">
-                            <a href="#">
-                                <img src='@ERP_SchoolSystem.Classes.UserInfo.GetEmpImage()' class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
-                            </a>
-                            <h6 class="mb-0 text-white text-shadow-dark">@ERP_SchoolSystem.Classes.UserInfo.EmpName()</h6>
-                        </div>
-                        <div class="sidebar-user-material-footer">
-                            <a href="#user-nav" class="d-flex justify-content-between align-items-center text-shadow-dark dropdown-toggle" data-toggle="collapse"><span>My account</span></a>
-                        </div>
-                    </div>
-                    <div class="collapse" id="user-nav">
-                        <ul class="nav nav-sidebar">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="icon-user-plus"></i>
-                                    <span>My profile</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="icon-comment-discussion"></i>
-                                    <span>Messages</span>
-                                    <span class="badge bg-success-400 badge-pill align-self-center ml-auto">58</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="icon-cog5"></i>
-                                    <span>Change Password</span>
-                                </a>
-                            </li>
-                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <li class="nav-item">
-                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">
-                                        <i class="icon-switch2"></i>
-                                        <span>Logout</span>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-                @Html.Partial("SystemSidebar")
-            </div>
-        </div>
+        @Html.Partial("SystemSidebar")
         <div class="content-wrapper">
             <div class="page-header page-header-light">
                 <div class="page-header-content header-elements-md-inline">
                     <div class="page-title d-flex">
-                        <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Dashboard</h4>
+                        <h4><img src='@ERP_SchoolSystem.Classes.UserInfo.GetSchoolLogo()' style="height:85px"  /> <span class="font-weight-semibold" style="font-family: -webkit-body;font-weight: bold;font-size: 22px;color: #4a7677;">@ERP_SchoolSystem.Classes.UserInfo.GetSchoolName()</span></h4>
                         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                     </div>
 
                     <div class="header-elements d-none">
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                                <i class="icon-bars-alt text-pink-300"></i>
-                                <span>Statistics</span>
-                            </a>
-                            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                                <i class="icon-calculator text-pink-300"></i>
-                                <span>Invoices</span>
-                            </a>
-                            <a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
-                                <i class="icon-calendar5 text-pink-300"></i>
-                                <span>Schedule</span>
-                            </a>
+                            <h4 class="mb-0" style="font-family: -webkit-body;font-weight: bold;font-size: 22px;color: #4a7677;" id="clockbox"></h4>
                         </div>
                     </div>
                 </div>
                 <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                     <div class="d-flex">
                         <div class="breadcrumb">
-                            <a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+                            <a href='@Url.Action("Index" , "Home")' class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
                             <span class="breadcrumb-item active">Dashboard</span>
                         </div>
 
@@ -340,25 +197,10 @@
                     </div>
                     <div class="header-elements d-none">
                         <div class="breadcrumb justify-content-center">
-                            <a href="#" class="breadcrumb-elements-item">
-                                <i class="icon-comment-discussion mr-2"></i>
-                                Support
+                            <a href='@Url.Action("AccountSetting" , "Home")' class="breadcrumb-elements-item">
+                                <i class="icon-gear mr-2"></i>
+                                Account Setting
                             </a>
-
-                            <div class="breadcrumb-elements-item dropdown p-0">
-                                <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-                                    <i class="icon-gear mr-2"></i>
-                                    Settings
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-                                    <a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-                                    <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,5 +212,31 @@
         </div>
     </div>
     @Scripts.Render("~/Content/JS")
+
+    <script type="text/javascript">
+        tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+        tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        function GetClock() {
+            var d = new Date();
+            var nday = d.getDay(), nmonth = d.getMonth(), ndate = d.getDate(), nyear = d.getYear();
+            if (nyear < 1000) nyear += 1900;
+            var nhour = d.getHours(), nmin = d.getMinutes(), nsec = d.getSeconds(), ap;
+
+            if (nhour == 0) { ap = " AM"; nhour = 12; }
+            else if (nhour < 12) { ap = " AM"; }
+            else if (nhour == 12) { ap = " PM"; }
+            else if (nhour > 12) { ap = " PM"; nhour -= 12; }
+
+            if (nmin <= 9) nmin = "0" + nmin;
+            if (nsec <= 9) nsec = "0" + nsec;
+            document.getElementById('clockbox').innerHTML = "" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "";
+        }
+
+        window.onload = function () {
+            GetClock();
+            setInterval(GetClock, 1000);
+        }
+    </script>
+
 </body>
 </html>

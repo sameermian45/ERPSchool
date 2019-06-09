@@ -20,7 +20,7 @@ namespace ERP_SchoolSystem.Classes
         {
             string  Username = HttpContext.Current.Request.Cookies["TheSchollSystemUsername"].Value;
             return Username;
-        }
+        } 
         public static int GetSchoolID()
         {
             int SchoolID = Convert.ToInt32(HttpContext.Current.Request.Cookies["TheSchollSystemSchoolID"].Value);
@@ -62,6 +62,21 @@ namespace ERP_SchoolSystem.Classes
             if(HttpContext.Current.Request.Cookies["TheSchollSystemProfilePicturePath"].Value != "Not Added")
             {
                 Path = HttpContext.Current.Request.Cookies["TheSchollSystemProfilePicturePath"].Value;
+            }
+            return Path;
+        }
+
+        public static string GetSchoolName()
+        {
+            string SchoolName = HttpContext.Current.Request.Cookies["TheSchollSystemSchoolName"].Value;
+            return SchoolName;
+        }
+        public static string GetSchoolLogo()
+        {
+            string Path = "/Content/Images/noimageicon.png";
+            if (HttpContext.Current.Request.Cookies["TheSchollSystemSchoollogoPath"].Value != "Not Added")
+            {
+                Path = HttpContext.Current.Request.Cookies["TheSchollSystemSchoollogoPath"].Value;
             }
             return Path;
         }

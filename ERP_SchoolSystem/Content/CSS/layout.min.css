@@ -1,5 +1,7 @@
 ﻿@charset "UTF-8";
 
+
+
 html {
     display: -ms-flexbox;
     display: flex;
@@ -15,6 +17,22 @@ body {
     flex-direction: column;
     -ms-flex: 1;
     flex: 1;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(254, 81, 2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .page-content {
@@ -47,7 +65,7 @@ body {
     }
 
 .page-title {
-    padding: 2rem 0;
+    padding: 1rem 0;
     position: relative;
 }
 
@@ -119,6 +137,7 @@ body {
     }
 
 .page-header-dark, .page-header-light {
+    margin-top: 4%;
     box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
 }
 
