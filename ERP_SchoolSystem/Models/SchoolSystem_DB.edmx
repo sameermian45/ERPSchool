@@ -86,6 +86,19 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="CboStudyProgram">
+          <Key>
+            <PropertyRef Name="StudyProgramID" />
+          </Key>
+          <Property Name="StudyProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudyProgramName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="Tbl_Std_Details">
           <Key>
             <PropertyRef Name="ID" />
@@ -655,6 +668,7 @@
           <EntitySet Name="CboDepartment" EntityType="Self.CboDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboDesignation" EntityType="Self.CboDesignation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboEmpStatus" EntityType="Self.CboEmpStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboStudyProgram" EntityType="Self.CboStudyProgram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Details" EntityType="Self.Tbl_Std_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="Self.Tbl_Std_Last_School_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="Self.Tbl_Std_Last_School_Document_Details" Schema="dbo" store:Type="Tables" />
@@ -777,6 +791,7 @@
           <EntitySet Name="CboDepartments" EntityType="ERP_SchoolSystemModel.CboDepartment" />
           <EntitySet Name="CboDesignations" EntityType="ERP_SchoolSystemModel.CboDesignation" />
           <EntitySet Name="CboEmpStatus" EntityType="ERP_SchoolSystemModel.CboEmpStatu" />
+          <EntitySet Name="CboStudyPrograms" EntityType="ERP_SchoolSystemModel.CboStudyProgram" />
           <EntitySet Name="Tbl_Std_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Details" />
           <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Details" />
           <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Document_Details" />
@@ -979,6 +994,19 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="CboEmpStatu" ToRole="TblSchool" />
           <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus" FromRole="CboEmpStatu" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="CboStudyProgram">
+          <Key>
+            <PropertyRef Name="StudyProgramID" />
+          </Key>
+          <Property Name="StudyProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudyProgramName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Tbl_Std_Details">
           <Key>
@@ -1669,6 +1697,20 @@
                 <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
                 <ScalarProperty Name="EmpStatusName" ColumnName="EmpStatusName" />
                 <ScalarProperty Name="EmpStatusID" ColumnName="EmpStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboStudyPrograms">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboStudyProgram">
+              <MappingFragment StoreEntitySet="CboStudyProgram">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="StudyProgramName" ColumnName="StudyProgramName" />
+                <ScalarProperty Name="StudyProgramID" ColumnName="StudyProgramID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

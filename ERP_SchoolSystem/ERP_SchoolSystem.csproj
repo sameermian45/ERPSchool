@@ -206,6 +206,9 @@
     <Compile Include="Models\CboEmpStatu.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CboStudyProgram.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SchoolSystem_DB.Context.cs">
