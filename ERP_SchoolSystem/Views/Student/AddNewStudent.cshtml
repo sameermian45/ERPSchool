@@ -35,7 +35,7 @@
             <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
         </div>
     }
-    <form class="wizard-form steps-validationStd" action="~/Student/AddNewStudent" data-fouc id="StdForm" method="post" enctype="multipart/form-data">
+    <form class="wizard-form steps-validation" action="~/Student/AddNewStudent" data-fouc id="StdForm" method="post" enctype="multipart/form-data">
         <h6>Student Personal Info</h6>
         <fieldset>
             <div class="row">
@@ -301,6 +301,12 @@
     </form>
 </div>
 <script>
+
+    function validateEduDetails()
+    {
+        return true;
+    }
+
     function GetProvince() {
         var CountryID = document.getElementById('Std_Country').value;
         if (CountryID != "") {

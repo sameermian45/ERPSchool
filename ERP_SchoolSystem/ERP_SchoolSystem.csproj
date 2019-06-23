@@ -672,7 +672,6 @@
     <Content Include="Content\JS\demo_pages\form_select2.js" />
     <Content Include="Content\JS\demo_pages\form_tags_input.js" />
     <Content Include="Content\JS\demo_pages\form_validation.js" />
-    <Content Include="Content\JS\demo_pages\form_wizard_Emp.js" />
     <Content Include="Content\JS\demo_pages\form_wizard_rtl.js" />
     <Content Include="Content\JS\demo_pages\fullcalendar_advanced.js" />
     <Content Include="Content\JS\demo_pages\fullcalendar_basic.js" />
@@ -711,7 +710,6 @@
     <Content Include="Content\JS\demo_pages\mail_list.js" />
     <Content Include="Content\JS\demo_pages\mail_list_read.js" />
     <Content Include="Content\JS\demo_pages\mail_list_write.js" />
-    <Content Include="Content\JS\demo_pages\form_wizard_Std.js" />
     <Content Include="Content\JS\demo_pages\maps\google\basic\basic.js" />
     <Content Include="Content\JS\demo_pages\maps\google\basic\click_event.js" />
     <Content Include="Content\JS\demo_pages\maps\google\basic\coordinates.js" />
