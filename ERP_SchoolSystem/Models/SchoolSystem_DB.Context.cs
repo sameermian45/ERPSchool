@@ -31,7 +31,18 @@ namespace ERP_SchoolSystem.Models
         public virtual DbSet<CboDepartment> CboDepartments { get; set; }
         public virtual DbSet<CboDesignation> CboDesignations { get; set; }
         public virtual DbSet<CboEmpStatu> CboEmpStatus { get; set; }
+        public virtual DbSet<CboStd_Guardian_Income> CboStd_Guardian_Income { get; set; }
+        public virtual DbSet<CboStd_Guardian_Occupation> CboStd_Guardian_Occupation { get; set; }
+        public virtual DbSet<CboStd_Guardian_Relationship> CboStd_Guardian_Relationship { get; set; }
         public virtual DbSet<CboStudyProgram> CboStudyPrograms { get; set; }
+        public virtual DbSet<GLAccount> GLAccounts { get; set; }
+        public virtual DbSet<GLDetailAccount> GLDetailAccounts { get; set; }
+        public virtual DbSet<GLMainGroup> GLMainGroups { get; set; }
+        public virtual DbSet<GLMajorAccount> GLMajorAccounts { get; set; }
+        public virtual DbSet<Tbl_School_Classes_Setup> Tbl_School_Classes_Setup { get; set; }
+        public virtual DbSet<Tbl_School_Fee_Setup> Tbl_School_Fee_Setup { get; set; }
+        public virtual DbSet<Tbl_School_Std_Fee> Tbl_School_Std_Fee { get; set; }
+        public virtual DbSet<Tbl_School_Std_Monthly_Fee> Tbl_School_Std_Monthly_Fee { get; set; }
         public virtual DbSet<Tbl_Std_Details> Tbl_Std_Details { get; set; }
         public virtual DbSet<Tbl_Std_Last_School_Details> Tbl_Std_Last_School_Details { get; set; }
         public virtual DbSet<Tbl_Std_Last_School_Document_Details> Tbl_Std_Last_School_Document_Details { get; set; }

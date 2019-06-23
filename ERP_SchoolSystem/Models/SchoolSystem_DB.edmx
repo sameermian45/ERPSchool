@@ -86,6 +86,42 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="CboStd_Guardian_Income">
+          <Key>
+            <PropertyRef Name="GuardianIncomeID" />
+          </Key>
+          <Property Name="GuardianIncomeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuardianIncomeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CboStd_Guardian_Occupation">
+          <Key>
+            <PropertyRef Name="GuardianOccupationID" />
+          </Key>
+          <Property Name="GuardianOccupationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuardianOccupationName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CboStd_Guardian_Relationship">
+          <Key>
+            <PropertyRef Name="GuardianRelationshipID" />
+          </Key>
+          <Property Name="GuardianRelationshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Guardian_RelationshipName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="CboStudyProgram">
           <Key>
             <PropertyRef Name="StudyProgramID" />
@@ -98,6 +134,140 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GLAccounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="AccountCode" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="AccountTitle" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CurrentBalance" Type="money" Nullable="false" />
+          <Property Name="DetailAccountID" Type="int" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GLDetailAccount">
+          <Key>
+            <PropertyRef Name="DetailAccountID" />
+          </Key>
+          <Property Name="DetailAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DetailAccountCode" Type="varchar" MaxLength="50" />
+          <Property Name="DetailAccountDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="MajorAccountID" Type="int" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GLMainGroups">
+          <Key>
+            <PropertyRef Name="MainGroupID" />
+          </Key>
+          <Property Name="MainGroupID" Type="int" Nullable="false" />
+          <Property Name="MainGroupCode" Type="varchar" MaxLength="50" />
+          <Property Name="MainGroupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MainGroupCaption" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GLMajorAccount">
+          <Key>
+            <PropertyRef Name="MajorAccountID" />
+          </Key>
+          <Property Name="MajorAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MajorAccountCode" Type="varchar" MaxLength="50" />
+          <Property Name="MajorAccountDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MainGroupID" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Classes_Setup">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Fee_Setup">
+          <Key>
+            <PropertyRef Name="FeeID" />
+          </Key>
+          <Property Name="FeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="FeeAmount" Type="float" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Std_Fee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="BranchID" Type="int" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="FeeID" Type="int" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="FeeAmount" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="StudentFee" Type="float" />
+          <Property Name="IsCurrent" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Std_Monthly_Fee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="BranchID" Type="int" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="FeeID" Type="int" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="FeeAmount" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="StudentFee" Type="float" />
+          <Property Name="RecivedAmount" Type="float" />
+          <Property Name="ReceivedOn" Type="datetime" />
+          <Property Name="ReceivedBy" Type="int" />
+          <Property Name="FeeMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="FeeYear" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Tbl_Std_Details">
           <Key>
@@ -127,13 +297,13 @@
           <Property Name="R_Address" Type="nvarchar" MaxLength="250" />
           <Property Name="G_Name" Type="nvarchar" MaxLength="150" />
           <Property Name="G_ContactPrimary" Type="nvarchar" MaxLength="50" />
-          <Property Name="G_Releationship" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_Releationship" Type="int" />
           <Property Name="G_CountryID" Type="int" />
           <Property Name="G_ProvincesID" Type="int" />
           <Property Name="G_CityID" Type="int" />
           <Property Name="G_Address" Type="nvarchar" MaxLength="250" />
-          <Property Name="G_Occupation" Type="nvarchar" MaxLength="250" />
-          <Property Name="G_MonthlyIncome" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_Occupation" Type="int" />
+          <Property Name="G_MonthlyIncome" Type="int" />
           <Property Name="G_ContactSecoundary" Type="nvarchar" MaxLength="50" />
           <Property Name="G_WorkContact" Type="nvarchar" MaxLength="50" />
           <Property Name="G_Email" Type="nvarchar" MaxLength="250" />
@@ -445,6 +615,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GLAccounts_GLAccounts">
+          <End Role="GLAccounts" Type="Self.GLAccounts" Multiplicity="1" />
+          <End Role="GLAccounts1" Type="Self.GLAccounts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GLAccounts">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="GLAccounts1">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblCities_TblCities">
           <End Role="TblProvinces" Type="Self.TblProvinces" Multiplicity="1" />
           <End Role="TblCities" Type="Self.TblCities" Multiplicity="*" />
@@ -668,7 +850,18 @@
           <EntitySet Name="CboDepartment" EntityType="Self.CboDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboDesignation" EntityType="Self.CboDesignation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboEmpStatus" EntityType="Self.CboEmpStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboStd_Guardian_Income" EntityType="Self.CboStd_Guardian_Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboStd_Guardian_Occupation" EntityType="Self.CboStd_Guardian_Occupation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CboStd_Guardian_Relationship" EntityType="Self.CboStd_Guardian_Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboStudyProgram" EntityType="Self.CboStudyProgram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GLAccounts" EntityType="Self.GLAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GLDetailAccount" EntityType="Self.GLDetailAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GLMainGroups" EntityType="Self.GLMainGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GLMajorAccount" EntityType="Self.GLMajorAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_School_Classes_Setup" EntityType="Self.Tbl_School_Classes_Setup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_School_Fee_Setup" EntityType="Self.Tbl_School_Fee_Setup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_School_Std_Fee" EntityType="Self.Tbl_School_Std_Fee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_School_Std_Monthly_Fee" EntityType="Self.Tbl_School_Std_Monthly_Fee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Details" EntityType="Self.Tbl_Std_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="Self.Tbl_Std_Last_School_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="Self.Tbl_Std_Last_School_Document_Details" Schema="dbo" store:Type="Tables" />
@@ -706,6 +899,10 @@
           <AssociationSet Name="FK_Department_TblSchool" Association="Self.FK_Department_TblSchool">
             <End Role="TblSchool" EntitySet="TblSchool" />
             <End Role="CboDepartment" EntitySet="CboDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GLAccounts_GLAccounts" Association="Self.FK_GLAccounts_GLAccounts">
+            <End Role="GLAccounts" EntitySet="GLAccounts" />
+            <End Role="GLAccounts1" EntitySet="GLAccounts" />
           </AssociationSet>
           <AssociationSet Name="FK_TblCities_TblCities" Association="Self.FK_TblCities_TblCities">
             <End Role="TblProvinces" EntitySet="TblProvinces" />
@@ -791,7 +988,18 @@
           <EntitySet Name="CboDepartments" EntityType="ERP_SchoolSystemModel.CboDepartment" />
           <EntitySet Name="CboDesignations" EntityType="ERP_SchoolSystemModel.CboDesignation" />
           <EntitySet Name="CboEmpStatus" EntityType="ERP_SchoolSystemModel.CboEmpStatu" />
+          <EntitySet Name="CboStd_Guardian_Income" EntityType="ERP_SchoolSystemModel.CboStd_Guardian_Income" />
+          <EntitySet Name="CboStd_Guardian_Occupation" EntityType="ERP_SchoolSystemModel.CboStd_Guardian_Occupation" />
+          <EntitySet Name="CboStd_Guardian_Relationship" EntityType="ERP_SchoolSystemModel.CboStd_Guardian_Relationship" />
           <EntitySet Name="CboStudyPrograms" EntityType="ERP_SchoolSystemModel.CboStudyProgram" />
+          <EntitySet Name="GLAccounts" EntityType="ERP_SchoolSystemModel.GLAccount" />
+          <EntitySet Name="GLDetailAccounts" EntityType="ERP_SchoolSystemModel.GLDetailAccount" />
+          <EntitySet Name="GLMainGroups" EntityType="ERP_SchoolSystemModel.GLMainGroup" />
+          <EntitySet Name="GLMajorAccounts" EntityType="ERP_SchoolSystemModel.GLMajorAccount" />
+          <EntitySet Name="Tbl_School_Classes_Setup" EntityType="ERP_SchoolSystemModel.Tbl_School_Classes_Setup" />
+          <EntitySet Name="Tbl_School_Fee_Setup" EntityType="ERP_SchoolSystemModel.Tbl_School_Fee_Setup" />
+          <EntitySet Name="Tbl_School_Std_Fee" EntityType="ERP_SchoolSystemModel.Tbl_School_Std_Fee" />
+          <EntitySet Name="Tbl_School_Std_Monthly_Fee" EntityType="ERP_SchoolSystemModel.Tbl_School_Std_Monthly_Fee" />
           <EntitySet Name="Tbl_Std_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Details" />
           <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Details" />
           <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Document_Details" />
@@ -841,6 +1049,10 @@
           <AssociationSet Name="FK_TblEmployees_CboEmpStatus" Association="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus">
             <End Role="CboEmpStatu" EntitySet="CboEmpStatus" />
             <End Role="TblEmployee" EntitySet="TblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GLAccounts_GLAccounts" Association="ERP_SchoolSystemModel.FK_GLAccounts_GLAccounts">
+            <End Role="GLAccount" EntitySet="GLAccounts" />
+            <End Role="GLAccount1" EntitySet="GLAccounts" />
           </AssociationSet>
           <AssociationSet Name="FK_TblCities_TblCities" Association="ERP_SchoolSystemModel.FK_TblCities_TblCities">
             <End Role="TblProvince" EntitySet="TblProvinces" />
@@ -995,6 +1207,42 @@
           <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="CboEmpStatu" ToRole="TblSchool" />
           <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus" FromRole="CboEmpStatu" ToRole="TblEmployee" />
         </EntityType>
+        <EntityType Name="CboStd_Guardian_Income">
+          <Key>
+            <PropertyRef Name="GuardianIncomeID" />
+          </Key>
+          <Property Name="GuardianIncomeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuardianIncomeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CboStd_Guardian_Occupation">
+          <Key>
+            <PropertyRef Name="GuardianOccupationID" />
+          </Key>
+          <Property Name="GuardianOccupationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuardianOccupationName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CboStd_Guardian_Relationship">
+          <Key>
+            <PropertyRef Name="GuardianRelationshipID" />
+          </Key>
+          <Property Name="GuardianRelationshipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Guardian_RelationshipName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="CboStudyProgram">
           <Key>
             <PropertyRef Name="StudyProgramID" />
@@ -1007,6 +1255,142 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GLAccount">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="AccountCode" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="AccountTitle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DetailAccountID" Type="Int32" Nullable="false" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GLAccounts1" Relationship="ERP_SchoolSystemModel.FK_GLAccounts_GLAccounts" FromRole="GLAccount" ToRole="GLAccount1" />
+          <NavigationProperty Name="GLAccount1" Relationship="ERP_SchoolSystemModel.FK_GLAccounts_GLAccounts" FromRole="GLAccount1" ToRole="GLAccount" />
+        </EntityType>
+        <EntityType Name="GLDetailAccount">
+          <Key>
+            <PropertyRef Name="DetailAccountID" />
+          </Key>
+          <Property Name="DetailAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DetailAccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DetailAccountDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MajorAccountID" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GLMainGroup">
+          <Key>
+            <PropertyRef Name="MainGroupID" />
+          </Key>
+          <Property Name="MainGroupID" Type="Int32" Nullable="false" />
+          <Property Name="MainGroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainGroupName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainGroupCaption" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GLMajorAccount">
+          <Key>
+            <PropertyRef Name="MajorAccountID" />
+          </Key>
+          <Property Name="MajorAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MajorAccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MajorAccountDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MainGroupID" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Classes_Setup">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Fee_Setup">
+          <Key>
+            <PropertyRef Name="FeeID" />
+          </Key>
+          <Property Name="FeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="FeeAmount" Type="Double" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Std_Fee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="BranchID" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="FeeID" Type="Int32" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="FeeAmount" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="StudentFee" Type="Double" />
+          <Property Name="IsCurrent" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_School_Std_Monthly_Fee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="BranchID" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="FeeID" Type="Int32" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="FeeAmount" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="StudentFee" Type="Double" />
+          <Property Name="RecivedAmount" Type="Double" />
+          <Property Name="ReceivedOn" Type="DateTime" Precision="3" />
+          <Property Name="ReceivedBy" Type="Int32" />
+          <Property Name="FeeMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FeeYear" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Tbl_Std_Details">
           <Key>
@@ -1036,13 +1420,13 @@
           <Property Name="R_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="G_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="G_ContactPrimary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="G_Releationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_Releationship" Type="Int32" />
           <Property Name="G_CountryID" Type="Int32" />
           <Property Name="G_ProvincesID" Type="Int32" />
           <Property Name="G_CityID" Type="Int32" />
           <Property Name="G_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="G_Occupation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="G_MonthlyIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_Occupation" Type="Int32" />
+          <Property Name="G_MonthlyIncome" Type="Int32" />
           <Property Name="G_ContactSecoundary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="G_WorkContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="G_Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -1427,6 +1811,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GLAccounts_GLAccounts">
+          <End Type="ERP_SchoolSystemModel.GLAccount" Role="GLAccount" Multiplicity="1" />
+          <End Type="ERP_SchoolSystemModel.GLAccount" Role="GLAccount1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GLAccount">
+              <PropertyRef Name="AccountID" />
+            </Principal>
+            <Dependent Role="GLAccount1">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TblCities_TblCities">
           <End Type="ERP_SchoolSystemModel.TblProvince" Role="TblProvince" Multiplicity="1" />
           <End Type="ERP_SchoolSystemModel.TblCity" Role="TblCity" Multiplicity="*" />
@@ -1700,6 +2096,45 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CboStd_Guardian_Income">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboStd_Guardian_Income">
+              <MappingFragment StoreEntitySet="CboStd_Guardian_Income">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GuardianIncomeName" ColumnName="GuardianIncomeName" />
+                <ScalarProperty Name="GuardianIncomeID" ColumnName="GuardianIncomeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboStd_Guardian_Occupation">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboStd_Guardian_Occupation">
+              <MappingFragment StoreEntitySet="CboStd_Guardian_Occupation">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GuardianOccupationName" ColumnName="GuardianOccupationName" />
+                <ScalarProperty Name="GuardianOccupationID" ColumnName="GuardianOccupationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CboStd_Guardian_Relationship">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboStd_Guardian_Relationship">
+              <MappingFragment StoreEntitySet="CboStd_Guardian_Relationship">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Guardian_RelationshipName" ColumnName="Guardian_RelationshipName" />
+                <ScalarProperty Name="GuardianRelationshipID" ColumnName="GuardianRelationshipID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CboStudyPrograms">
             <EntityTypeMapping TypeName="ERP_SchoolSystemModel.CboStudyProgram">
               <MappingFragment StoreEntitySet="CboStudyProgram">
@@ -1711,6 +2146,148 @@
                 <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
                 <ScalarProperty Name="StudyProgramName" ColumnName="StudyProgramName" />
                 <ScalarProperty Name="StudyProgramID" ColumnName="StudyProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GLAccounts">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.GLAccount">
+              <MappingFragment StoreEntitySet="GLAccounts">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="DetailAccountID" ColumnName="DetailAccountID" />
+                <ScalarProperty Name="CurrentBalance" ColumnName="CurrentBalance" />
+                <ScalarProperty Name="AccountTitle" ColumnName="AccountTitle" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GLDetailAccounts">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.GLDetailAccount">
+              <MappingFragment StoreEntitySet="GLDetailAccount">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="MajorAccountID" ColumnName="MajorAccountID" />
+                <ScalarProperty Name="DetailAccountDesc" ColumnName="DetailAccountDesc" />
+                <ScalarProperty Name="DetailAccountCode" ColumnName="DetailAccountCode" />
+                <ScalarProperty Name="DetailAccountID" ColumnName="DetailAccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GLMainGroups">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.GLMainGroup">
+              <MappingFragment StoreEntitySet="GLMainGroups">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="MainGroupCaption" ColumnName="MainGroupCaption" />
+                <ScalarProperty Name="MainGroupName" ColumnName="MainGroupName" />
+                <ScalarProperty Name="MainGroupCode" ColumnName="MainGroupCode" />
+                <ScalarProperty Name="MainGroupID" ColumnName="MainGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GLMajorAccounts">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.GLMajorAccount">
+              <MappingFragment StoreEntitySet="GLMajorAccount">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="MainGroupID" ColumnName="MainGroupID" />
+                <ScalarProperty Name="MajorAccountDesc" ColumnName="MajorAccountDesc" />
+                <ScalarProperty Name="MajorAccountCode" ColumnName="MajorAccountCode" />
+                <ScalarProperty Name="MajorAccountID" ColumnName="MajorAccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_School_Classes_Setup">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_School_Classes_Setup">
+              <MappingFragment StoreEntitySet="Tbl_School_Classes_Setup">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_School_Fee_Setup">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_School_Fee_Setup">
+              <MappingFragment StoreEntitySet="Tbl_School_Fee_Setup">
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="FeeID" ColumnName="FeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_School_Std_Fee">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_School_Std_Fee">
+              <MappingFragment StoreEntitySet="Tbl_School_Std_Fee">
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+                <ScalarProperty Name="StudentFee" ColumnName="StudentFee" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="FeeID" ColumnName="FeeID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_School_Std_Monthly_Fee">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_School_Std_Monthly_Fee">
+              <MappingFragment StoreEntitySet="Tbl_School_Std_Monthly_Fee">
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FeeYear" ColumnName="FeeYear" />
+                <ScalarProperty Name="FeeMonth" ColumnName="FeeMonth" />
+                <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+                <ScalarProperty Name="ReceivedOn" ColumnName="ReceivedOn" />
+                <ScalarProperty Name="RecivedAmount" ColumnName="RecivedAmount" />
+                <ScalarProperty Name="StudentFee" ColumnName="StudentFee" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="FeeID" ColumnName="FeeID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

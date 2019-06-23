@@ -11,6 +11,8 @@
     var SchoolList = db.TblSchools.Where(x => x.SchoolId == SchoolID && x.IsActive == true).ToList();
     List<ERP_SchoolSystem.Models.TblUserType> UserTypeList = new List<ERP_SchoolSystem.Models.TblUserType>();
     UserTypeList = db.TblUserTypes.Where(x => x.UserTypeID == 5 && x.IsActive == true).ToList();
+
+    var StudyProgramList = db.CboStudyPrograms.Where(x => x.SchoolId == SchoolID && x.IsActive == true).ToList();
 }
 
 
@@ -35,14 +37,14 @@
             <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
         </div>
     }
-    <form class="wizard-form steps-validation" action="~/Student/AddNewStudent" data-fouc id="StdForm" method="post" enctype="multipart/form-data">
+    <form class="wizard-form steps-validation" action="~/Student/AddNewStudent" data-fouc id="Details_Form" method="post" enctype="multipart/form-data">
         <h6>Student Personal Info</h6>
         <fieldset>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>School Name <span class="text-danger">*</span></label>
-                        <select name="SchoolID" id="SchoolID" data-placeholder="Select School Name" class="form-control form-control-select2" data-fouc>
+                        <select name="SchoolID" id="SchoolID" data-placeholder="Select School Name" class="form-control form-control-select2" data-fouc required>
                             <option value="">Select School Name</option>
                             @foreach (var item in SchoolList)
                             {
@@ -54,7 +56,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Branch Name <span class="text-danger">*</span></label>
-                        <select name="BranchID" id="BranchID" data-placeholder="Select Branch Name" class="form-control form-control-select2" data-fouc>
+                        <select name="BranchID" id="BranchID" data-placeholder="Select Branch Name" class="form-control form-control-select2" data-fouc required>
                             <option value="">Select Branch Name</option>
                             @foreach (var item in BranchNameList)
                             {
@@ -82,7 +84,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Student Gender <span class="text-danger">*</span></label>
-                        <select name="Gender" data-placeholder="Select Gender" class="form-control form-control-select2" data-fouc id="Gender">
+                        <select name="Gender" data-placeholder="Select Gender" class="form-control form-control-select2" data-fouc id="Gender" required>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
@@ -130,7 +132,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Student Country <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Std_Country" id="Std_Country" onchange="GetProvince()">
+                        <select class="form-control form-control-select2" data-fouc name="Std_Country" id="Std_Country" onchange="GetProvince()" required>
                             <option value="">Select Country</option>
                             @foreach (var item in CountriesList)
                             {
@@ -145,7 +147,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Postal Province <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_Province" id="Std_Postal_Province" onchange="GetPostalCities()">
+                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_Province" id="Std_Postal_Province" required onchange="GetPostalCities()">
                             <option value="">Select Postal Province</option>
                         </select>
                     </div>
@@ -153,7 +155,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Postal City <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_City" id="Std_Postal_City">
+                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_City" id="Std_Postal_City" required>
                             <option value="">Select Postal City</option>
                         </select>
                     </div>
@@ -163,7 +165,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Permanent Province <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_Province" id="Std_Permanent_Province" onchange="GetPermanentCities()">
+                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_Province" id="Std_Permanent_Province" required onchange="GetPermanentCities()">
                             <option value="">Select Permanent Province</option>
                         </select>
                     </div>
@@ -171,7 +173,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Permanent City <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_City" id="Std_Permanent_City">
+                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_City" id="Std_Permanent_City" required>
                             <option value="">Select Permanent City</option>
                         </select>
                     </div>
@@ -238,7 +240,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Student User Type <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="StudentUserType" id="StudentUserType">
+                        <select class="form-control form-control-select2" data-fouc name="StudentUserType" id="StudentUserType" required>
                             <option value="">Select User Type</option>
                             @foreach (var item in UserTypeList)
                             {
@@ -275,8 +277,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Study program <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Studyprogram" id="Study program">
+                        <select class="form-control form-control-select2" data-fouc name="Studyprogram" id="Studyprogram" required>
                             <option value="">Select Study program</option>
+                            @foreach (var item in StudyProgramList)
+                            {
+                                <option value="@item.StudyProgramID">@item.StudyProgramName</option>
+                            }
                         </select>
                     </div>
                 </div>

@@ -1,7 +1,11 @@
-﻿@{ 
+﻿@{
     ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
     var CountriesList = db.TblCountries.Where(x => x.IsActive == true).ToList();
+    var RelationShipList = db.CboStd_Guardian_Relationship.Where(x => x.IsActive == true).ToList();
+    var IncomeList = db.CboStd_Guardian_Income.Where(x => x.IsActive == true).ToList();
+    var OccupationList = db.CboStd_Guardian_Occupation.Where(x => x.IsActive == true).ToList();
 }
+
 
 <div class="row">
     <div class="col-md-6">
@@ -21,9 +25,12 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian Relationship <span class="text-danger">*</span></label>
-            <select name="GuardianRelationship" data-placeholder="Select Guardian Relationship" class="form-control form-control-select2" data-fouc id="Gender">
-                <option value="Parents">Parents</option>
-                <option value="Brother">Brother</option>
+            <select name="GuardianRelationship" id="GuardianRelationship" data-placeholder="Select Guardian Relationship" class="form-control form-control-select2" data-fouc required>
+                <option value="">Select Relationship</option>
+                @foreach (var item in RelationShipList)
+                {
+                    <option value="@item.GuardianRelationshipID">@item.Guardian_RelationshipName</option>
+                }
             </select>
         </div>
     </div>
@@ -38,7 +45,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian Country <span class="text-danger">*</span></label>
-            <select class="form-control form-control-select2" data-fouc name="GuardianCountry" id="GuardianCountry" onchange="Get_G_Province()">
+            <select class="form-control form-control-select2" data-fouc name="GuardianCountry" id="GuardianCountry" onchange="Get_G_Province()" required>
                 <option value="">Select Guardian Country</option>
                 @foreach (var item in CountriesList)
                 {
@@ -51,7 +58,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian Province <span class="text-danger">*</span></label>
-            <select class="form-control form-control-select2" data-fouc name="GuardianProvince" id="GuardianProvince" onchange="Get_G_Cities()">
+            <select class="form-control form-control-select2" data-fouc name="GuardianProvince" id="GuardianProvince" onchange="Get_G_Cities()" required>
                 <option value="">Select Guardian Province</option>
             </select>
         </div>
@@ -61,7 +68,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian City <span class="text-danger">*</span></label>
-            <select class="form-control form-control-select2" data-fouc name="GuardianCity" id="GuardianCity">
+            <select class="form-control form-control-select2" data-fouc name="GuardianCity" id="GuardianCity" required>
                 <option value="">Select Guardian City</option>
             </select>
         </div>
@@ -93,13 +100,25 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian Occupation<span class="text-danger">*</span></label>
-            <input type="text" name="GuardianOccupation" id="GuardianOccupation" class="form-control" placeholder="Enter Guardian Occupation">
+            <select class="form-control form-control-select2" data-fouc name="GuardianOccupation" id="GuardianOccupation" required>
+                <option value="">Select Guardian Occupation</option>
+                @foreach (var item in OccupationList)
+                {
+                    <option value="@item.GuardianOccupationID">@item.GuardianOccupationName</option>
+                }
+            </select>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label>Guardian Monthly Income</label>
-            <input type="number" name="GuardianMonthlyIncome" id="GuardianMonthlyIncome" class="form-control" placeholder="Enter Guardian Monthly Income">
+            <select class="form-control form-control-select2" data-fouc name="GuardianMonthlyIncome" id="GuardianMonthlyIncome" required>
+                <option value="">Select Guardian Monthly Income</option>
+                @foreach (var item in IncomeList)
+                {
+                    <option value="@item.GuardianIncomeID">@item.GuardianIncomeName</option>
+                }
+            </select>
         </div>
     </div>
 </div>

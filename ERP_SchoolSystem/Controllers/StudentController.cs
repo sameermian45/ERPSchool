@@ -43,8 +43,8 @@ namespace ERP_SchoolSystem.Controllers
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> AddNewStudent(int SchoolID, int BranchID, string StudentName, string FatherName, string Gender, DateTime DOB, DateTime DOA, string CNIC, string EmailAddress,
             int Std_Country, int Std_Postal_Province, int Std_Postal_City, int Std_Permanent_Province, int Std_Permanent_City, string Std_R_HomeAddress, string Std_P_HomeAddress, string Std_ContactNo,
-            string Std_HomeContactNo, string GuardianName, string GuardianCNIC, string GuardianRelationship, string GuardianEmail, int GuardianCountry, int GuardianProvince, int GuardianCity,
-            string GuardianHomeAddress, string GuardianContactPrimary, string GuardianContactSecoundary, string GuardianOccupation, string GuardianMonthlyIncome,
+            string Std_HomeContactNo, string GuardianName, string GuardianCNIC, int GuardianRelationship, string GuardianEmail, int GuardianCountry, int GuardianProvince, int GuardianCity,
+            string GuardianHomeAddress, string GuardianContactPrimary, string GuardianContactSecoundary, int GuardianOccupation, int GuardianMonthlyIncome,
             string[] SchoolNameN, string[] ClassNameN, string[] StudyGradesN, string[] RemarksN, string[] DocumentName, HttpPostedFileBase[] Document, string DocumentDetails, string Password, string StudentUserName,
             string GuardianOfficeContact, int StudentUserType, string StudentBatchNo, string StudentBatchDetails, int Studyprogram, HttpPostedFileBase StdLogo, int IsActive = 0)
         {
@@ -161,6 +161,10 @@ namespace ERP_SchoolSystem.Controllers
                         {
                             using (MemoryStream ms = new MemoryStream())
                             {
+                                if(item == null)
+                                {
+                                    break;
+                                }
                                 Tbl_Std_Last_School_Document_Details edu = new Tbl_Std_Last_School_Document_Details();
                                 edu.SchoolID = SchoolID;
                                 edu.StudentID = std.StudentID;
@@ -174,19 +178,22 @@ namespace ERP_SchoolSystem.Controllers
                             }
                         }
                         int b = 0;
-                        foreach (var item in SchoolNameN)
+                        if (SchoolNameN != null)
                         {
-                            Tbl_Std_Last_School_Details st = new Tbl_Std_Last_School_Details();
-                            st.SchoolID = SchoolID;
-                            st.StudentID = std.StudentID;
-                            st.Last_SchoolName = SchoolNameN[b];
-                            st.Last_SchoolDetails = RemarksN[b];
-                            st.Last_SchoolClassName = ClassNameN[b];
-                            st.Study_Grades = StudyGradesN[b];
-                            st.AddedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
-                            st.AddedOn = DateTime.Now;
-                            db.Tbl_Std_Last_School_Details.Add(st);
-                            db.SaveChanges();
+                            foreach (var item in SchoolNameN)
+                            {
+                                Tbl_Std_Last_School_Details st = new Tbl_Std_Last_School_Details();
+                                st.SchoolID = SchoolID;
+                                st.StudentID = std.StudentID;
+                                st.Last_SchoolName = SchoolNameN[b];
+                                st.Last_SchoolDetails = RemarksN[b];
+                                st.Last_SchoolClassName = ClassNameN[b];
+                                st.Study_Grades = StudyGradesN[b];
+                                st.AddedBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                                st.AddedOn = DateTime.Now;
+                                db.Tbl_Std_Last_School_Details.Add(st);
+                                db.SaveChanges();
+                            }
                         }
                     }
 

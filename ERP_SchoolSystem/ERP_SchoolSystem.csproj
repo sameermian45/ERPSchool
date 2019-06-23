@@ -206,7 +206,28 @@
     <Compile Include="Models\CboEmpStatu.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CboStd_Guardian_Income.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CboStd_Guardian_Occupation.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CboStd_Guardian_Relationship.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CboStudyProgram.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GLAccount.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GLDetailAccount.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GLMainGroup.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GLMajorAccount.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -257,6 +278,18 @@
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblUserType.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_School_Classes_Setup.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_School_Fee_Setup.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_School_Std_Fee.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_School_Std_Monthly_Fee.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tbl_Std_Details.cs">
@@ -923,7 +956,9 @@
       <DependentUpon>SchoolSystem_DB.edmx</DependentUpon>
       <LastGenOutput>SchoolSystem_DB.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

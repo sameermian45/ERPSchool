@@ -38,13 +38,13 @@ namespace ERP_SchoolSystem.Models
         public string R_Address { get; set; }
         public string G_Name { get; set; }
         public string G_ContactPrimary { get; set; }
-        public string G_Releationship { get; set; }
+        public Nullable<int> G_Releationship { get; set; }
         public Nullable<int> G_CountryID { get; set; }
         public Nullable<int> G_ProvincesID { get; set; }
         public Nullable<int> G_CityID { get; set; }
         public string G_Address { get; set; }
-        public string G_Occupation { get; set; }
-        public string G_MonthlyIncome { get; set; }
+        public Nullable<int> G_Occupation { get; set; }
+        public Nullable<int> G_MonthlyIncome { get; set; }
         public string G_ContactSecoundary { get; set; }
         public string G_WorkContact { get; set; }
         public string G_Email { get; set; }
