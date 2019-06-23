@@ -31,6 +31,9 @@ namespace ERP_SchoolSystem.Models
         public virtual DbSet<CboDepartment> CboDepartments { get; set; }
         public virtual DbSet<CboDesignation> CboDesignations { get; set; }
         public virtual DbSet<CboEmpStatu> CboEmpStatus { get; set; }
+        public virtual DbSet<Tbl_Std_Details> Tbl_Std_Details { get; set; }
+        public virtual DbSet<Tbl_Std_Last_School_Details> Tbl_Std_Last_School_Details { get; set; }
+        public virtual DbSet<Tbl_Std_Last_School_Document_Details> Tbl_Std_Last_School_Document_Details { get; set; }
         public virtual DbSet<TblCity> TblCities { get; set; }
         public virtual DbSet<TblCountry> TblCountries { get; set; }
         public virtual DbSet<TblEmpEduDetail> TblEmpEduDetails { get; set; }

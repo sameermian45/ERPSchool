@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblProvince>
+    <option value="">Select Permanent Province</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.ProvincesID">@item.ProvincesName</option>
+    }

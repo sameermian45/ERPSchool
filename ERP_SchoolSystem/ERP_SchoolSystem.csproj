@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Filter\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filter\EmpDataFilter.cs" />
@@ -253,6 +254,15 @@
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TblUserType.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Std_Details.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Std_Last_School_Details.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_Std_Last_School_Document_Details.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -383,8 +393,10 @@
     <Content Include="Content\images\demo\video1.png" />
     <Content Include="Content\images\demo\video2.png" />
     <Content Include="Content\images\diagram.svg" />
+    <Content Include="Content\images\Doc_Avt.png" />
     <Content Include="Content\images\dribbble.png" />
     <Content Include="Content\images\image.png" />
+    <Content Include="Content\images\Doc_Avt.jpg" />
     <Content Include="Content\images\lang\de.png" />
     <Content Include="Content\images\lang\es.png" />
     <Content Include="Content\images\lang\gb.png" />
@@ -1009,6 +1021,16 @@
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home\PaymentAlert.cshtml" />
     <Content Include="Views\Home\AccountSetting.cshtml" />
+    <Content Include="Views\Student\AddNewStudent.cshtml" />
+    <Content Include="Views\Student\Std_G_Details.cshtml" />
+    <Content Include="Views\Student\Std_LastSchool_Details.cshtml" />
+    <Content Include="Views\Student\Std_Edu_Document.cshtml" />
+    <Content Include="Views\Student\Get_Std_Postal_CitiesList.cshtml" />
+    <Content Include="Views\Student\Get_Std_Permanent_ProvincesList.cshtml" />
+    <Content Include="Views\Student\Get_Std_Permanent_CitiesList.cshtml" />
+    <Content Include="Views\Student\Get_Std_Postal_ProvincesList.cshtml" />
+    <Content Include="Views\Student\Get_G_ProvincesList.cshtml" />
+    <Content Include="Views\Student\Get_G_CitiesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

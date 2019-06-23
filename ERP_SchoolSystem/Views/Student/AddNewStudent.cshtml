@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Add New Employee";
+    ViewBag.Title = "Add New Student";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
     ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
@@ -9,26 +9,16 @@
     var DepartmentList = db.CboDepartments.Where(x => x.SchoolId == SchoolID && x.IsActive == true).ToList();
     var DesignationList = db.CboDesignations.Where(x => x.SchoolId == SchoolID && x.IsActive == true).ToList();
     var SchoolList = db.TblSchools.Where(x => x.SchoolId == SchoolID && x.IsActive == true).ToList();
-
     List<ERP_SchoolSystem.Models.TblUserType> UserTypeList = new List<ERP_SchoolSystem.Models.TblUserType>();
-    if (ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 1)
-    {
-        UserTypeList = db.TblUserTypes.Where(x => x.IsActive == true).ToList();
-    }
-    else
-    {
-        UserTypeList = db.TblUserTypes.Where(x => x.UserTypeID != 1 && x.UserTypeID != 5 && x.IsActive == true).ToList();
-    }
-
+    UserTypeList = db.TblUserTypes.Where(x => x.UserTypeID == 5 && x.IsActive == true).ToList();
 }
 
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Add New Employee</h6>
+        <h6 class="card-title">Add New Student</h6>
         <div class="header-elements">
         </div>
     </div>
-
     @if (ViewBag.SuccessMessage != null)
     {
         <div class="alert alert-success alert-dismissible">
@@ -43,9 +33,8 @@
             <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
         </div>
     }
-
-    <form class="wizard-form steps-validationEmp" action="~/Employee/NewEmployee" data-fouc id="EmpForm" method="post" enctype="multipart/form-data">
-        <h6>Personal data</h6>
+    <form class="wizard-form steps-validationStd" action="~/Student/AddNewStudent" data-fouc id="StdForm" method="post" enctype="multipart/form-data">
+        <h6>Student Personal Info</h6>
         <fieldset>
             <div class="row">
                 <div class="col-md-6">
@@ -76,50 +65,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>First Name <span class="text-danger">*</span></label>
-                        <input type="text" name="FirstName" class="form-control" placeholder="Enter First Name">
+                        <label>Student Name <span class="text-danger">*</span></label>
+                        <input type="text" name="StudentName" class="form-control" placeholder="Enter Student Name">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Last Name <span class="text-danger">*</span></label>
-                        <input type="text" name="LastName" class="form-control" placeholder="Enter Last Name">
+                        <label>Father Name <span class="text-danger">*</span></label>
+                        <input type="text" name="FatherName" class="form-control" placeholder="Enter Father Name">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee Gender <span class="text-danger">*</span></label>
+                        <label>Student Gender <span class="text-danger">*</span></label>
                         <select name="Gender" data-placeholder="Select Gender" class="form-control form-control-select2" data-fouc id="Gender" onchange="ShowGDatails()">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Marital Status <span class="text-danger">*</span></label>
-                        <select name="MaritalStatus" data-placeholder="Select Marital Status" id="MaritalStatus" onchange="ShowGDatails()" class="form-control form-control-select2" data-fouc>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widow">Widow</option>
-                        </select>
-                    </div>
-                </div>
-               
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group" id="Father" style="display:block">
-                        <label>Father Name <span class="text-danger">*</span></label>
-                        <input type="text" name="FatherName" id="FatherName" class="form-control" placeholder="Enter Father Name">
-                    </div>
-                    <div class="form-group" id="Husband" style="display:none">
-                        <label>Husband Name <span class="text-danger">*</span></label>
-                        <input type="text" name="HusbandName" id="HusbandName" class="form-control" placeholder="Enter Husband Name">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -137,18 +101,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Date of Joining <span class="text-danger">*</span></label>
+                        <label>Date of Addmission <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-calendar22"></i></span>
                             </span>
-                            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" name="DOJ">
+                            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" name="DOA">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee CNIC <span class="text-danger">*</span></label>
+                        <label>Student CNIC (B Form) <span class="text-danger">*</span></label>
                         <input type="text" name="CNIC" class="form-control" placeholder="Enter Employee CNIC" data-mask="99999-9999999-9">
                     </div>
                 </div>
@@ -157,14 +121,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Email Address <span class="text-danger">*</span></label>
-                        <input type="text" name="EmailAddress" class="form-control" placeholder="Enter Email Address">
+                        <label>Email Address</label>
+                        <input type="email" name="EmailAddress" class="form-control" placeholder="Enter Email Address">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee Country <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Country" id="Country" onchange="GetProvince()">
+                        <label>Student Country <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Std_Country" id="Std_Country" onchange="GetProvince()">
                             <option value="">Select Country</option>
                             @foreach (var item in CountriesList)
                             {
@@ -178,38 +142,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee Province <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Province" id="Province" onchange="GetCities()">
-                            <option value="">Select Province</option>
+                        <label>Postal Province <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_Province" id="Std_Postal_Province" onchange="GetPostalCities()">
+                            <option value="">Select Postal Province</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee City <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="City" id="City">
-                            <option value="">Select City</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Home Address <span class="text-danger">*</span></label>
-                        <input type="text" name="HomeAddress" class="form-control" placeholder="Enter Home Address">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Employee Status <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="EmployeeStatus" id="EmployeeStatus">
-                            <option value="">Select Employee Status</option>
-                            @foreach (var item in EmployeeStatusList)
-                            {
-                                <option value="@item.EmpStatusID">@item.EmpStatusName</option>
-                            }
+                        <label>Postal City <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Std_Postal_City" id="Std_Postal_City">
+                            <option value="">Select Postal City</option>
                         </select>
                     </div>
                 </div>
@@ -217,105 +160,69 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Contact No. <span class="text-danger">*</span></label>
-                        <input type="text" name="ContactNo1" class="form-control" placeholder="Enter Contact No" data-mask="9999-9999999">
+                        <label>Permanent Province <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_Province" id="Std_Permanent_Province" onchange="GetPermanentCities()">
+                            <option value="">Select Permanent Province</option>
+                        </select>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Permanent City <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Std_Permanent_City" id="Std_Permanent_City">
+                            <option value="">Select Permanent City</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Postal Address <span class="text-danger">*</span></label>
+                        <input type="text" name="Std_R_HomeAddress" class="form-control" placeholder="Enter Postal Address">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Permanent Address <span class="text-danger">*</span></label>
+                        <input type="text" name="Std_P_HomeAddress" class="form-control" placeholder="Enter Permanent Address">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Contact No.</label>
-                        <input type="text" name="ContactNo2" class="form-control" placeholder="Enter Contact No" data-mask="9999-9999999">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Employee Department <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Department" id="Department">
-                            <option value="">Select Department</option>
-                            @foreach (var item in DepartmentList)
-                            {
-                                <option value="@item.DepartmentID">@item.DepartmentName</option>
-                            }
-                        </select>
+                        <input type="text" name="Std_ContactNo" class="form-control" placeholder="Enter Contact No" data-mask="9999-9999999">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee Designation <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="Designation" id="Designation">
-                            <option value="">Select Designation</option>
-                            @foreach (var item in DesignationList)
-                            {
-                                <option value="@item.DesignationID">@item.DesignationName</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Job Description<span class="text-danger">*</span></label>
-                        <input type="text" name="JobDescription" class="form-control" placeholder="Enter Job Description">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Duty Location <span class="text-danger">*</span></label>
-                        <input type="text" name="DutyLocation" class="form-control" placeholder="Enter Duty Location">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Bank Account No</label>
-                        <input type="text" name="BankAccountNo" class="form-control" placeholder="Enter Bank Account No.">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Employee Income Tax Details</label>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox" style="margin-top: 10%;">
-                                    <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" name="TaxFiler" value="1">
-                                    <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">TaxFiler</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="text" name="NTNNo" class="form-control" placeholder="Enter NTN No.">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="number" name="IncomeTax" class="form-control" placeholder="Enter Income Tax Amount">
-                            </div>
-                        </div>
+                        <label>Home Contact No. <span class="text-danger">*</span></label>
+                        <input type="text" name="Std_HomeContactNo" class="form-control" placeholder="Enter Home Contact No" data-mask="9999-9999999">
                     </div>
                 </div>
             </div>
         </fieldset>
-        <h6>Education</h6>
+        <h6>Guardian Info</h6>
         <fieldset>
-            @Html.Partial("Employee_Edu")
+            @Html.Partial("Std_G_Details")
         </fieldset>
-        <h6>Experience</h6>
+        <h6>Last School Info</h6>
         <fieldset>
-            @Html.Partial("Employee_Exp")
+            @Html.Partial("Std_LastSchool_Details")
         </fieldset>
-        <h6>Login Details</h6>
+        <h6>Edu Documents</h6>
         <fieldset>
-
+            @Html.Partial("Std_Edu_Document")
+        </fieldset>
+        <h6>Student Info</h6>
+        <fieldset>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee UserName<span class="text-danger">*</span></label>
-                        <input type="text" name="EmployeeUserName" class="form-control" placeholder="Enter Employee UserName" value="Auto Generate" readonly="readonly" required>
+                        <label>Student UserName<span class="text-danger">*</span></label>
+                        <input type="text" name="StudentUserName" class="form-control" placeholder="Enter Employee UserName" value="Auto Generate" readonly="readonly" required>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -325,12 +232,11 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee User Type <span class="text-danger">*</span></label>
-                        <select class="form-control form-control-select2" data-fouc name="EmployeeUserType" id="EmployeeUserType">
+                        <label>Student User Type <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="StudentUserType" id="StudentUserType">
                             <option value="">Select User Type</option>
                             @foreach (var item in UserTypeList)
                             {
@@ -340,7 +246,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>Employee Status</label>
+                    <label>Student Status</label>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked1" name="IsActive" value="1">
@@ -349,13 +255,35 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Employee Profile Picture</label>
-                        <input type="file" class="form-input-styled" data-fouc accept=".jpg , .png , .gif ,.jpeg" onchange="readURL(this);" id="EmpLogo" name="EmpLogo">
+                        <label>Student Batch No<span class="text-danger">*</span></label>
+                        <input type="text" name="StudentBatchNo" class="form-control" placeholder="Enter Student Batch No">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Student Batch Details <span class="text-danger">*</span></label>
+                        <input type="text" name="StudentBatchDetails" class="form-control" placeholder="Enter Student Batch Details">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Study program <span class="text-danger">*</span></label>
+                        <select class="form-control form-control-select2" data-fouc name="Studyprogram" id="Study program">
+                            <option value="">Select Study program</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Student Profile Picture</label>
+                        <input type="file" class="form-input-styled" data-fouc accept=".jpg , .png , .gif ,.jpeg" onchange="readURL(this);" id="StdLogo" name="StdLogo">
                         <span class="form-text text-muted">Accepted formats: png, jpg , jpeg. Max file size less then 2Mb</span>
                     </div>
                 </div>
@@ -370,31 +298,13 @@
         </fieldset>
     </form>
 </div>
-
-
 <script>
-    function ShowGDatails() {
-        $('#FatherName').val(null);
-        $('#HusbandName').val(null);
-        if ($("#Gender").val() == "Female" && $("#MaritalStatus").val() != "Single") {
-            $("#Husband").show();
-            $("#HusbandName").addClass("required");
-            $("#Father").hide();
-            $("#FatherName").removeClass("required");
-        }
-        else {
-            $("#Father").show();
-            $("#FatherName").addClass("required");
-            $("#Husband").hide();
-            $("#HusbandName").removeClass("required");
-        }
-    }
-
     function GetProvince() {
-        var CountryID = document.getElementById('Country').value;
+        var CountryID = document.getElementById('Std_Country').value;
         if (CountryID != "") {
+            debugger;
             $("#LoadingSpinner").show();
-            var url = '@Url.Action("GetProvincesList", "Employee")';
+            var url = '@Url.Action("Get_Std_Permanent_ProvincesList", "Student")';
             $.ajax({
                 url: url,
                 data: { CountryID: CountryID },
@@ -402,18 +312,35 @@
                 type: "POST",
                 success: function (result) {
                     if (result != null) {
-                        $("#Province").html(result);
+                        $("#Std_Permanent_Province").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+        if (CountryID != "") {
+            debugger;
+            $("#LoadingSpinner").show();
+            var url = '@Url.Action("Get_Std_Postal_ProvincesList", "Student")';
+            $.ajax({
+                url: url,
+                data: { CountryID: CountryID },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#Std_Postal_Province").html(result);
                         $("#LoadingSpinner").hide();
                     }
                 }
             });
         }
     }
-    function GetCities() {
-        var ProvinceID = document.getElementById('Province').value;
+    function GetPostalCities() {
+        var ProvinceID = document.getElementById('Std_Postal_Province').value;
         if (ProvinceID != "") {
             $("#LoadingSpinner").show();
-            var url = '@Url.Action("GetCitiesList", "Employee")';
+            var url = '@Url.Action("Get_Std_Postal_CitiesList", "Student")';
             $.ajax({
                 url: url,
                 data: { ProvinceID: ProvinceID },
@@ -421,7 +348,27 @@
                 type: "POST",
                 success: function (result) {
                     if (result != null) {
-                        $("#City").html(result);
+                        $("#Std_Postal_City").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+    }
+
+    function GetPermanentCities() {
+        var ProvinceID = document.getElementById('Std_Permanent_Province').value;
+        if (ProvinceID != "") {
+            $("#LoadingSpinner").show();
+            var url = '@Url.Action("Get_Std_Permanent_CitiesList", "Student")';
+            $.ajax({
+                url: url,
+                data: { ProvinceID: ProvinceID },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#Std_Permanent_City").html(result);
                         $("#LoadingSpinner").hide();
                     }
                 }
@@ -442,10 +389,9 @@
             const fileType = file['type'];
             const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             var FileSize = file.size / 1024 / 1024;
-            if (parseInt(FileSize) > 1)
-            {
+            if (parseInt(FileSize) > 1) {
                 toastr.error('please select file less then 2Mb')
-                var input = $("#EmpLogo");
+                var input = $("#StdLogo");
                 input.replaceWith(input.val('').clone(true));
                 return;
             }
@@ -461,9 +407,11 @@
             }
             else {
                 toastr.error('Please select Image only (Accepted formats: png, jpg jpeg)')
-                var input = $("#EmpLogo");
+                var input = $("#StdLogo");
                 input.replaceWith(input.val('').clone(true));
             }
         }
     }
 </script>
+
+

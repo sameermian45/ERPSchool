@@ -1,0 +1,157 @@
+﻿@{ 
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    var CountriesList = db.TblCountries.Where(x => x.IsActive == true).ToList();
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Name <span class="text-danger">*</span></label>
+            <input type="text" name="GuardianName" id="GuardianName" class="form-control" placeholder="Enter Guardian Name">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian CNIC <span class="text-danger">*</span></label>
+            <input type="text" name="GuardianCNIC" id="GuardianCNIC" class="form-control" placeholder="Enter Guardian CNIC" data-mask="99999-9999999-9">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Relationship <span class="text-danger">*</span></label>
+            <select name="GuardianRelationship" data-placeholder="Select Guardian Relationship" class="form-control form-control-select2" data-fouc id="Gender" onchange="ShowGDatails()">
+                <option value="Parents">Parents</option>
+                <option value="Brother">Brother</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Email <span class="text-danger">*</span></label>
+            <input type="email" name="GuardianEmail" id="GuardianEmail" class="form-control" placeholder="Enter Guardian Email Address">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Country <span class="text-danger">*</span></label>
+            <select class="form-control form-control-select2" data-fouc name="GuardianCountry" id="GuardianCountry" onchange="Get_G_Province()">
+                <option value="">Select Guardian Country</option>
+                @foreach (var item in CountriesList)
+                {
+                    <option value="@item.CountryID">@item.CountryName</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Province <span class="text-danger">*</span></label>
+            <select class="form-control form-control-select2" data-fouc name="GuardianProvince" id="GuardianProvince" onchange="Get_G_Cities()">
+                <option value="">Select Guardian Province</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian City <span class="text-danger">*</span></label>
+            <select class="form-control form-control-select2" data-fouc name="GuardianCity" id="GuardianCity">
+                <option value="">Select Guardian City</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Home Address <span class="text-danger">*</span></label>
+            <input type="text" name="GuardianHomeAddress" class="form-control" placeholder="Enter Guardian Home Address">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Contact Primary<span class="text-danger">*</span></label>
+            <input type="text" name="GuardianContactPrimary" id="GuardianContactPrimary" class="form-control" placeholder="Enter Guardian Contact Primary" data-mask="9999-9999999">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Contact Secoundary</label>
+            <input type="text" name="GuardianContactSecoundary" id="GuardianContactSecoundary" class="form-control" placeholder="Enter Guardian Contact Secoundary" data-mask="9999-9999999">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Occupation<span class="text-danger">*</span></label>
+            <input type="text" name="GuardianOccupation" id="GuardianOccupation" class="form-control" placeholder="Enter Guardian Occupation">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Monthly Income</label>
+            <input type="number" name="GuardianMonthlyIncome" id="GuardianMonthlyIncome" class="form-control" placeholder="Enter Guardian Monthly Income">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Guardian Office Contact<span class="text-danger">*</span></label>
+            <input type="text" name="GuardianOfficeContact" id="GuardianOfficeContact" class="form-control" placeholder="Enter Guardian Office Contact" data-mask="9999-9999999">
+        </div>
+    </div>
+</div>
+
+<script>
+    function Get_G_Province() {
+        var CountryID = document.getElementById('GuardianCountry').value;
+        if (CountryID != "") {
+            debugger;
+            $("#LoadingSpinner").show();
+            var url = '@Url.Action("Get_G_ProvincesList", "Student")';
+            $.ajax({
+                url: url,
+                data: { CountryID: CountryID },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#GuardianProvince").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+    }
+    function Get_G_Cities() {
+        var ProvinceID = document.getElementById('GuardianProvince').value;
+        if (ProvinceID != "") {
+            $("#LoadingSpinner").show();
+            var url = '@Url.Action("Get_G_CitiesList", "Student")';
+            $.ajax({
+                url: url,
+                data: { ProvinceID: ProvinceID },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#GuardianCity").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+    }
+
+</script>
+

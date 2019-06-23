@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblCity>
+    <option value="">Select Postal City</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.CityID">@item.CityName</option>
+    }

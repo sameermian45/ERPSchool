@@ -86,6 +86,87 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="Tbl_Std_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="BranchID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="150" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="Home_Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="P_ProvincesID" Type="int" />
+          <Property Name="P_CityID" Type="int" />
+          <Property Name="P_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="R_ProvincesID" Type="int" />
+          <Property Name="R_CityID" Type="int" />
+          <Property Name="R_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="G_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="G_ContactPrimary" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_Releationship" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_CountryID" Type="int" />
+          <Property Name="G_ProvincesID" Type="int" />
+          <Property Name="G_CityID" Type="int" />
+          <Property Name="G_Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="G_Occupation" Type="nvarchar" MaxLength="250" />
+          <Property Name="G_MonthlyIncome" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_ContactSecoundary" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_WorkContact" Type="nvarchar" MaxLength="50" />
+          <Property Name="G_Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="G_CNIC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Std_BatchNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Std_BatchDetails" Type="nvarchar" MaxLength="250" />
+          <Property Name="Std_RollNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Std_Study_ProgramID" Type="int" Nullable="false" />
+          <Property Name="Std_DocDetails" Type="nvarchar" MaxLength="250" />
+          <Property Name="Std_Picture" Type="image" />
+          <Property Name="ProfilePicturePath" Type="nvarchar" MaxLength="250" />
+          <Property Name="AddedOn" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Std_Last_School_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="Last_SchoolName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Last_SchoolClassName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Study_Grades" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last_SchoolDetails" Type="nvarchar" MaxLength="250" />
+          <Property Name="AddedOn" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Std_Last_School_Document_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="SchoolID" Type="int" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Document_Image" Type="image" />
+          <Property Name="AddedOn" Type="datetime" />
+          <Property Name="AddedBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="ModifyBy" Type="int" />
+        </EntityType>
         <EntityType Name="TblCities">
           <Key>
             <PropertyRef Name="CityID" />
@@ -574,6 +655,9 @@
           <EntitySet Name="CboDepartment" EntityType="Self.CboDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboDesignation" EntityType="Self.CboDesignation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CboEmpStatus" EntityType="Self.CboEmpStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Std_Details" EntityType="Self.Tbl_Std_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="Self.Tbl_Std_Last_School_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="Self.Tbl_Std_Last_School_Document_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCities" EntityType="Self.TblCities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCountries" EntityType="Self.TblCountries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmpEduDetails" EntityType="Self.TblEmpEduDetails" Schema="dbo" store:Type="Tables" />
@@ -693,6 +777,9 @@
           <EntitySet Name="CboDepartments" EntityType="ERP_SchoolSystemModel.CboDepartment" />
           <EntitySet Name="CboDesignations" EntityType="ERP_SchoolSystemModel.CboDesignation" />
           <EntitySet Name="CboEmpStatus" EntityType="ERP_SchoolSystemModel.CboEmpStatu" />
+          <EntitySet Name="Tbl_Std_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Details" />
+          <EntitySet Name="Tbl_Std_Last_School_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Details" />
+          <EntitySet Name="Tbl_Std_Last_School_Document_Details" EntityType="ERP_SchoolSystemModel.Tbl_Std_Last_School_Document_Details" />
           <EntitySet Name="TblCities" EntityType="ERP_SchoolSystemModel.TblCity" />
           <EntitySet Name="TblCountries" EntityType="ERP_SchoolSystemModel.TblCountry" />
           <EntitySet Name="TblEmpEduDetails" EntityType="ERP_SchoolSystemModel.TblEmpEduDetail" />
@@ -892,6 +979,87 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TblSchool" Relationship="ERP_SchoolSystemModel.FK_CboEmpStatus_TblSchool" FromRole="CboEmpStatu" ToRole="TblSchool" />
           <NavigationProperty Name="TblEmployees" Relationship="ERP_SchoolSystemModel.FK_TblEmployees_CboEmpStatus" FromRole="CboEmpStatu" ToRole="TblEmployee" />
+        </EntityType>
+        <EntityType Name="Tbl_Std_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="BranchID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+          <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Home_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="P_ProvincesID" Type="Int32" />
+          <Property Name="P_CityID" Type="Int32" />
+          <Property Name="P_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="R_ProvincesID" Type="Int32" />
+          <Property Name="R_CityID" Type="Int32" />
+          <Property Name="R_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="G_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="G_ContactPrimary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_Releationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_CountryID" Type="Int32" />
+          <Property Name="G_ProvincesID" Type="Int32" />
+          <Property Name="G_CityID" Type="Int32" />
+          <Property Name="G_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="G_Occupation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="G_MonthlyIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_ContactSecoundary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_WorkContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="G_Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="G_CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Std_BatchNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Std_BatchDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Std_RollNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Std_Study_ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="Std_DocDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Std_Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProfilePicturePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AddedOn" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_Std_Last_School_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="Last_SchoolName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Last_SchoolClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Study_Grades" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_SchoolDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AddedOn" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_Std_Last_School_Document_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="SchoolID" Type="Int32" />
+          <Property Name="Document_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AddedOn" Type="DateTime" Precision="3" />
+          <Property Name="AddedBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
         </EntityType>
         <EntityType Name="TblCity">
           <Key>
@@ -1501,6 +1669,90 @@
                 <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
                 <ScalarProperty Name="EmpStatusName" ColumnName="EmpStatusName" />
                 <ScalarProperty Name="EmpStatusID" ColumnName="EmpStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Std_Details">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_Std_Details">
+              <MappingFragment StoreEntitySet="Tbl_Std_Details">
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="ProfilePicturePath" ColumnName="ProfilePicturePath" />
+                <ScalarProperty Name="Std_Picture" ColumnName="Std_Picture" />
+                <ScalarProperty Name="Std_DocDetails" ColumnName="Std_DocDetails" />
+                <ScalarProperty Name="Std_Study_ProgramID" ColumnName="Std_Study_ProgramID" />
+                <ScalarProperty Name="Std_RollNo" ColumnName="Std_RollNo" />
+                <ScalarProperty Name="Std_BatchDetails" ColumnName="Std_BatchDetails" />
+                <ScalarProperty Name="Std_BatchNo" ColumnName="Std_BatchNo" />
+                <ScalarProperty Name="G_CNIC" ColumnName="G_CNIC" />
+                <ScalarProperty Name="G_Email" ColumnName="G_Email" />
+                <ScalarProperty Name="G_WorkContact" ColumnName="G_WorkContact" />
+                <ScalarProperty Name="G_ContactSecoundary" ColumnName="G_ContactSecoundary" />
+                <ScalarProperty Name="G_MonthlyIncome" ColumnName="G_MonthlyIncome" />
+                <ScalarProperty Name="G_Occupation" ColumnName="G_Occupation" />
+                <ScalarProperty Name="G_Address" ColumnName="G_Address" />
+                <ScalarProperty Name="G_CityID" ColumnName="G_CityID" />
+                <ScalarProperty Name="G_ProvincesID" ColumnName="G_ProvincesID" />
+                <ScalarProperty Name="G_CountryID" ColumnName="G_CountryID" />
+                <ScalarProperty Name="G_Releationship" ColumnName="G_Releationship" />
+                <ScalarProperty Name="G_ContactPrimary" ColumnName="G_ContactPrimary" />
+                <ScalarProperty Name="G_Name" ColumnName="G_Name" />
+                <ScalarProperty Name="R_Address" ColumnName="R_Address" />
+                <ScalarProperty Name="R_CityID" ColumnName="R_CityID" />
+                <ScalarProperty Name="R_ProvincesID" ColumnName="R_ProvincesID" />
+                <ScalarProperty Name="P_Address" ColumnName="P_Address" />
+                <ScalarProperty Name="P_CityID" ColumnName="P_CityID" />
+                <ScalarProperty Name="P_ProvincesID" ColumnName="P_ProvincesID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Home_Phone" ColumnName="Home_Phone" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Std_Last_School_Details">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_Std_Last_School_Details">
+              <MappingFragment StoreEntitySet="Tbl_Std_Last_School_Details">
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="Last_SchoolDetails" ColumnName="Last_SchoolDetails" />
+                <ScalarProperty Name="Study_Grades" ColumnName="Study_Grades" />
+                <ScalarProperty Name="Last_SchoolClassName" ColumnName="Last_SchoolClassName" />
+                <ScalarProperty Name="Last_SchoolName" ColumnName="Last_SchoolName" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Std_Last_School_Document_Details">
+            <EntityTypeMapping TypeName="ERP_SchoolSystemModel.Tbl_Std_Last_School_Document_Details">
+              <MappingFragment StoreEntitySet="Tbl_Std_Last_School_Document_Details">
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="Document_Image" ColumnName="Document_Image" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
