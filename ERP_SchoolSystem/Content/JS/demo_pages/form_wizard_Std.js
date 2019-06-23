@@ -130,8 +130,7 @@ var FormWizard = function() {
 
         // Show form
         var form = $('.steps-validation').show();
-        var form = $('.steps-validationEmp').show();
-        var form = $('.steps-validationStd').show();
+
 
         // Initialize wizard
         $('.steps-validation').steps({
@@ -172,6 +171,9 @@ var FormWizard = function() {
             }
         });
 
+
+
+        var form = $('.steps-validationEmp').show();
         // Initialize wizard For Employee
         $('.steps-validationEmp').steps({
             headerTag: 'h6',
@@ -220,7 +222,11 @@ var FormWizard = function() {
                 }
             }
         });
+
         
+
+
+        var form = $('.steps-validationStd').show();
         // Initialize wizard For Employee
         $('.steps-validationStd').steps({
             headerTag: 'h6',
@@ -270,7 +276,7 @@ var FormWizard = function() {
             }
         });
 
-        // Initialize validation
+
         $('.steps-validationEmp').validate({
             ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
             errorClass: 'validation-invalid-label',
@@ -311,7 +317,7 @@ var FormWizard = function() {
             }
         });
 
-        //  Initialize validation
+
         $('.steps-validationStd').validate({
             ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
             errorClass: 'validation-invalid-label',
@@ -351,6 +357,7 @@ var FormWizard = function() {
                 }
             }
         });
+
 
         // Initialize validation
         $('.steps-validation').validate({

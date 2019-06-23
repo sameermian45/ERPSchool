@@ -13,6 +13,8 @@
     UserTypeList = db.TblUserTypes.Where(x => x.UserTypeID == 5 && x.IsActive == true).ToList();
 }
 
+
+
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Add New Student</h6>
@@ -80,7 +82,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Student Gender <span class="text-danger">*</span></label>
-                        <select name="Gender" data-placeholder="Select Gender" class="form-control form-control-select2" data-fouc id="Gender" onchange="ShowGDatails()">
+                        <select name="Gender" data-placeholder="Select Gender" class="form-control form-control-select2" data-fouc id="Gender">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
