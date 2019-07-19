@@ -14,6 +14,13 @@ namespace ERP_SchoolSystem.Models
     
     public partial class TblSchoolBranch
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TblSchoolBranch()
+        {
+            this.TblSchoolBranchesFees = new HashSet<TblSchoolBranchesFee>();
+            this.TblSchoolMonthlyPayments = new HashSet<TblSchoolMonthlyPayment>();
+        }
+    
         public int BranchID { get; set; }
         public string BranchTitle { get; set; }
         public int SchoolID { get; set; }
@@ -24,5 +31,9 @@ namespace ERP_SchoolSystem.Models
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     
         public virtual TblSchool TblSchool { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolBranchesFee> TblSchoolBranchesFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
     }
 }

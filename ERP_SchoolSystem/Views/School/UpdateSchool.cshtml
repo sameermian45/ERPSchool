@@ -1,20 +1,16 @@
-﻿@{
-    ViewBag.Title = "Add New School";
+﻿@model ERP_SchoolSystem.Models.TblSchool
+@{
+    ViewBag.Title = "Update School";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
-    var CountriesList = db.TblCountries.Where(x => x.IsActive == true ).ToList();
-    var UserTypeList = db.TblUserTypes.Where(x => x.IsActive == true && x.UserTypeID == 2).ToList();
-    var PackagesList = db.TblSchoolPackages.ToList();
+    var CountriesList = db.TblCountries.Where(x => x.IsActive == true && x.CountryID != Model.CountryId).ToList();
 }
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Add New School</h6>
-        <div class="header-elements">
-
-        </div>
+        <div class="header-elements"></div>
     </div>
-
     @if (ViewBag.SuccessMessage != null)
     {
         <div class="alert alert-success alert-dismissible">
@@ -29,34 +25,33 @@
             <span class="font-weight-semibold">@ViewBag.ErrorMessage</span>
         </div>
     }
-
-
-
     <div class="card-body">
-        <form class="form-validate-jquery" action='@Url.Action("AddNewSchool", "School")' onsubmit="return ShowLoading()" id="SchoolFrom" method="post" enctype="multipart/form-data">
+        <form class="form-validate-jquery" action='@Url.Action("UpdateSchool", "School")' onsubmit="return ShowLoading()" id="SchoolFrom" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="@Model.SchoolId" name="Schoolid"/>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Name</label>
                         <div class="col-lg-9">
-                            <input type="text" name="SchoolName" class="form-control" placeholder="Enter School Name" required>
+                            <input type="text" name="SchoolName" class="form-control" placeholder="Enter School Name" value="@Model.SchoolName" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">SR Person Name</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" placeholder="Enter School Representive Person Name" name="SRPersonName" required>
+                            <input type="text" class="form-control" placeholder="Enter School Representive Person Name" name="SRPersonName" value="@Model.SROfficerName" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Select Country</label>
                         <div class="col-lg-9">
                             <select class="form-control form-control-select2" data-fouc name="Country" id="Country" onchange="GetProvince()" required>
-                                <option value="">Select Country</option>
+                                <option value="@Model.TblCountry.CountryID">@Model.TblCountry.CountryName</option>
                                 @foreach (var item in CountriesList)
                                 {
                                     <option value="@item.CountryID">@item.CountryName</option>
                                 }
+
                             </select>
                         </div>
                     </div>
@@ -64,74 +59,54 @@
                         <label class="col-lg-3 col-form-label">Select City</label>
                         <div class="col-lg-9">
                             <select class="form-control form-control-select2" data-fouc name="City" id="City" required>
-                                <option value="">Select City</option>
+                                <option value="@Model.TblCity.CityID">@Model.TblCity.CityName</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Reg. No.</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="RegistrationNo" placeholder="Enter School Registration No">
+                            <input type="text" class="form-control" name="RegistrationNo" placeholder="Enter School Registration No" value="@Model.RegistrationNo">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Landline</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" data-mask="9999-9999999" name="PtclNo" placeholder="Enter School Landline No">
+                            <input type="text" class="form-control" data-mask="9999-9999999" name="PtclNo" placeholder="Enter School Landline No" value="@Model.PtclNo">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Cell No (2)</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="CellNo2" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">Default UserName</label>
-                        <div class="col-lg-9">
-                            <input type="email" class="form-control" name="DefaultUserName" autocomplete="off" placeholder="Enter Default UserName" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">Select User Type</label>
-                        <div class="col-lg-9">
-                            <select class="form-control form-control-select2" data-fouc name="UserType" id="UserType" required>
-                                <option value="">Select User Type</option>
-                                @foreach (var item in UserTypeList)
-                                {
-                                    <option value="@item.UserTypeID">@item.Description</option>
-                                }
-                            </select>
+                            <input type="text" class="form-control" name="CellNo2" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No" required value="@Model.CellNo1">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Short Code</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="SchoolShortCode" autocomplete="off" placeholder="Enter School Short Code" required>
+                            <input type="text" class="form-control" name="SchoolShortCode" autocomplete="off" placeholder="Enter School Short Code" required value="@Model.SchoolShortCode">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Status:</label>
                         <div class="col-lg-9">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" name="IsActive" value="1" checked="checked">
-                                <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">Active</label>
-                            </div>
+                            @if (Model.IsActive == true)
+                            {
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" name="IsActive" value="1" checked="checked">
+                                    <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">Active</label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="custom_checkbox_stacked_unchecked" name="IsActive" value="1">
+                                    <label class="custom-control-label" for="custom_checkbox_stacked_unchecked">Active</label>
+                                </div>
+                            }
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">School Logo</label>
-                        <div class="col-lg-9">
-                            <img src="~/Content/images/default_School.png" style="width:180px; height:150px; border: 1px solid #ddd; padding: 1px;" id="img_prev" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">Upload Logo</label>
-                        <div class="col-lg-9">
-                            <input type="file" class="form-input-styled" data-fouc accept=".jpg , .png , .gif ,.jpeg" onchange="readURL(this);" id="SchLogo" required name="SchoolLogo">
-                            <span class="form-text text-muted">Accepted formats: png, jpg , jpeg. Max file size less then 2Mb</span>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group row">
@@ -140,83 +115,85 @@
                             <span class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-calendar22"></i></span>
                             </span>
-                            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", DateTime.Now)" required name="RegistrationDate">
+                            <input type="text" class="form-control daterange-single" value="@String.Format("{0:MM/dd/yyyy}", Model.RegistrationDate)" required name="RegistrationDate">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">SR Contact No</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="SROffiersContactNo" data-mask="9999-9999999" placeholder="Enter School Rrpresentive Person Contact No" required>
+                            <input type="text" class="form-control" name="SROffiersContactNo" data-mask="9999-9999999" value="@Model.SROffiersContactNo"  placeholder="Enter School Rrpresentive Person Contact No" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Select Province</label>
                         <div class="col-lg-9">
                             <select class="form-control form-control-select2" data-fouc name="Province" id="Province" onchange="GetCities()" required>
-                                <option value="">Select Province</option>
+                                <option value="@Model.TblProvince.ProvincesID">@Model.TblProvince.ProvincesName</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Address</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="Address" placeholder="Enter School Address" required>
+                            <input type="text" class="form-control" name="Address" placeholder="Enter School Address" required value="@Model.Address">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School NTN No.</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="NTNNo" placeholder="Enter School NTN No">
+                            <input type="text" class="form-control" name="NTNNo" placeholder="Enter School NTN No" value="@Model.NTNNo">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Cell No(1)</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="CellNo1" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No" required>
+                            <input type="text" class="form-control" name="CellNo1" data-mask="9999-9999999" placeholder="Enter School Cell(Mobile) No" required value="@Model.CellNo">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Email</label>
                         <div class="col-lg-9">
-                            <input type="email" class="form-control" name="Email" placeholder="Enter School Email" required>
+                            <input type="email" class="form-control" name="Email" placeholder="Enter School Email" required value="@Model.Email">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">School Website</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="Website" placeholder="Enter School Website">
+                            <input type="text" class="form-control" name="Website" placeholder="Enter School Website" value="@Model.Website">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">Default Password</label>
-                        <div class="col-lg-9">
-                            <input type="password" class="form-control" name="DefaultPassword" id="DefaultPassword" autocomplete="off" placeholder="Enter Default Password" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">Select Package</label>
-                        <div class="col-lg-9">
-                            <select class="form-control form-control-select2" data-fouc name="PackageID" id="PackageID" required>
-                                <option value="">Select Package</option>
-                                @foreach (var item in PackagesList)
-                                {
-                                    <option value="@item.PackageID">@item.PackageName</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
+                    
                     
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">School Logo</label>
+                        <div class="col-lg-9">
+                            <img src="@ERP_SchoolSystem.Classes.UserInfo.GetSchoolLogo()" style="width:180px; height:150px; border: 1px solid #ddd; padding: 1px;" id="img_prev" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">Update Logo</label>
+                        <div class="col-lg-9">
+                            <input type="file" class="form-input-styled" data-fouc accept=".jpg , .png , .gif ,.jpeg" onchange="readURL(this);" id="SchLogo" name="SchoolLogo">
+                            <span class="form-text text-muted">Accepted formats: png, jpg , jpeg. Max file size less then 2Mb</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-header bg-white header-elements-inline">
+                <div class="header-elements"></div>
+            </div>
             <div class="text-right">
-                <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
+                <button type="submit" class="btn btn-primary">Update School <i class="icon-paperplane ml-2"></i></button>
             </div>
         </form>
     </div>
@@ -227,36 +204,75 @@
     function GetProvince() {
         $("#LoadingSpinner").show();
         var CountryID = document.getElementById('Country').value;
-        var url = '@Url.Action("GetProvincesList", "School")';
-        $.ajax({
-            url: url,
-            data: { CountryID: CountryID },
-            cache: false,
-            type: "POST",
-            success: function (result) {
-                if (result != null) {
-                    $("#Province").html(result);
-                    $("#LoadingSpinner").hide();
+        if (parseInt(CountryID) == '@Model.CountryId')
+        {
+            var url = '@Url.Action("GetProvincesList_Update", "School")';
+            $.ajax({
+                url: url,
+                data: { CountryID: CountryID, ProvinceID: '@Model.ProvinceId' },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#Province").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
                 }
-            }
-        });
+            });
+        }
+        else
+        {
+            var url = '@Url.Action("GetProvincesList_Update", "School")';
+            $.ajax({
+                url: url,
+                data: { CountryID: CountryID, ProvinceID: 0 },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#Province").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
     }
     function GetCities() {
         $("#LoadingSpinner").show();
         var ProvinceID = document.getElementById('Province').value;
-        var url = '@Url.Action("GetCitiesList", "School")';
-        $.ajax({
-            url: url,
-            data: { ProvinceID: ProvinceID },
-            cache: false,
-            type: "POST",
-            success: function (result) {
-                if (result != null) {
-                    $("#City").html(result);
-                    $("#LoadingSpinner").hide();
+        if(parseInt(ProvinceID) == '@Model.ProvinceId')
+        {
+            var url = '@Url.Action("GetCitiesList_Update", "School")';
+            $.ajax({
+                url: url,
+                data: { ProvinceID: ProvinceID, CityID: '@Model.CityId' },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#City").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
                 }
-            }
-        });
+            });
+        }
+        else
+        {
+            var url = '@Url.Action("GetCitiesList_Update", "School")';
+            $.ajax({
+                url: url,
+                data: { ProvinceID: ProvinceID, CityID: 0 },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#City").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+
     }
 
     function ShowLoading() {
@@ -304,4 +320,5 @@
     });
 
 </script>
+
 

@@ -20,8 +20,11 @@ namespace ERP_SchoolSystem.Models
             this.CboDepartments = new HashSet<CboDepartment>();
             this.CboDesignations = new HashSet<CboDesignation>();
             this.CboEmpStatus = new HashSet<CboEmpStatu>();
+            this.Tbl_StudyProgram = new HashSet<Tbl_StudyProgram>();
             this.TblEmployees = new HashSet<TblEmployee>();
             this.TblSchoolBranches = new HashSet<TblSchoolBranch>();
+            this.TblSchoolBranchesFees = new HashSet<TblSchoolBranchesFee>();
+            this.TblSchoolFees = new HashSet<TblSchoolFee>();
             this.TblSchoolMonthlyPayments = new HashSet<TblSchoolMonthlyPayment>();
         }
     
@@ -45,7 +48,6 @@ namespace ERP_SchoolSystem.Models
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.DateTime> ModifeidDateTime { get; set; }
         public Nullable<bool> IsActive { get; set; }
-        public int PackageId { get; set; }
         public byte[] SchoolLogo { get; set; }
         public Nullable<System.DateTime> RegistrationDate { get; set; }
         public string AdminUserName { get; set; }
@@ -58,14 +60,19 @@ namespace ERP_SchoolSystem.Models
         public virtual ICollection<CboDesignation> CboDesignations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CboEmpStatu> CboEmpStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_StudyProgram> Tbl_StudyProgram { get; set; }
         public virtual TblCity TblCity { get; set; }
         public virtual TblCountry TblCountry { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblEmployee> TblEmployees { get; set; }
         public virtual TblProvince TblProvince { get; set; }
-        public virtual TblSchoolPackage TblSchoolPackage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblSchoolBranch> TblSchoolBranches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolBranchesFee> TblSchoolBranchesFees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblSchoolFee> TblSchoolFees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
     }

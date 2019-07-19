@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblCity>
+    @{ 
+        int CityID = Convert.ToInt32(ViewBag.CityID);
+        ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+        var SchoolCity = db.TblCities.Where(x => x.CityID == CityID).FirstOrDefault();
+    }
+
+<select class="form-control form-control-select2" data-fouc>
+    @if (CityID == 0)
+    {
+        <option value="">Select City</option>
+    }
+    else
+    {
+        <option value="@SchoolCity.CityID">@SchoolCity.CityName</option>
+    }
+    @foreach (var item in Model)
+    {
+        <option value="@item.CityID">@item.CityName</option>
+    }
+</select>
+

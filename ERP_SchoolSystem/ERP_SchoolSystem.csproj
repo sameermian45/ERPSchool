@@ -173,6 +173,7 @@
     <Compile Include="Classes\DAL\DAL.cs" />
     <Compile Include="Classes\DataAccess.cs" />
     <Compile Include="Classes\Encrypt_Decrypt.cs" />
+    <Compile Include="Classes\Get_MonthsAndYears.cs" />
     <Compile Include="Classes\UserInfo.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Filter\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filter\EmpDataFilter.cs" />
+    <Compile Include="Filter\RestrictRoute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +220,7 @@
     <Compile Include="Models\CboStudyProgram.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomModel.cs" />
     <Compile Include="Models\GLAccount.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
@@ -271,6 +274,12 @@
     <Compile Include="Models\TblSchoolBranch.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TblSchoolBranchesFee.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TblSchoolFee.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TblSchoolMonthlyPayment.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
@@ -301,6 +310,9 @@
     <Compile Include="Models\Tbl_Std_Last_School_Document_Details.cs">
       <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tbl_StudyProgram.cs">
+      <DependentUpon>SchoolSystem_DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -313,6 +325,7 @@
     <Content Include="Content\CSS\fonts\material-icons.svg" />
     <Content Include="Content\CSS\layout.min.css" />
     <Content Include="Content\CSS\styles.min.css" />
+    <Content Include="Content\images\lockscreen-bg.jpg" />
     <Content Include="Content\JS\demo_pages\form_wizard.js" />
     <Content Include="Content\images\brands\amazon.png" />
     <Content Include="Content\images\brands\bing.png" />
@@ -938,7 +951,6 @@
     <Content Include="Content\Loader\spinner.css" />
     <Content Include="Content\Loader\toastr.min.css" />
     <Content Include="Content\Loader\toastr.min.js" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="LoginPage\CSS\font-awesome.min.css" />
     <Content Include="LoginPage\CSS\style.css" />
@@ -1069,6 +1081,21 @@
     <Content Include="Views\Student\Get_Std_Postal_ProvincesList.cshtml" />
     <Content Include="Views\Student\Get_G_ProvincesList.cshtml" />
     <Content Include="Views\Student\Get_G_CitiesList.cshtml" />
+    <Content Include="Views\School\ManageSchool.cshtml" />
+    <Content Include="Views\School\UpdateSchool.cshtml" />
+    <Content Include="Views\School\GetProvincesList_Update.cshtml" />
+    <Content Include="Views\School\GetCitiesList_Update.cshtml" />
+    <Content Include="Views\School\UpdateSchoolPackage.cshtml" />
+    <Content Include="Views\Shared\_SchoolBranches.cshtml" />
+    <Content Include="Views\Shared\GetBranchesList.cshtml" />
+    <Content Include="Views\School\ManageBranch.cshtml" />
+    <Content Include="Views\School\BranchPackagesLog.cshtml" />
+    <Content Include="Views\School\SchoolMonthlyCollection.cshtml" />
+    <Content Include="Views\School\SchoolMonthlyCollectionRemaining.cshtml" />
+    <Content Include="Views\School\_SchoolMonthlyCollectionRemaining.cshtml" />
+    <Content Include="Views\School\_SchoolMonthlyCollection.cshtml" />
+    <Content Include="Views\School\SchoolBranches.cshtml" />
+    <Content Include="Views\Home\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

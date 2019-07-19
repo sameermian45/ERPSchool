@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblProvince>
+    @{ 
+        int ProvinceID = Convert.ToInt32(ViewBag.ProvinceID);
+        ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+        var SchoolProvince = db.TblProvinces.Where(x => x.ProvincesID == ProvinceID).FirstOrDefault();
+    }
+<select class="form-control form-control-select2" data-fouc>
+    @if (ProvinceID == 0)
+    {
+        <option value="">Select Province</option>
+    }
+    else
+    {
+        <option value="@SchoolProvince.ProvincesID">@SchoolProvince.ProvincesName</option>
+    }
+    @foreach (var item in Model)
+    {
+        <option value="@item.ProvincesID">@item.ProvincesName</option>
+    }
+</select>
+
+

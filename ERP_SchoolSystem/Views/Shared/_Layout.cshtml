@@ -16,13 +16,13 @@
         <!-- Header with logos -->
         <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
             <div class="navbar-brand navbar-brand-md">
-                <a href="index.html" class="d-inline-block">
+                <a href="~/Home/Index" class="d-inline-block">
                     <img src="~/Content/images//logo_light.png" alt="">
                 </a>
             </div>
 
             <div class="navbar-brand navbar-brand-xs">
-                <a href="index.html" class="d-inline-block">
+                <a href="~/Home/Index" class="d-inline-block">
                     <img src="~/Content/images//logo_icon_light.png" alt="">
                 </a>
             </div>
@@ -31,7 +31,7 @@
         <!-- Mobile controls -->
         <div class="d-flex flex-1 d-md-none">
             <div class="navbar-brand mr-auto">
-                <a href="index.html" class="d-inline-block">
+                <a href="~/Home/Index" class="d-inline-block">
                     <img src="~/Content/images//logo_dark.png" alt="">
                 </a>
             </div>
@@ -190,7 +190,7 @@
                     <div class="d-flex">
                         <div class="breadcrumb">
                             <a href='@Url.Action("Index" , "Home")' class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                            <span class="breadcrumb-item active">Dashboard</span>
+                            <a href='@Url.Action("DashBoard" , "Home")' class="breadcrumb-item"><i class="icon-home2 mr-2"></i> DashBoard</a>
                         </div>
 
                         <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>

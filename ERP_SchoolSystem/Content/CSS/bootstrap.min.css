@@ -4361,7 +4361,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     padding: .9375rem 1.25rem;
     margin-bottom: 0;
     background-color: rgba(0,0,0,.02);
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 2px solid rgb(3, 169, 244);
 }
 
     .card-header:first-child {
@@ -9641,6 +9641,7 @@ a.close.disabled {
 
 .text-right {
     text-align: right !important;
+    margin-top:1%;
 }
 
 .text-center {

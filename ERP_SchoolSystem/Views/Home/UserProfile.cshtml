@@ -2,20 +2,8 @@
 @{
     ViewBag.Title = "UserProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
     ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
-    
-    var EmployeeStatus = db.CboEmpStatus.Where(x => x.EmpStatusID == Model.StatusId).FirstOrDefault();
-    var Department = db.CboDepartments.Where(x => x.DepartmentID == Model.DepartmentID).FirstOrDefault();
-    var Designation = db.CboDesignations.Where(x => x.DesignationID == Model.DesignationID).FirstOrDefault();
-    var School = db.TblSchools.Where(x => x.SchoolId == SchoolID).FirstOrDefault();
     var BranchName = db.TblSchoolBranches.Where(x => x.BranchID == Model.BranchID).FirstOrDefault();
-
-    var Countryname = db.TblCountries.Where(x => x.CountryID == Model.CountryID).FirstOrDefault();
-    var Provincename = db.TblProvinces.Where(x => x.ProvincesID == Model.ProvincesID).FirstOrDefault();
-    var Cityname = db.TblCities.Where(x => x.CityID == Model.CityID).FirstOrDefault();
-
 }
 <div class="profile-cover">
     <div style="background-color:#2a3140">
@@ -47,7 +35,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>School Name <span class="text-danger">*</span></label>
-                        <input type="text" name="SchoolName" class="form-control" value="@School.SchoolName" placeholder="Enter School Name" readonly>
+                        <input type="text" name="SchoolName" class="form-control" value="@Model.TblSchool.SchoolName" placeholder="Enter School Name" readonly>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -139,7 +127,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee Country <span class="text-danger">*</span></label>
-                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Countryname.CountryName">
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Model.TblCountry.CountryName">
                     </div>
                 </div>
             </div>
@@ -148,13 +136,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee Province <span class="text-danger">*</span></label>
-                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Provincename.ProvincesName">
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Model.TblProvince.ProvincesName">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee City <span class="text-danger">*</span></label>
-                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Cityname.CityName">
+                        <input type="text" name="EmailAddress" class="form-control" readonly value="@Model.TblCity.CityName">
                     </div>
                 </div>
             </div>
@@ -169,7 +157,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee Status <span class="text-danger">*</span></label>
-                        <input type="text" value="@EmployeeStatus.EmpStatusName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                        <input type="text" value="@Model.CboEmpStatu.EmpStatusName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
                     </div>
                 </div>
             </div>
@@ -191,13 +179,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee Department <span class="text-danger">*</span></label>
-                        <input type="text" value="@Department.DepartmentName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                        <input type="text" value="@Model.CboDepartment.DepartmentName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Employee Designation <span class="text-danger">*</span></label>
-                        <input type="text" value="@Designation.DesignationName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
+                        <input type="text" value="@Model.CboDesignation.DesignationName" name="CNIC" class="form-control" placeholder="Enter Employee Status" readonly>
                     </div>
                 </div>
             </div>

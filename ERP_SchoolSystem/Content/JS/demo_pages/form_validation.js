@@ -126,9 +126,9 @@ var FormValidation = function() {
             unhighlight: function(element, errorClass) {
                 $(element).removeClass(errorClass);
             },
-            success: function(label) {
-                label.addClass('validation-valid-label').text('Success.'); // remove to hide Success message
-            },
+            //success: function(label) {
+            //    label.addClass('validation-valid-label').text('Success.'); // remove to hide Success message
+            //},
 
             // Different components require proper error label placement
             errorPlacement: function(error, element) {

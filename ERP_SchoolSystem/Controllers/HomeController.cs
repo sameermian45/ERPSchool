@@ -25,6 +25,13 @@ namespace ERP_SchoolSystem.Controllers
         {
             return View();
         }
+        [Authorize]
+        [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin,WebUser")]
+        [EmpDataFilter]
+        public ActionResult DashBoard()
+        {
+            return View();
+        }
 
         public ActionResult PaymentAlert()
         {
@@ -57,21 +64,72 @@ namespace ERP_SchoolSystem.Controllers
         [Authorize]
         [CustomAuthorizeAttribute(Roles = "SuperAdmin,Admin,WebUser")]
         [EmpDataFilter]
-        public async System.Threading.Tasks.Task<ActionResult> AccountSetting(string UserName, string NewPassword, string ConfirmPassword, HttpPostedFileBase EmpLogo)
+        public async System.Threading.Tasks.Task<ActionResult> AccountSetting(string UserName, string NewPassword, HttpPostedFileBase EmpLogo)
         {
             try
             {
-                var user = await UserManager.FindByNameAsync(UserName);
-                if (user == null)
+                if(EmpLogo == null)
                 {
-                    ViewBag.ErrorMessage = "The user does not exist";
+                    var user = await UserManager.FindByNameAsync(UserName);
+                    if (user == null)
+                    {
+                        ViewBag.ErrorMessage = "The user does not exist";
+                    }
+                    var result = UserManager.RemovePassword(user.Id);
+                    result = UserManager.AddPassword(user.Id, NewPassword);
+                    if (result.Succeeded)
+                    {
+                        NewPassword = ERP_SchoolSystem.Classes.Encrypt_Decrypt.Encrypt(NewPassword);
+                        AspNetUser obj = db.AspNetUsers.Where(x => x.Id == user.Id).FirstOrDefault();
+                        obj.Password = NewPassword;
+                        obj.UpdateBy = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                        obj.UpdateOn = DateTime.Now;
+                        db.SaveChanges();
+
+                        if (Request.Cookies["TheSchollSystemPassword"] != null)
+                        {
+                            System.Web.HttpCookie ckPassword = new System.Web.HttpCookie("TheSchollSystemPassword");
+                            ckPassword.Expires = DateTime.Now.AddDays(-1);
+                            Response.Cookies.Add(ckPassword);
+                        }
+
+                        ViewBag.SuccessMessage = "Password has been changed successfully";
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Error !!!... , Try Again.";
+                    }
                 }
-                //var result = await UserManager.ResetPasswordAsync(user.Id, null, NewPassword);
-                //if (result.Succeeded)
-                //{
-                //    ViewBag.SuccessMessage = "Password has been changed successfully";
-                //}
-                return RedirectToAction("Index", "Home");
+                else
+                {
+                    int UserID = ERP_SchoolSystem.Classes.UserInfo.GetUserID();
+                    TblEmployee obj = db.TblEmployees.Where(x => x.UserID == UserID).FirstOrDefault();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        EmpLogo.InputStream.CopyTo(ms);
+                        obj.EmpPicture = ms.GetBuffer();
+                    }
+                    string FilePath = ERP_SchoolSystem.Classes.UserInfo.GetUserName() + System.IO.Path.GetExtension(EmpLogo.FileName);
+                    var path = Path.Combine(Server.MapPath("~/ProfileImagesUploads"), FilePath);
+                    EmpLogo.SaveAs(path);
+                    obj.ProfilePicturePath = "/ProfileImagesUploads/" + FilePath;
+                    db.SaveChanges();
+
+                    //DeleteCookies 
+                    if (Request.Cookies["TheSchollSystemProfilePicturePath"] != null)
+                    {
+                        System.Web.HttpCookie ckProfilePic = new System.Web.HttpCookie("TheSchollSystemProfilePicturePath");
+                        ckProfilePic.Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies.Add(ckProfilePic);
+                    }
+                    //AddCookies
+                    System.Web.HttpCookie ckProfilePicture = new System.Web.HttpCookie("TheSchollSystemProfilePicturePath");
+                    ckProfilePicture.Value = obj.ProfilePicturePath.ToString();
+                    ckProfilePicture.Expires = DateTime.Now.AddDays(1);
+                    Response.Cookies.Add(ckProfilePicture);
+                    ViewBag.SuccessMessage = "Profile Picture has been changed successfully";
+                }
+                return View();
             }
             catch (Exception ex)
             {
@@ -90,7 +148,7 @@ namespace ERP_SchoolSystem.Controllers
             }
             else
             {
-                return Json(UserPassword);
+                return Json(true);
             }
         }
 

@@ -84,7 +84,7 @@ namespace ERP_SchoolSystem.Controllers
                     if (IsUserValid != null)
                     {
                         var SchoolDetails = db.TblSchools.Where(x => x.SchoolId == IsUserValid.SchoolID).FirstOrDefault();
-                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.Month == DateTime.Now.Month && x.Year == DateTime.Now.Year).FirstOrDefault();
+                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.PaymentMonth == DateTime.Now.Month && x.PaymentYear == DateTime.Now.Year).FirstOrDefault();
 
                         if(IsUserValid.UserTypeId == 1)
                         {
@@ -170,7 +170,7 @@ namespace ERP_SchoolSystem.Controllers
                     if (IsUserValid != null)
                     {
                         var SchoolDetails = db.TblSchools.Where(x => x.SchoolId == IsUserValid.SchoolID).FirstOrDefault();
-                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.Month == DateTime.Now.Month && x.Year == DateTime.Now.Year).FirstOrDefault();
+                        var checkpayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolDetails.SchoolId && x.PaymentMonth == DateTime.Now.Month && x.PaymentYear == DateTime.Now.Year).FirstOrDefault();
                         if (IsUserValid.UserTypeId == 1)
                         {
                             var result = await SignInManager.PasswordSignInAsync(UserName, Password, Convert.ToBoolean(RememberMe), shouldLockout: false);
@@ -245,7 +245,7 @@ namespace ERP_SchoolSystem.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Your user name has been deactive. Please contact to system admin.";
+                        ViewBag.Message = "The user name or password provided is incorrect.";
                         return View();
                     }
                 }

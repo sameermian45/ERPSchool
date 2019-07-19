@@ -17,9 +17,12 @@ namespace ERP_SchoolSystem.Models
         public int ID { get; set; }
         public Nullable<int> SchoolID { get; set; }
         public Nullable<int> PackageID { get; set; }
-        public Nullable<double> Payment { get; set; }
-        public Nullable<int> Month { get; set; }
-        public Nullable<int> Year { get; set; }
+        public Nullable<int> BranchID { get; set; }
+        public Nullable<int> BranchPercentage { get; set; }
+        public Nullable<double> BranchAmount { get; set; }
+        public Nullable<double> PaymentReceived { get; set; }
+        public Nullable<int> PaymentMonth { get; set; }
+        public Nullable<int> PaymentYear { get; set; }
         public string PaymentMode { get; set; }
         public Nullable<System.DateTime> AddedOn { get; set; }
         public Nullable<int> AddedBy { get; set; }
@@ -36,9 +39,10 @@ namespace ERP_SchoolSystem.Models
         public Nullable<bool> IsShopPay { get; set; }
         public Nullable<bool> IsMobilePay { get; set; }
         public Nullable<bool> isPay { get; set; }
-        public Nullable<System.DateTime> PaymentData { get; set; }
+        public Nullable<System.DateTime> PaymentDate { get; set; }
     
         public virtual TblSchool TblSchool { get; set; }
+        public virtual TblSchoolBranch TblSchoolBranch { get; set; }
         public virtual TblSchoolPackage TblSchoolPackage { get; set; }
     }
 }

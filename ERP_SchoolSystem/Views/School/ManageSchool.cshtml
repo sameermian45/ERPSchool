@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ERP_SchoolSystem.Models.TblSchool>
+@{
+    ViewBag.Title = "Manage School";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    int SNo = 1;
+}
+
+<div class="card">
+    <table class="table datatable-basic">
+        <thead>
+            <tr>
+                <th>School Name</th>
+                <th>S R Name</th>
+                <th>S R Contact</th>
+                <th>Packages</th>
+                <th>Month Fee</th>
+                <th>Province / City</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody style="width: 100%;">
+            @foreach (var item in Model)
+            {
+                var BTF = item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true ).ToList();
+                int TotalAmount = 0;
+                foreach (var aa in BTF)
+                {
+                    TotalAmount = TotalAmount + Convert.ToInt32(aa.MonthlyFee);
+                }
+                var PackageID = item.TblSchoolFees.Where(a => a.IsActive == true).Select(a => a.PackageID).FirstOrDefault();
+                <tr>
+                    <td>@item.SchoolName</td>
+                    <td>@item.SROfficerName</td>
+                    <td>@item.SROffiersContactNo</td>
+                    <td> @db.TblSchoolPackages.Where(x=>x.PackageID == PackageID).Select(x=>x.PackageName).FirstOrDefault()  (Rs: + @item.TblSchoolFees.Where(x=>x.IsActive == true).Select(x => x.MonthFee).FirstOrDefault())</td>
+                    <td>Branches : @item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true).Count() , Rs: @TotalAmount</td>
+                    <td>@item.TblProvince.ProvincesName / @item.TblCity.CityName</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td> Active</td>
+                    }
+                    else
+                    {
+                        <td> In Active </td>
+                    }
+
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a onclick="changeSchoolStatus(@item.SchoolId,1)" class="dropdown-item active1">Active</a>
+                                    <a onclick="changeSchoolStatus(@item.SchoolId,0)" class=" dropdown-item active1">In Active</a>
+                                    <a href="@item.Website" class="dropdown-item active1" target="_blank">School Website</a>
+                                    <a href="~/School/ManageBranch?Schoolid=@item.SchoolId" class="dropdown-item active1">Manage School Branches</a>
+                                    <a href="~/School/UpdateSchoolPackage?Schoolid=@item.SchoolId" class="dropdown-item active1">Update Payment Plan</a>
+                                    <a href="~/School/UpdateSchool?Schoolid=@item.SchoolId" class="dropdown-item active1">Update School</a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function changeSchoolStatus(id, userstatus) {
+        $("#LoadingSpinner").show();
+        $.ajax({
+            url: '@Url.Action("ManageSchool", "School")',
+            type: "POST",
+            data: { Schoolid: id, StatusID: userstatus },
+            success: function (response) {
+                toastr.error('Successfully Update.')
+                $("#LoadingSpinner").hide();
+                window.location.reload();
+            },
+            error: function (response) {
+                toastr.error('Error !!!... , Try Again.')
+                $("#LoadingSpinner").hide();
+            }
+        });
+        
+    }
+</script>
+

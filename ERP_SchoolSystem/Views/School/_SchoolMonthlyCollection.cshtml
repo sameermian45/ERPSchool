@@ -1,0 +1,88 @@
+﻿@{
+    int FeeMonth = ViewBag.FeeMonth;
+    int FeeYear = ViewBag.FeeYear;
+    string Status = ViewBag.Status;
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+   
+    var School = db.TblSchools.ToList();
+    var MonthList = ERP_SchoolSystem.Classes.Get_MonthsAndYears.GetMonthList();
+    var YearList = ERP_SchoolSystem.Classes.Get_MonthsAndYears.GetYearList();
+}
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">School's details</h6>
+        <div class="header-elements"></div>
+    </div>
+    <table class="table datatable-basic">
+        <thead>
+            <tr>
+                <th>School Name</th>
+                <th>S R Name</th>
+                <th>S R Contact</th>
+                <th>Packages</th>
+                <th>Month Fee</th>
+                <th>Province / City</th>
+                <th>Status</th>
+                <th>Fee Paid</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody style="width: 100%;">
+            @foreach (var item in School)
+            {
+                var BranchesList = db.TblSchoolBranches.Where(x => x.SchoolID == item.SchoolId).ToList();
+                var MonthPayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == item.SchoolId && x.PaymentMonth == FeeMonth && x.PaymentYear == FeeYear).FirstOrDefault();
+                var MonthPaymentList = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == item.SchoolId && x.PaymentMonth == FeeMonth && x.PaymentYear == FeeYear).ToList();
+
+                var BTF = item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true).ToList();
+                int TotalAmount = 0;
+                foreach (var aa in BTF)
+                {
+                    TotalAmount = TotalAmount + Convert.ToInt32(aa.MonthlyFee);
+                }
+                var PackageID = item.TblSchoolFees.Where(a => a.IsActive == true).Select(a => a.PackageID).FirstOrDefault();
+                <tr>
+                    <td>@item.SchoolName</td>
+                    <td>@item.SROfficerName</td>
+                    <td>@item.SROffiersContactNo</td>
+                    <td> @db.TblSchoolPackages.Where(x => x.PackageID == PackageID).Select(x => x.PackageName).FirstOrDefault()  (Rs: + @item.TblSchoolFees.Where(x => x.IsActive == true).Select(x => x.MonthFee).FirstOrDefault())</td>
+                    <td>Branches : @item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true).Count() , Rs: @TotalAmount</td>
+                    <td>@item.TblProvince.ProvincesName / @item.TblCity.CityName</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td> Active</td>
+                    }
+                    else
+                    {
+                        <td> In Active </td>
+                    }
+                    @if (MonthPayment == null)
+                    {
+                        <td> Not Paid</td>
+                    }
+                    else if (MonthPaymentList.Count() != BranchesList.Count)
+                    {
+                        <td> Parital Paid</td>
+                    }
+                    else
+                    {
+                        <td> Paid </td>
+                    }
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="~/School/SchoolBranches?Schoolid=@item.SchoolId&&FeeMonth=@FeeMonth&&FeeYear=@FeeYear" class=" dropdown-item" target="_blank">View Branches</a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

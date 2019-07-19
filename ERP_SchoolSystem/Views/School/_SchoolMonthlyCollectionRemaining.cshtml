@@ -1,0 +1,373 @@
+﻿@{
+    int SchoolId = ViewBag.SchoolId;
+    int FeeMonth = ViewBag.FeeMonth;
+    int FeeYear = ViewBag.FeeYear;
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    var BranchesList = db.TblSchoolBranches.Where(x => x.SchoolID == SchoolId).ToList();
+    var School = db.TblSchools.Where(x => x.SchoolId == SchoolId).ToList();
+    var MonthPayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolId && x.PaymentMonth == FeeMonth && x.PaymentYear == FeeYear).FirstOrDefault();
+    var MonthPaymentList = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolId && x.PaymentMonth == FeeMonth && x.PaymentYear == FeeYear).ToList();
+    var MonthList = ERP_SchoolSystem.Classes.Get_MonthsAndYears.GetMonthList();
+    var YearList = ERP_SchoolSystem.Classes.Get_MonthsAndYears.GetYearList();
+}
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">School's details</h6>
+        <div class="header-elements"></div>
+    </div>
+    <table class="table datatable-basic">
+        <thead>
+            <tr>
+                <th>School Name</th>
+                <th>S R Name</th>
+                <th>S R Contact</th>
+                <th>Packages</th>
+                <th>Month Fee</th>
+                <th>Province / City</th>
+                <th>Status</th>
+                <th>Fee Paid</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody style="width: 100%;">
+            @foreach (var item in School)
+            {
+                var BTF = item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true).ToList();
+                int TotalAmount = 0;
+                foreach (var aa in BTF)
+                {
+                    TotalAmount = TotalAmount + Convert.ToInt32(aa.MonthlyFee);
+                }
+                var PackageID = item.TblSchoolFees.Where(a => a.IsActive == true).Select(a => a.PackageID).FirstOrDefault();
+                <tr>
+                    <td>@item.SchoolName</td>
+                    <td>@item.SROfficerName</td>
+                    <td>@item.SROffiersContactNo</td>
+                    <td> @db.TblSchoolPackages.Where(x => x.PackageID == PackageID).Select(x => x.PackageName).FirstOrDefault()  (Rs: + @item.TblSchoolFees.Where(x => x.IsActive == true).Select(x => x.MonthFee).FirstOrDefault())</td>
+                    <td>Branches : @item.TblSchoolBranchesFees.Where(x => x.SchoolID == item.SchoolId && x.IsActive == true).Count() , Rs: @TotalAmount</td>
+                    <td>@item.TblProvince.ProvincesName / @item.TblCity.CityName</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td> Active</td>
+                    }
+                    else
+                    {
+                        <td> In Active </td>
+                    }
+                    @if (MonthPayment == null)
+                    {
+                        <td> Not Paid</td>
+                    }
+                    else if (MonthPaymentList.Count() != BranchesList.Count)
+                    {
+                        <td> Parital Paid</td>
+                    }
+                    else
+                    {
+                        <td> Paid </td>
+                    }
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a onclick="changeSchoolStatus(@item.SchoolId,1)" class="dropdown-item">Active</a>
+                                    <a onclick="changeSchoolStatus(@item.SchoolId,0)" class=" dropdown-item">In Active</a>
+                                    <a onclick="SetSchoolValues('@item.SchoolName' , @item.SchoolId)" class="dropdown-item" data-toggle="modal" data-target="#modal_theme_info_School">Pay Fee</a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Branches details</h6>
+        <div class="header-elements"></div>
+    </div>
+    <table class="table datatable-basic">
+        <thead>
+            <tr>
+                <th>Branch Name</th>
+                <th>Packages </th>
+                <th>Packages Amount</th>
+                <th>Percentage</th>
+                <th>Payable</th>
+                <th>Status</th>
+                <th>Fee Paid</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody style="width: 100%;">
+            @foreach (var item in BranchesList)
+            {
+                var BranchMonthPayment = db.TblSchoolMonthlyPayments.Where(x => x.SchoolID == SchoolId && x.BranchID == item.BranchID && x.PaymentMonth == FeeMonth && x.PaymentYear == FeeYear).FirstOrDefault();
+                int? PackageId = db.TblSchoolBranchesFees.Where(x => x.BranchID == item.BranchID && x.IsActive == true).Select(x => x.PackageID).FirstOrDefault();
+                var package = db.TblSchoolPackages.Where(x => x.PackageID == PackageId).FirstOrDefault();
+                <tr>
+                    <td>@item.BranchTitle</td>
+                    <td>@package.PackageName</td>
+                    <td>@package.Price</td>
+                    <td>@item.TblSchoolBranchesFees.Where(x => x.IsActive == true).Select(x => x.Percentage).FirstOrDefault()</td>
+                    <td>@item.TblSchoolBranchesFees.Where(x => x.IsActive == true).Select(x => x.MonthlyFee).FirstOrDefault()</td>
+                    @if (item.IsActive == true)
+                    {
+                        <td> Active</td>
+                    }
+                    else
+                    {
+                        <td> In Active </td>
+                    }
+                    @if (BranchMonthPayment == null)
+                    {
+                        <td> Not Paid</td>
+                    }
+                    else
+                    {
+                        <td> Paid </td>
+                    }
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a onclick="ChangeBranchStatus(@item.BranchID,1)" class="dropdown-item">Active</a>
+                                    <a onclick="ChangeBranchStatus(@item.BranchID,0)" class=" dropdown-item">In Active</a>
+                                    <a onclick="SetBranchValues('@item.BranchTitle' , @item.BranchID)" class="dropdown-item" data-toggle="modal" data-target="#modal_theme_info_Branch">Pay Fee</a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="modal_theme_info_School" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h6 class="modal-title">School Monthly Fee Pay</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">School Name</label>
+                            <div class="col-lg-7">
+
+                                <input type="text" value="" name="SchoolName" id="SchoolName" readonly class="form-control" required>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Payment Mode</label>
+                            <div class="col-lg-7">
+                                <select name="PaymentModeS" id="PaymentModeS" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    <option value="Online App">Online App</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Bank tranfer">Bank tranfer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Month</label>
+                            <div class="col-lg-7">
+                                <select name="MonthS" id="MonthS" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    @foreach (var item in MonthList)
+                                    {
+                                        <option value="@item.MonthID">@item.MonthName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Year</label>
+                            <div class="col-lg-7">
+                                <select name="YearS" id="YearS" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    @foreach (var item in YearList)
+                                    {
+                                        <option value="@item.Year">@item.Year</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                <button type="button" class="btn bg-info" onclick="PaySchoolFee()">Submit Fee</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal_theme_info_Branch" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h6 class="modal-title">Branch Monthly Fee Pay</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Branch Name</label>
+                            <div class="col-lg-7">
+                                <input type="hidden" name="BranchID" value="" id="BranchID" />
+                                <input type="text" name="BranchName" value="" id="BranchName" readonly class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Payment Mode</label>
+                            <div class="col-lg-7">
+                                <select name="PaymentModeB" id="PaymentModeB" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    <option value="Online App">Online App</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="Bank tranfer">Bank tranfer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Month</label>
+                            <div class="col-lg-7">
+                                <select name="MonthB" id="MonthB" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    @foreach (var item in MonthList)
+                                    {
+                                        <option value="@item.MonthID">@item.MonthName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label">Select Year</label>
+                            <div class="col-lg-7">
+                                <select name="YearB" id="YearB" class="form-control form-control-select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    @foreach (var item in YearList)
+                                    {
+                                        <option value="@item.Year">@item.Year</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                <button type="button" class="btn bg-info" onclick="PayBranchFee()">Submit Fee</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function changeSchoolStatus(id, userstatus) {
+        $("#LoadingSpinner").show();
+        $.ajax({
+            url: '@Url.Action("ManageSchool", "School")',
+            type: "POST",
+            data: { Schoolid: id, StatusID: userstatus },
+            success: function (response) {
+                toastr.error('Successfully Update.')
+                $("#LoadingSpinner").hide();
+                window.location.reload();
+            },
+            error: function (response) {
+                toastr.error('Error !!!... , Try Again.')
+                $("#LoadingSpinner").hide();
+            }
+        });
+
+    }
+    function ChangeBranchStatus(BranchID, StatusID) {
+        $("#LoadingSpinner").show();
+        $.ajax({
+            url: '@Url.Action("UpdateBranch", "School")',
+            type: "POST",
+            data: { BranchID: BranchID, StatusID: StatusID },
+            success: function (response) {
+                toastr.error('Successfully Update.')
+                $("#LoadingSpinner").hide();
+                window.location.reload();
+            },
+            error: function (response) {
+                toastr.error('Error !!!... , Try Again.')
+                $("#LoadingSpinner").hide();
+            }
+        });
+
+    }
+
+    function SetSchoolValues(SchoolName , SchoolID)
+    {
+        document.getElementById('SchoolName').value = SchoolName;
+    }
+    function SetBranchValues(BranchName , BranchID)
+    {
+        document.getElementById('BranchID').value = BranchID;
+        document.getElementById('BranchName').value = BranchName;
+
+    }
+
+    function PaySchoolFee() {
+        $("#LoadingSpinner").show();
+        var SchoolID = '@SchoolId';
+        var Month = $("#MonthS").val();
+        var year = $("#YearS").val();
+        var PaymentMode = $("#PaymentModeS").val();
+
+        $.ajax({
+            url: '@Url.Action("PayfeeSchool", "School")',
+            type: "POST",
+            data: { SchoolID: SchoolID, Month: Month, year: year, PaymentMode: PaymentMode },
+            success: function (response) {
+                toastr.error(response);
+                $("#LoadingSpinner").hide();
+                window.location.reload();
+            },
+            error: function (response) {
+                toastr.error('Error !!!... , Try Again.')
+                $("#LoadingSpinner").hide();
+            }
+        });
+
+    }
+    function PayBranchFee() {
+        $("#LoadingSpinner").show();
+        var BranchID = document.getElementById('BranchID').value;
+        var Month = $("#MonthB").val();
+        var year = $("#YearB").val();
+        var PaymentMode = $("#PaymentModeB").val();
+        $.ajax({
+            url: '@Url.Action("PayfeeBranch", "School")',
+            type: "POST",
+            data: { BranchID: BranchID, Month: Month, year: year, PaymentMode: PaymentMode },
+            success: function (response) {
+                toastr.error(response);
+                $("#LoadingSpinner").hide();
+                window.location.reload();
+            },
+            error: function (response) {
+                toastr.error('Error !!!... , Try Again.')
+                $("#LoadingSpinner").hide();
+            }
+        });
+
+    }
+</script>

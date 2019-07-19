@@ -1,0 +1,56 @@
+﻿@{ 
+    ERP_SchoolSystem.Models.ERP_SchoolSystemEntities db = new ERP_SchoolSystem.Models.ERP_SchoolSystemEntities();
+    int UserType = ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID();
+    int SchoolID = ERP_SchoolSystem.Classes.UserInfo.GetSchoolID();
+
+    var SchoolList = db.TblSchools.Where(x => x.IsActive == true && x.SchoolId == SchoolID).ToList();
+    if(UserType == 1)
+    {
+        SchoolList = db.TblSchools.Where(x => x.IsActive == true).ToList();
+    }
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>School Name <span class="text-danger">*</span></label>
+            <select name="SchoolID" id="SchoolID" data-placeholder="Select School Name" class="form-control form-control-select2" data-fouc onchange="GetBranches()">
+                <option value="">Select School Name</option>
+                @foreach (var item in SchoolList)
+                {
+                    <option value="@item.SchoolId">@item.SchoolName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Branch Name <span class="text-danger">*</span></label>
+            <select name="BranchID" id="BranchID" data-placeholder="Select Branch Name" class="form-control form-control-select2" data-fouc>
+                <option value="">Select Branch Name</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    function GetBranches() {
+        var SchoolID = document.getElementById('SchoolID').value;
+        if (SchoolID != "") {
+            $("#LoadingSpinner").show();
+            var url = '@Url.Action("GetBranchesList", "School")';
+            $.ajax({
+                url: url,
+                data: { SchoolID: SchoolID },
+                cache: false,
+                type: "POST",
+                success: function (result) {
+                    if (result != null) {
+                        $("#BranchID").html(result);
+                        $("#LoadingSpinner").hide();
+                    }
+                }
+            });
+        }
+    }
+</script>

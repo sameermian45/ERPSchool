@@ -29,7 +29,15 @@ namespace ERP_SchoolSystem.Classes
 
         public static int GetUserTypeID()
         {
-            int UserTypeID = Convert.ToInt32(HttpContext.Current.Request.Cookies["TheSchollSystemUserTypeID"].Value);
+            int UserTypeID = 0;
+            try
+            {
+                 UserTypeID = Convert.ToInt32(HttpContext.Current.Request.Cookies["TheSchollSystemUserTypeID"].Value);
+            }
+            catch (Exception ex)
+            {
+                UserTypeID = 0;
+            }
             return UserTypeID;
         }
 

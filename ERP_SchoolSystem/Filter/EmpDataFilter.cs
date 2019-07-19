@@ -20,6 +20,10 @@ namespace ERP_SchoolSystem.Filters
             string actionName = filterContext.ActionDescriptor.ActionName;
             if (controller != null)
             {
+                if(ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 0)
+                {
+                    filterContext.Result = new RedirectResult("~/Account/Login");
+                }
                 if (ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 1 || ERP_SchoolSystem.Classes.UserInfo.GetUserTypeID() == 2)
                 {
                     if(ERP_SchoolSystem.Classes.UserInfo.IsEmpAdded() == false)
@@ -30,6 +34,5 @@ namespace ERP_SchoolSystem.Filters
             }
             base.OnActionExecuting(filterContext);
         }
-
     }
 }

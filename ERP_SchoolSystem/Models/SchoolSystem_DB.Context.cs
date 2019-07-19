@@ -46,6 +46,7 @@ namespace ERP_SchoolSystem.Models
         public virtual DbSet<Tbl_Std_Details> Tbl_Std_Details { get; set; }
         public virtual DbSet<Tbl_Std_Last_School_Details> Tbl_Std_Last_School_Details { get; set; }
         public virtual DbSet<Tbl_Std_Last_School_Document_Details> Tbl_Std_Last_School_Document_Details { get; set; }
+        public virtual DbSet<Tbl_StudyProgram> Tbl_StudyProgram { get; set; }
         public virtual DbSet<TblCity> TblCities { get; set; }
         public virtual DbSet<TblCountry> TblCountries { get; set; }
         public virtual DbSet<TblEmpEduDetail> TblEmpEduDetails { get; set; }
@@ -54,6 +55,8 @@ namespace ERP_SchoolSystem.Models
         public virtual DbSet<TblProvince> TblProvinces { get; set; }
         public virtual DbSet<TblSchool> TblSchools { get; set; }
         public virtual DbSet<TblSchoolBranch> TblSchoolBranches { get; set; }
+        public virtual DbSet<TblSchoolBranchesFee> TblSchoolBranchesFees { get; set; }
+        public virtual DbSet<TblSchoolFee> TblSchoolFees { get; set; }
         public virtual DbSet<TblSchoolMonthlyPayment> TblSchoolMonthlyPayments { get; set; }
         public virtual DbSet<TblSchoolPackage> TblSchoolPackages { get; set; }
         public virtual DbSet<TblUserType> TblUserTypes { get; set; }
